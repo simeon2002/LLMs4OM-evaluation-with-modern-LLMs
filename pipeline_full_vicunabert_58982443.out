@@ -1,0 +1,109 @@
+SLURM_JOB_ID: 58982443
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: intro_vsc38504
+SLURM_JOB_NAME: pipeline_full_vicunabert
+SLURM_CLUSTER_NAME: genius
+SLURM_JOB_PARTITION: gpu_v100
+SLURM_NNODES: 1
+SLURM_NODELIST: r24g09
+SLURM_JOB_CPUS_PER_NODE: 4
+SLURM_JOB_GPUS: 2
+Date: Tue Feb 24 11:33:50 CET 2026
+Walltime: 01-16:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: r24g09
+Start: Tue Feb 24 11:34:06 CET 2026
+JobID: 58982443
+CUDA_VISIBLE_DEVICES: 0
+=== GPU check ===
+Tue Feb 24 11:34:06 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.95.05              Driver Version: 580.95.05      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-SXM2-32GB           Off |   00000000:3A:00.0 Off |                    0 |
+| N/A   37C    P0             42W /  300W |       0MiB /  32768MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+working on VicunaBertRAG-RAG-VicunaLLMBertRAG
+	Working on bio-ml track
+	Working on bio-ml/ncit-doid.disease task
+		Prompting ID is: label
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-VicunaBertRAG-label-2026.02.24-14:57:50.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-VicunaBertRAG-label-children-2026.02.24-18:20:29.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-VicunaBertRAG-label-parent-2026.02.24-21:42:41.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/omim-ordo.disease task
+		Prompting ID is: label
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/rag-VicunaBertRAG-label-2026.02.24-23:47:18.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/rag-VicunaBertRAG-label-children-2026.02.25-01:52:09.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/rag-VicunaBertRAG-label-parent-2026.02.25-03:56:53.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-fma.body task
+		Prompting ID is: label
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/rag-VicunaBertRAG-label-2026.02.25-11:18:50.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/rag-VicunaBertRAG-label-children-2026.02.25-18:44:25.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/rag-VicunaBertRAG-label-parent-2026.02.26-02:10:35.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.neoplas task
+		Prompting ID is: label
+		Encoded input pairs: 5
+		Working on generating response!

@@ -1,0 +1,49 @@
+#!/bin/bash -l
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=simeon.serafimov@student.kuleuven.be
+#SBATCH --clusters=wice
+#SBATCH --account=intro_vsc38504
+#SBATCH --partition=gpu_h100
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --gpus-per-node=1
+#SBATCH --time=1-16:00:00
+#SBATCH --job-name=pipeline_full_llama7bbert
+#SBATCH --output=logs/%x_%j.out
+#SBATCH --error=logs/%x_%j.err
+#SBATCH --export=ALL
+
+set -eo pipefail
+
+source ~/.bashrc #also activates conda environment
+
+export HUGGINGFACE_ACCESS_TOKEN=$HF_TOKEN
+tok="${HUGGINGFACE_ACCESS_TOKEN:-}"
+echo "HF_TOKEN preview: ${tok:0:4}...${tok: -4}"
+
+echo "Host: $(hostname)"
+echo "Start: $(date)"
+echo "JobID: ${SLURM_JOB_ID}"
+echo "CUDA_VISIBLE_DEVICES: ${CUDA_VISIBLE_DEVICES:-<unset>}"
+
+echo "=== GPU check ==="
+nvidia-smi || true
+
+echo "=== Python/env check ==="
+python - <<'PY'
+import os, sys
+print("Python:", sys.executable)
+print("CONDA_DEFAULT_ENV:", os.environ.get("CONDA_DEFAULT_ENV"))
+print("HF_TOKEN set:", bool(os.environ.get("HUGGINGFACE_ACCESS_TOKEN")))
+PY
+
+#  srun -M genius -A intro_vsc38504 -p gpu_v100   -N 1 -n 1 -c 4 --gpus-per-node=1 --time=00:30:00   --pty bash -l
+ python pipeline_full_llama7bbert.py
+
+ echo "End: $(date)"
+
+  # add completion data to file:
+ d=$(date +%F)
+mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.out" "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}_${d}.out" 2>/dev/null || true
+mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.err" "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}_${d}.err" 2>/dev/null || true

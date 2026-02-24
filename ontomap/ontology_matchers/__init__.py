@@ -83,9 +83,9 @@ MatcherCatalog = {
     },
     "rag": {
         "LLaMA7BAdaRAG": LLaMA7BLLMAdaRAG,
+        "LLaMA7BBertRAG": LLaMA7BLLMBertRAG,
         "MistralAdaRAG": MistralLLMAdaRAG,
         "ChatGPTOpenAIAdaRAG": ChatGPTOpenAIAdaRAG,
-        "LLaMA7BBertRAG": LLaMA7BLLMBertRAG,
         "MistralBertRAG": MistralLLMBertRAG,
         "FalconAdaRAG": FalconLLMAdaRAG,
         "FalconBertRAG": FalconLLMBertRAG,
@@ -94,7 +94,8 @@ MatcherCatalog = {
         "MPTBertRAG": MPTLLMBertRAG,
         "MPTAdaRAG": MPTLLMAdaRAG,
         "MambaLLMAdaRAG": MambaLLMAdaRAG,
-        "MambaLLMBertRAG": MambaLLMBertRAG
+        "MambaLLMBertRAG": MambaLLMBertRAG,
+        llamaQwenRAG: 
 
     },
     "retrieval": {

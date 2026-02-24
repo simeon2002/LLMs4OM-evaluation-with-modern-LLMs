@@ -1,0 +1,182 @@
+SLURM_JOB_ID: 66070888
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: intro_vsc38504
+SLURM_JOB_NAME: pipeline_full_llama7bbert
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g12
+SLURM_JOB_CPUS_PER_NODE: 4
+SLURM_JOB_GPUS: 2
+Date: Tue Feb 24 12:12:36 PM CET 2026
+Walltime: 01-16:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g12
+Start: Tue Feb 24 12:12:56 PM CET 2026
+JobID: 66070888
+CUDA_VISIBLE_DEVICES: 0
+=== GPU check ===
+Tue Feb 24 12:12:56 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 590.48.01              Driver Version: 590.48.01      CUDA Version: 13.1     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          On  |   00000000:A6:00.0 Off |                    0 |
+| N/A   27C    P0             69W /  700W |       0MiB /  81559MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+working on LLaMA7BBertRAG-RAG-LLaMA7BLLMBertRAG
+	Working on bio-ml track
+	Working on bio-ml/ncit-doid.disease task
+		Prompting ID is: label
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-LLaMA7BBertRAG-label-2026.02.24-12:44:55.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-LLaMA7BBertRAG-label-children-2026.02.24-13:14:52.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-LLaMA7BBertRAG-label-parent-2026.02.24-13:44:43.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/omim-ordo.disease task
+		Prompting ID is: label
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/rag-LLaMA7BBertRAG-label-2026.02.24-14:02:54.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/rag-LLaMA7BBertRAG-label-children-2026.02.24-14:21:13.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/rag-LLaMA7BBertRAG-label-parent-2026.02.24-14:39:29.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-fma.body task
+		Prompting ID is: label
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/rag-LLaMA7BBertRAG-label-2026.02.24-15:44:27.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/rag-LLaMA7BBertRAG-label-children-2026.02.24-16:50:24.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/rag-LLaMA7BBertRAG-label-parent-2026.02.24-17:56:11.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.neoplas task
+		Prompting ID is: label
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/rag-LLaMA7BBertRAG-label-2026.02.24-18:39:18.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/rag-LLaMA7BBertRAG-label-children-2026.02.24-19:22:48.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/rag-LLaMA7BBertRAG-label-parent-2026.02.24-20:06:08.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.pharm task
+		Prompting ID is: label
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/rag-LLaMA7BBertRAG-label-2026.02.24-21:01:58.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/rag-LLaMA7BBertRAG-label-children-2026.02.24-21:58:09.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/rag-LLaMA7BBertRAG-label-parent-2026.02.24-22:54:13.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+Run evaluation on LLaMA7BBertRAG
+	Working on bio-ml track
+	Working on bio-ml/ncit-doid.disease task
+		Prompting ID is: label
+Evaluating output for rag-LLaMA7BBertRAG-label-2026.02.24-12:44:55.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-LLaMA7BBertRAG-label-2026.02.24-12:44:55.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for rag-LLaMA7BBertRAG-label-children-2026.02.24-13:14:52.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-LLaMA7BBertRAG-label-children-2026.02.24-13:14:52.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for rag-LLaMA7BBertRAG-label-parent-2026.02.24-13:44:43.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-LLaMA7BBertRAG-label-parent-2026.02.24-13:44:43.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/omim-ordo.disease task
+		Prompting ID is: label
+Evaluating output for rag-LLaMA7BBertRAG-label-2026.02.24-14:02:54.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/rag-LLaMA7BBertRAG-label-2026.02.24-14:02:54.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for rag-LLaMA7BBertRAG-label-children-2026.02.24-14:21:13.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/rag-LLaMA7BBertRAG-label-children-2026.02.24-14:21:13.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for rag-LLaMA7BBertRAG-label-parent-2026.02.24-14:39:29.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/rag-LLaMA7BBertRAG-label-parent-2026.02.24-14:39:29.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-fma.body task
+		Prompting ID is: label
+Evaluating output for rag-LLaMA7BBertRAG-label-2026.02.24-15:44:27.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/rag-LLaMA7BBertRAG-label-2026.02.24-15:44:27.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for rag-LLaMA7BBertRAG-label-children-2026.02.24-16:50:24.json run!

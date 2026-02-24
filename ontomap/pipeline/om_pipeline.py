@@ -22,21 +22,22 @@ class OMPipelines:
 
         if not kwargs["use-all-models"]:
             self.matcher_catalog = {}
-            for model_id, model in MatcherCatalog[kwargs["approach"]].items():
+            for model_id, model in MatcherCatalog[kwargs["approach"]].items(): # if you set an approach, those LLMs will be the ones loaded, if you use use-all-models to true then all of the models in the catalog will be ran, otherwise only the ones specified in the models-to-consider list will be ran!
                 if model_id in kwargs["models-to-consider"]:
                     self.matcher_catalog[model_id] = model
 
         if not kwargs["use-all-encoders"]:
             self.encoder_catalog = {}
             for encoder_type, encoder_module in EncoderCatalog[kwargs["encoder"]].items():
-                if encoder_type in kwargs["approach-encoders-to-consider"]:
+                if encoder_type in kwargs["approach-encoders-to-consider"]: #same approach as above.
                     self.encoder_catalog[encoder_type] = encoder_module
 
         if self.approach in ["rag", "icv", "fewshot"]:
             batch_size = kwargs["batch-size"]
             self.config = BaseConfig(approach=kwargs["approach"]).get_args(device=kwargs["device"],
                                                                            batch_size=int(batch_size),
-                                                                           nshots=kwargs['nshots'])
+                                                                           nshots=kwargs['nshots']) # TODO: didin't get this self.config object fully.. due to get_args function
+            
             self.config.output_dir = os.path.join(self.config.experiments_dir, kwargs["outputs-dir"])
         if self.do_evaluation:
             self.llm_confidence_th = float(kwargs['llm_confidence_th'])
@@ -44,15 +45,15 @@ class OMPipelines:
 
     def __call__(self):
         for model_id, matcher_model in self.matcher_catalog.items():
-            if not self.do_evaluation:
+            if not self.do_evaluation: # if do_evaluation is False, we need to initialize the model to generate outputs, otherwise we just need the model_id to read the outputs and evaluate them!
                 MODEL = matcher_model(**vars(self.config)[model_id])
                 print(f"working on {model_id}-{MODEL}")
             else:
                 print(f"Run evaluation on {model_id}")
-            for track, tasks in ontology_matching.items():
+            for track, tasks in ontology_matching.items(): # ontology_matching has only bio-ml track active, the rest are commented out!
                 print(f"\tWorking on {track} track")
                 for task in tasks:
-                    task_obj = task()
+                    task_obj = task() # the value itself is the dataset class whcih we need to initialize to get the dataset object and then collect data or load from json!
                     print(f"\tWorking on {task_obj} task")
                     if self.load_from_json:
                         task_owl = task_obj.load_from_json(root_dir=self.config.root_dir)
@@ -68,15 +69,18 @@ class OMPipelines:
                                 "dataset-info": task_owl["dataset-info"],
                                 "encoder-id": encoder_id,
                                 "encoder-info": encoder_module().get_encoder_info(),
-                            }
-                            if self.approach == "rag":
+                            }  # objec that will be stored as JSON as output, contains all the relevant info about the model, dataset, encoder and the generated output and evaluation results if do_evaluation is True!
+                            if self.approach == "rag": # this is what we need. RAG. retriever fetches top-k candidates and LLM generates the predection, post-filtering done and that is the result, other approaches irrelevant for me.
                                 # task_owl["dataset-module"] = self.dataset_module
-                                task_owl["llm"] = model_id
-                            encoded_inputs = encoder_module()(**task_owl)
+                                task_owl["llm"] = model_id # this essentially adds an LLM so that it becomes RAG
+                            encoded_inputs = encoder_module()(**task_owl) # contains the retriever encoder, the llm generator, the task itself (json format), and IRI to index mapping for for efficient matching of onotlogy elements.
+                            print(f"\t\tEncoded input pairs: {len(encoded_inputs)}")
+                            #TODO: check encoder_module out a bit more, because apperantly this also encodes the dataset task into a prompt format that can be fed to the LLM, so it is not only encoding the retrieved candidates but also the task itself, which is important to understand for the next steps!
                             print("\t\tWorking on generating response!")
                             start_time = time.time()
                             try:
-                                model_output = MODEL.generate(input_data=encoded_inputs)
+                                model_output = MODEL.generate(input_data=encoded_inputs) # this is where the model generates the output, and it is also where the memory error happens for some models, so we need to catch that exception and store it in the output dict instead of the generated output!
+                                #TODO: try to undersatnd the MODEL.generate function more. this is where the whole generation happens and post-processing (in RAG case no post-processing)
                             except RuntimeError as e:
                                 print(f"MEMORY EXCEPTION: {e}")
                                 model_output = [str(e)]

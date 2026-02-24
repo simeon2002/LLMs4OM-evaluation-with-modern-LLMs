@@ -25,19 +25,19 @@ from ontomap.ontology.mse import (
 from ontomap.ontology.phenotype import DoidOrdoOMDataset, HpMpOMDataset
 
 ontology_matching = {
-    "anatomy": [MouseHumanOMDataset],
-    "biodiv": [
-        EnvoSweetOMDataset,
-        FishZooplanktonOMDataset,
-        MacroalgaeMacrozoobenthosOMDataset,
-        TaxrefldBacteriaNcbitaxonBacteriaOMDataset,
-        TaxrefldChromistaNcbitaxonChromistaOMDataset,
-        TaxrefldFungiNcbitaxonFungiOMDataset,
-        TaxrefldPlantaeNcbitaxonPlantaeOMDataset,
-        TaxrefldProtozoaNcbitaxonProtozoaOMDataset,
-    ],
-    "phenotype": [DoidOrdoOMDataset, HpMpOMDataset],
-    "commonkg": [NellDbpediaOMDataset, YagoWikidataOMDataset],
+    # "anatomy": [MouseHumanOMDataset],
+    # "biodiv": [
+    #     EnvoSweetOMDataset,
+    #     FishZooplanktonOMDataset,
+    #     MacroalgaeMacrozoobenthosOMDataset,
+    #     TaxrefldBacteriaNcbitaxonBacteriaOMDataset,
+    #     TaxrefldChromistaNcbitaxonChromistaOMDataset,
+    #     TaxrefldFungiNcbitaxonFungiOMDataset,
+    #     TaxrefldPlantaeNcbitaxonPlantaeOMDataset,
+    #     TaxrefldProtozoaNcbitaxonProtozoaOMDataset,
+    # ],
+    # "phenotype": [DoidOrdoOMDataset, HpMpOMDataset],
+    # "commonkg": [NellDbpediaOMDataset, YagoWikidataOMDataset],
     "bio-ml": [
         NCITDOIDDiseaseOMDataset,
         OMIMORDODiseaseOMDataset,
@@ -45,10 +45,10 @@ ontology_matching = {
         SNOMEDNCITNeoplasOMDataset,
         SNOMEDNCITPharmOMDataset,
     ],
-    "mse": [
-        MaterialInformationEMMOOMDataset,
-        MaterialInformationMatOntoMDataset
-    ],
+    # "mse": [
+    #     MaterialInformationEMMOOMDataset,
+    #     MaterialInformationMatOntoMDataset
+    # ],
 }
 
 __all__ = ["ontology_matching"]

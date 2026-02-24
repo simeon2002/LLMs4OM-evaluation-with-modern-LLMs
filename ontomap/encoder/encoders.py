@@ -88,7 +88,7 @@ class RAGEncoder(BaseEncoder):
             source["iri"]: index for index, source in enumerate(kwargs["source"])
         }
         target_onto_iri2index = {
-            target["iri"]: index for index, target in enumerate(kwargs["target"])
+            target["iri"]: index for index, target in enumerate(kwargs["target"]) # used to map IRI to idnex in the dataset, which is used for retrieval and LLM encoding. Used for matching ontology elements efficiently by their IRI which gives us the index of the source concept and target concept in the dataset, which is used for retrieval and LLM encoding.
         }
         return {
             "retriever-encoder": self.retrieval_encoder,

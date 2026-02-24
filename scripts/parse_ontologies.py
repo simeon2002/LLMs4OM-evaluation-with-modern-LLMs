@@ -14,6 +14,6 @@ if __name__ == "__main__":
         print(f"working on {ontology} track OM pairs!")
         for om in oms:
             print(f"\t {om.ontology_name} pairs is processing!")
-            dataset = om().collect(root_dir=config.root_dir)
+            dataset = om().collect(root_dir=config.root_dir) # same collect funciton as used in om_pipelines whenever the load from json is set to false, which is the default value. So it will always parse the ontologies and generate the dataset.
             output_path = os.path.join(config.root_dir, om.working_dir, "om.json")
             io.write_json(output_path=output_path, json_data=dataset)

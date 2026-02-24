@@ -34,7 +34,7 @@ class Retrieval(BaseOMModel):
     def estimate_similarity(self, query_embed: Any, candidate_embeds: Any) -> Any:
         pass
 
-    def get_top_k(self, query_embed: Any, candidate_embeds: Any) -> [List, List]:
+    def get_top_k(self, query_embed: Any, candidate_embeds: Any) -> tuple[list, list]:
         results = self.estimate_similarity(query_embed=query_embed, candidate_embeds=candidate_embeds)
         values = [(score, index) for index, score in enumerate(results)]
         dtype = [("score", float), ("index", int)]

@@ -1,0 +1,1099 @@
+{
+    "model": "MistralBertRAG",
+    "model-path": "NO MODEL LOADING IN RAG MODELS",
+    "model-config": {
+        "retriever-config": {
+            "top_k": 5,
+            "device": "cuda"
+        },
+        "llm-config": {
+            "max_token_length": 1,
+            "tokenizer_max_length": 500,
+            "num_beams": 1,
+            "device": "cuda",
+            "truncation": true,
+            "top_p": 0.95,
+            "temperature": 0.8,
+            "batch_size": 16,
+            "padding": "max_length"
+        },
+        "nshots": 0
+    },
+    "dataset-info": {
+        "track": "bio-ml",
+        "ontology-name": "ncit-doid.disease"
+    },
+    "encoder-id": "label",
+    "encoder-info": "PROMPT-TEMPLATE USES:LabelRAGDataset ENCODER",
+    "response-time": 51.08843731880188,
+    "generated-output": [
+        {
+            "ir-outputs": [
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C100051",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050120",
+                        "http://purl.obolibrary.org/obo/DOID_0050083",
+                        "http://purl.obolibrary.org/obo/DOID_0050013",
+                        "http://purl.obolibrary.org/obo/DOID_0050025",
+                        "http://purl.obolibrary.org/obo/DOID_0050105"
+                    ],
+                    "score-cands": [
+                        0.4815604090690613,
+                        0.47197484970092773,
+                        0.4421420097351074,
+                        0.4372990131378174,
+                        0.414734423160553
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C100093",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050025",
+                        "http://purl.obolibrary.org/obo/DOID_0050120",
+                        "http://purl.obolibrary.org/obo/DOID_0050026",
+                        "http://purl.obolibrary.org/obo/DOID_0050105",
+                        "http://purl.obolibrary.org/obo/DOID_0050097"
+                    ],
+                    "score-cands": [
+                        0.5206977725028992,
+                        0.49673742055892944,
+                        0.46562129259109497,
+                        0.4604208469390869,
+                        0.45064985752105713
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C100104",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050117",
+                        "http://purl.obolibrary.org/obo/DOID_0050143",
+                        "http://purl.obolibrary.org/obo/DOID_0050140",
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0050127"
+                    ],
+                    "score-cands": [
+                        0.4538939595222473,
+                        0.4252638816833496,
+                        0.42213529348373413,
+                        0.4064784646034241,
+                        0.40594467520713806
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101024",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050140",
+                        "http://purl.obolibrary.org/obo/DOID_0050145",
+                        "http://purl.obolibrary.org/obo/DOID_0050025",
+                        "http://purl.obolibrary.org/obo/DOID_0050132"
+                    ],
+                    "score-cands": [
+                        0.5844563245773315,
+                        0.5021492838859558,
+                        0.5015909671783447,
+                        0.5008872747421265,
+                        0.49793189764022827
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101025",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050072",
+                        "http://purl.obolibrary.org/obo/DOID_0050135",
+                        "http://purl.obolibrary.org/obo/DOID_0050136",
+                        "http://purl.obolibrary.org/obo/DOID_0050145"
+                    ],
+                    "score-cands": [
+                        0.5152950286865234,
+                        0.513899028301239,
+                        0.4699484407901764,
+                        0.46473607420921326,
+                        0.452512264251709
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101029",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050127",
+                        "http://purl.obolibrary.org/obo/DOID_0050072",
+                        "http://purl.obolibrary.org/obo/DOID_0050148",
+                        "http://purl.obolibrary.org/obo/DOID_0050138"
+                    ],
+                    "score-cands": [
+                        0.5470868945121765,
+                        0.5198140740394592,
+                        0.4892628788948059,
+                        0.47081130743026733,
+                        0.46282461285591125
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101038",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0002116",
+                        "http://purl.obolibrary.org/obo/DOID_0050118",
+                        "http://purl.obolibrary.org/obo/DOID_0050025",
+                        "http://purl.obolibrary.org/obo/DOID_0050047",
+                        "http://purl.obolibrary.org/obo/DOID_0050051"
+                    ],
+                    "score-cands": [
+                        0.6392953395843506,
+                        0.4893268942832947,
+                        0.4713653326034546,
+                        0.4576560854911804,
+                        0.45407164096832275
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101039",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050118",
+                        "http://purl.obolibrary.org/obo/DOID_0050125",
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0050147",
+                        "http://purl.obolibrary.org/obo/DOID_0050072"
+                    ],
+                    "score-cands": [
+                        0.551205039024353,
+                        0.49917125701904297,
+                        0.4974871873855591,
+                        0.48131465911865234,
+                        0.47927427291870117
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101044",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050118",
+                        "http://purl.obolibrary.org/obo/DOID_0050026",
+                        "http://purl.obolibrary.org/obo/DOID_0050097",
+                        "http://purl.obolibrary.org/obo/DOID_0050127",
+                        "http://purl.obolibrary.org/obo/DOID_0050145"
+                    ],
+                    "score-cands": [
+                        0.5572130680084229,
+                        0.5435875654220581,
+                        0.5300614833831787,
+                        0.5144197940826416,
+                        0.507795512676239
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101045",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050013",
+                        "http://purl.obolibrary.org/obo/DOID_0050120",
+                        "http://purl.obolibrary.org/obo/DOID_0014667",
+                        "http://purl.obolibrary.org/obo/DOID_0050032",
+                        "http://purl.obolibrary.org/obo/DOID_0050105"
+                    ],
+                    "score-cands": [
+                        0.5612792372703552,
+                        0.5432339906692505,
+                        0.5270040035247803,
+                        0.48843061923980713,
+                        0.43001222610473633
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101046",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050041",
+                        "http://purl.obolibrary.org/obo/DOID_0050145",
+                        "http://purl.obolibrary.org/obo/DOID_0050083",
+                        "http://purl.obolibrary.org/obo/DOID_0050072",
+                        "http://purl.obolibrary.org/obo/DOID_0001816"
+                    ],
+                    "score-cands": [
+                        0.4201223850250244,
+                        0.41324347257614136,
+                        0.40606245398521423,
+                        0.4053521752357483,
+                        0.40381157398223877
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101050",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050072",
+                        "http://purl.obolibrary.org/obo/DOID_0050147",
+                        "http://purl.obolibrary.org/obo/DOID_0002116",
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050145"
+                    ],
+                    "score-cands": [
+                        0.4113155007362366,
+                        0.40291136503219604,
+                        0.39103662967681885,
+                        0.3765222430229187,
+                        0.3720141053199768
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101051",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050136",
+                        "http://purl.obolibrary.org/obo/DOID_0050012",
+                        "http://purl.obolibrary.org/obo/DOID_0050026",
+                        "http://purl.obolibrary.org/obo/DOID_0050120",
+                        "http://purl.obolibrary.org/obo/DOID_0050150"
+                    ],
+                    "score-cands": [
+                        0.3746369481086731,
+                        0.36593642830848694,
+                        0.3654232621192932,
+                        0.36240020394325256,
+                        0.3621683418750763
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101053",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050072",
+                        "http://purl.obolibrary.org/obo/DOID_0050145",
+                        "http://purl.obolibrary.org/obo/DOID_0050025",
+                        "http://purl.obolibrary.org/obo/DOID_0050061"
+                    ],
+                    "score-cands": [
+                        0.3951202630996704,
+                        0.3837115168571472,
+                        0.3768688440322876,
+                        0.3756542205810547,
+                        0.37104374170303345
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101054",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050061",
+                        "http://purl.obolibrary.org/obo/DOID_0050120",
+                        "http://purl.obolibrary.org/obo/DOID_0050150",
+                        "http://purl.obolibrary.org/obo/DOID_0050145",
+                        "http://purl.obolibrary.org/obo/DOID_0050059"
+                    ],
+                    "score-cands": [
+                        0.4331611394882202,
+                        0.38655218482017517,
+                        0.37205415964126587,
+                        0.36913418769836426,
+                        0.3623981475830078
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101055",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050118",
+                        "http://purl.obolibrary.org/obo/DOID_0050041",
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0050061",
+                        "http://purl.obolibrary.org/obo/DOID_0050116"
+                    ],
+                    "score-cands": [
+                        0.41040313243865967,
+                        0.3937234878540039,
+                        0.38934987783432007,
+                        0.3878251910209656,
+                        0.37623631954193115
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101057",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050026",
+                        "http://purl.obolibrary.org/obo/DOID_0050118",
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0050138",
+                        "http://purl.obolibrary.org/obo/DOID_0050061"
+                    ],
+                    "score-cands": [
+                        0.41824764013290405,
+                        0.40593838691711426,
+                        0.4024601876735687,
+                        0.3954015374183655,
+                        0.39271771907806396
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101059",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0050026",
+                        "http://purl.obolibrary.org/obo/DOID_0050061",
+                        "http://purl.obolibrary.org/obo/DOID_0050012",
+                        "http://purl.obolibrary.org/obo/DOID_0050083"
+                    ],
+                    "score-cands": [
+                        0.46829235553741455,
+                        0.43535226583480835,
+                        0.4055408239364624,
+                        0.4039415717124939,
+                        0.39961063861846924
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101074",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050141",
+                        "http://purl.obolibrary.org/obo/DOID_0050073",
+                        "http://purl.obolibrary.org/obo/DOID_0050140",
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050072"
+                    ],
+                    "score-cands": [
+                        0.6426410675048828,
+                        0.5418566465377808,
+                        0.5378611087799072,
+                        0.520309567451477,
+                        0.5176916718482971
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101075",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050041",
+                        "http://purl.obolibrary.org/obo/DOID_0050147",
+                        "http://purl.obolibrary.org/obo/DOID_0050097",
+                        "http://purl.obolibrary.org/obo/DOID_0050125",
+                        "http://purl.obolibrary.org/obo/DOID_0050144"
+                    ],
+                    "score-cands": [
+                        0.41640374064445496,
+                        0.40383729338645935,
+                        0.38364648818969727,
+                        0.38063323497772217,
+                        0.37802353501319885
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101083",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0050041",
+                        "http://purl.obolibrary.org/obo/DOID_0050051",
+                        "http://purl.obolibrary.org/obo/DOID_0050125",
+                        "http://purl.obolibrary.org/obo/DOID_0050061"
+                    ],
+                    "score-cands": [
+                        0.41071557998657227,
+                        0.40601682662963867,
+                        0.3820886015892029,
+                        0.3781629204750061,
+                        0.3707456588745117
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101085",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050041",
+                        "http://purl.obolibrary.org/obo/DOID_0050051",
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0050147",
+                        "http://purl.obolibrary.org/obo/DOID_0050050"
+                    ],
+                    "score-cands": [
+                        0.4215741753578186,
+                        0.38955211639404297,
+                        0.38651007413864136,
+                        0.3789352774620056,
+                        0.37848955392837524
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101091",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050012",
+                        "http://purl.obolibrary.org/obo/DOID_0050150",
+                        "http://purl.obolibrary.org/obo/DOID_0050097",
+                        "http://purl.obolibrary.org/obo/DOID_0050116",
+                        "http://purl.obolibrary.org/obo/DOID_0050118"
+                    ],
+                    "score-cands": [
+                        0.40534740686416626,
+                        0.3758074641227722,
+                        0.3757184147834778,
+                        0.37048977613449097,
+                        0.36759620904922485
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101116",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050043",
+                        "http://purl.obolibrary.org/obo/DOID_0050061",
+                        "http://purl.obolibrary.org/obo/DOID_0050120",
+                        "http://purl.obolibrary.org/obo/DOID_0050105",
+                        "http://purl.obolibrary.org/obo/DOID_0050051"
+                    ],
+                    "score-cands": [
+                        0.43121957778930664,
+                        0.4300832748413086,
+                        0.40049025416374207,
+                        0.3975532650947571,
+                        0.3938709497451782
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101201",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050134",
+                        "http://purl.obolibrary.org/obo/DOID_0050135",
+                        "http://purl.obolibrary.org/obo/DOID_0050145",
+                        "http://purl.obolibrary.org/obo/DOID_0050138",
+                        "http://purl.obolibrary.org/obo/DOID_0050116"
+                    ],
+                    "score-cands": [
+                        0.45766252279281616,
+                        0.44226670265197754,
+                        0.43565911054611206,
+                        0.4291646182537079,
+                        0.402296245098114
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101209",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050138",
+                        "http://purl.obolibrary.org/obo/DOID_0050145",
+                        "http://purl.obolibrary.org/obo/DOID_0050118",
+                        "http://purl.obolibrary.org/obo/DOID_0050026",
+                        "http://purl.obolibrary.org/obo/DOID_0050059"
+                    ],
+                    "score-cands": [
+                        0.5360722541809082,
+                        0.5038343667984009,
+                        0.496143102645874,
+                        0.474355548620224,
+                        0.43783146142959595
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101214",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050026",
+                        "http://purl.obolibrary.org/obo/DOID_0050145",
+                        "http://purl.obolibrary.org/obo/DOID_0050127",
+                        "http://purl.obolibrary.org/obo/DOID_0050138",
+                        "http://purl.obolibrary.org/obo/DOID_0001816"
+                    ],
+                    "score-cands": [
+                        0.5485121011734009,
+                        0.5465875267982483,
+                        0.5452308654785156,
+                        0.5043981075286865,
+                        0.500004231929779
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101216",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050134",
+                        "http://purl.obolibrary.org/obo/DOID_0050136",
+                        "http://purl.obolibrary.org/obo/DOID_0050133",
+                        "http://purl.obolibrary.org/obo/DOID_0050135",
+                        "http://purl.obolibrary.org/obo/DOID_0050138"
+                    ],
+                    "score-cands": [
+                        0.46818679571151733,
+                        0.46661698818206787,
+                        0.4446212649345398,
+                        0.4445960521697998,
+                        0.40180033445358276
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101218",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050120",
+                        "http://purl.obolibrary.org/obo/DOID_0014667",
+                        "http://purl.obolibrary.org/obo/DOID_0050025",
+                        "http://purl.obolibrary.org/obo/DOID_0050083",
+                        "http://purl.obolibrary.org/obo/DOID_0050140"
+                    ],
+                    "score-cands": [
+                        0.6133406162261963,
+                        0.5000374913215637,
+                        0.4647948145866394,
+                        0.46296918392181396,
+                        0.4543225169181824
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101219",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050083",
+                        "http://purl.obolibrary.org/obo/DOID_0050072",
+                        "http://purl.obolibrary.org/obo/DOID_0050118",
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050136"
+                    ],
+                    "score-cands": [
+                        0.45540791749954224,
+                        0.4481796324253082,
+                        0.44699227809906006,
+                        0.4221253991127014,
+                        0.41310226917266846
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101220",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050072",
+                        "http://purl.obolibrary.org/obo/DOID_0050025",
+                        "http://purl.obolibrary.org/obo/DOID_0050148",
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0001816"
+                    ],
+                    "score-cands": [
+                        0.4664885401725769,
+                        0.4496755003929138,
+                        0.4483811557292938,
+                        0.4375643730163574,
+                        0.4228616952896118
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101223",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0050118",
+                        "http://purl.obolibrary.org/obo/DOID_0050026",
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050083"
+                    ],
+                    "score-cands": [
+                        0.5010259747505188,
+                        0.4703054428100586,
+                        0.4449154734611511,
+                        0.43096575140953064,
+                        0.42859935760498047
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101253",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0050072",
+                        "http://purl.obolibrary.org/obo/DOID_0014667",
+                        "http://purl.obolibrary.org/obo/DOID_0050127"
+                    ],
+                    "score-cands": [
+                        0.5790576934814453,
+                        0.5529296398162842,
+                        0.48500752449035645,
+                        0.48167967796325684,
+                        0.4742794632911682
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101254",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0014667",
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050013",
+                        "http://purl.obolibrary.org/obo/DOID_0050083",
+                        "http://purl.obolibrary.org/obo/DOID_0050032"
+                    ],
+                    "score-cands": [
+                        0.5502251982688904,
+                        0.5185462832450867,
+                        0.5075730085372925,
+                        0.4884454011917114,
+                        0.48122772574424744
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101270",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050136",
+                        "http://purl.obolibrary.org/obo/DOID_0050134",
+                        "http://purl.obolibrary.org/obo/DOID_0050138",
+                        "http://purl.obolibrary.org/obo/DOID_0050127",
+                        "http://purl.obolibrary.org/obo/DOID_0050147"
+                    ],
+                    "score-cands": [
+                        0.4297013282775879,
+                        0.4240871071815491,
+                        0.42143362760543823,
+                        0.4172557294368744,
+                        0.41381239891052246
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101304",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050120",
+                        "http://purl.obolibrary.org/obo/DOID_0014667",
+                        "http://purl.obolibrary.org/obo/DOID_0050026",
+                        "http://purl.obolibrary.org/obo/DOID_0050105",
+                        "http://purl.obolibrary.org/obo/DOID_0050117"
+                    ],
+                    "score-cands": [
+                        0.5841970443725586,
+                        0.5516032576560974,
+                        0.4584565758705139,
+                        0.45405566692352295,
+                        0.451519250869751
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101328",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050032",
+                        "http://purl.obolibrary.org/obo/DOID_0050026",
+                        "http://purl.obolibrary.org/obo/DOID_0050136",
+                        "http://purl.obolibrary.org/obo/DOID_0014667",
+                        "http://purl.obolibrary.org/obo/DOID_0050120"
+                    ],
+                    "score-cands": [
+                        0.4956722855567932,
+                        0.4334147572517395,
+                        0.42872354388237,
+                        0.42809057235717773,
+                        0.4172874689102173
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101334",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050013",
+                        "http://purl.obolibrary.org/obo/DOID_0014667",
+                        "http://purl.obolibrary.org/obo/DOID_0050032",
+                        "http://purl.obolibrary.org/obo/DOID_0050132",
+                        "http://purl.obolibrary.org/obo/DOID_0050120"
+                    ],
+                    "score-cands": [
+                        0.7319377660751343,
+                        0.7125390768051147,
+                        0.6757403016090393,
+                        0.5214864611625671,
+                        0.507504940032959
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101437",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050051",
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0050061",
+                        "http://purl.obolibrary.org/obo/DOID_0050041",
+                        "http://purl.obolibrary.org/obo/DOID_0050117"
+                    ],
+                    "score-cands": [
+                        0.4260266423225403,
+                        0.4156550168991089,
+                        0.4111282527446747,
+                        0.39509713649749756,
+                        0.3919997811317444
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101440",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050116",
+                        "http://purl.obolibrary.org/obo/DOID_0050072",
+                        "http://purl.obolibrary.org/obo/DOID_0050097",
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0001816"
+                    ],
+                    "score-cands": [
+                        0.41004353761672974,
+                        0.4094530940055847,
+                        0.3835453391075134,
+                        0.38162752985954285,
+                        0.38120436668395996
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101641",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050096",
+                        "http://purl.obolibrary.org/obo/DOID_0050116",
+                        "http://purl.obolibrary.org/obo/DOID_0050061",
+                        "http://purl.obolibrary.org/obo/DOID_0050013",
+                        "http://purl.obolibrary.org/obo/DOID_0050117"
+                    ],
+                    "score-cands": [
+                        0.4360758066177368,
+                        0.4134787321090698,
+                        0.40892574191093445,
+                        0.40716540813446045,
+                        0.4056888818740845
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C102570",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050145",
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050072",
+                        "http://purl.obolibrary.org/obo/DOID_0050134",
+                        "http://purl.obolibrary.org/obo/DOID_0050147"
+                    ],
+                    "score-cands": [
+                        0.6274528503417969,
+                        0.5455084443092346,
+                        0.5195056200027466,
+                        0.4909808039665222,
+                        0.4790601432323456
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C102820",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050138",
+                        "http://purl.obolibrary.org/obo/DOID_0050132",
+                        "http://purl.obolibrary.org/obo/DOID_0050140",
+                        "http://purl.obolibrary.org/obo/DOID_0050131",
+                        "http://purl.obolibrary.org/obo/DOID_0050004"
+                    ],
+                    "score-cands": [
+                        0.5388040542602539,
+                        0.5178259611129761,
+                        0.5059158205986023,
+                        0.4934770166873932,
+                        0.4822591245174408
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C102870",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050025",
+                        "http://purl.obolibrary.org/obo/DOID_0050130",
+                        "http://purl.obolibrary.org/obo/DOID_0050120",
+                        "http://purl.obolibrary.org/obo/DOID_0050004",
+                        "http://purl.obolibrary.org/obo/DOID_0050105"
+                    ],
+                    "score-cands": [
+                        0.5325911045074463,
+                        0.519282341003418,
+                        0.5138399004936218,
+                        0.4515390396118164,
+                        0.43570494651794434
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C102872",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050148",
+                        "http://purl.obolibrary.org/obo/DOID_0050145",
+                        "http://purl.obolibrary.org/obo/DOID_0050025",
+                        "http://purl.obolibrary.org/obo/DOID_0050059",
+                        "http://purl.obolibrary.org/obo/DOID_0050083"
+                    ],
+                    "score-cands": [
+                        0.49652543663978577,
+                        0.4957066774368286,
+                        0.4919058084487915,
+                        0.48561471700668335,
+                        0.48026055097579956
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C102884",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050004",
+                        "http://purl.obolibrary.org/obo/DOID_0050025",
+                        "http://purl.obolibrary.org/obo/DOID_0050120",
+                        "http://purl.obolibrary.org/obo/DOID_0050072",
+                        "http://purl.obolibrary.org/obo/DOID_0050117"
+                    ],
+                    "score-cands": [
+                        0.5132279396057129,
+                        0.5075671672821045,
+                        0.49086794257164,
+                        0.4634634554386139,
+                        0.4597056210041046
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C102897",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050120",
+                        "http://purl.obolibrary.org/obo/DOID_0050145",
+                        "http://purl.obolibrary.org/obo/DOID_0050059",
+                        "http://purl.obolibrary.org/obo/DOID_0050025"
+                    ],
+                    "score-cands": [
+                        0.4982303977012634,
+                        0.48405152559280396,
+                        0.48277711868286133,
+                        0.44562482833862305,
+                        0.4369211792945862
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C102955",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0001816",
+                        "http://purl.obolibrary.org/obo/DOID_0050136",
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0050134",
+                        "http://purl.obolibrary.org/obo/DOID_0050118"
+                    ],
+                    "score-cands": [
+                        0.4804377853870392,
+                        0.4245906472206116,
+                        0.41994068026542664,
+                        0.4135591387748718,
+                        0.41211557388305664
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C102979",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050026",
+                        "http://purl.obolibrary.org/obo/DOID_0050025",
+                        "http://purl.obolibrary.org/obo/DOID_0014667",
+                        "http://purl.obolibrary.org/obo/DOID_0050118",
+                        "http://purl.obolibrary.org/obo/DOID_0050120"
+                    ],
+                    "score-cands": [
+                        0.5441270470619202,
+                        0.5215510725975037,
+                        0.5035092234611511,
+                        0.49691128730773926,
+                        0.49444231390953064
+                    ]
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C103144",
+                    "target-cands": [
+                        "http://purl.obolibrary.org/obo/DOID_0050144",
+                        "http://purl.obolibrary.org/obo/DOID_0050125",
+                        "http://purl.obolibrary.org/obo/DOID_0050051",
+                        "http://purl.obolibrary.org/obo/DOID_0050041",
+                        "http://purl.obolibrary.org/obo/DOID_0050047"
+                    ],
+                    "score-cands": [
+                        0.5961281657218933,
+                        0.48566383123397827,
+                        0.48401522636413574,
+                        0.45902520418167114,
+                        0.45626431703567505
+                    ]
+                }
+            ]
+        },
+        {
+            "llm-output": [
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C100104",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050117",
+                    "score": 0.5783354043960571
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C100104",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050143",
+                    "score": 0.6782572865486145
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C100104",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050140",
+                    "score": 0.7405426502227783
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C100104",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.6679102182388306
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C100104",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050127",
+                    "score": 0.6967328786849976
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101038",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0002116",
+                    "score": 0.7788040637969971
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101039",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.5925771594047546
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101045",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0014667",
+                    "score": 0.517095148563385
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101051",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050136",
+                    "score": 0.540942907333374
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101051",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050026",
+                    "score": 0.5344277620315552
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101051",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050120",
+                    "score": 0.597017765045166
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101053",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0001816",
+                    "score": 0.626812756061554
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101054",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050120",
+                    "score": 0.6236703395843506
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101055",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.5968272089958191
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101057",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050026",
+                    "score": 0.5185720920562744
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101057",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.5584276914596558
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101059",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.5429170727729797
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101059",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050026",
+                    "score": 0.5998726487159729
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101075",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.5697142481803894
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101083",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.5621126294136047
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101085",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.615993320941925
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101116",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050120",
+                    "score": 0.6418784260749817
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101214",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050138",
+                    "score": 0.5018810033798218
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101220",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.5195907354354858
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101253",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.5191909074783325
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101304",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050105",
+                    "score": 0.5008819103240967
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101328",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0014667",
+                    "score": 0.5852583050727844
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101334",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0014667",
+                    "score": 0.67325758934021
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101334",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050120",
+                    "score": 0.5213758945465088
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101437",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.6654744744300842
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101440",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050116",
+                    "score": 0.6712438464164734
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101440",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.7238093614578247
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101440",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0001816",
+                    "score": 0.5436151027679443
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101641",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050061",
+                    "score": 0.5306833982467651
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C101641",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050013",
+                    "score": 0.5978115200996399
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C102884",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050117",
+                    "score": 0.7486510276794434
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C102955",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0001816",
+                    "score": 0.5172656774520874
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C102955",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.520272970199585
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C103144",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050144",
+                    "score": 0.6579811573028564
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C103144",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050051",
+                    "score": 0.6783719062805176
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C103144",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050041",
+                    "score": 0.5389848351478577
+                },
+                {
+                    "source": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C103144",
+                    "target": "http://purl.obolibrary.org/obo/DOID_0050047",
+                    "score": 0.581885814666748
+                }
+            ]
+        }
+    ]
+}
