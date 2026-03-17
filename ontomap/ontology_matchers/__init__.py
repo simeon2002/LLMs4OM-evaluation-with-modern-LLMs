@@ -95,8 +95,6 @@ MatcherCatalog = {
         "MPTAdaRAG": MPTLLMAdaRAG,
         "MambaLLMAdaRAG": MambaLLMAdaRAG,
         "MambaLLMBertRAG": MambaLLMBertRAG,
-        llamaQwenRAG: 
-
     },
     "retrieval": {
         "BM25Retrieval": BM25Retrieval,
