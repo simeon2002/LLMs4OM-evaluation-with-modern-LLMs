@@ -13,10 +13,28 @@ from ontomap.ontology_matchers.rag.rag import (
     RAGBasedDecoderLLMArch,
     RAGBasedOpenAILLMArch,
 )
-from ontomap.ontology_matchers.retrieval.models import AdaRetrieval, BERTRetrieval
+from ontomap.ontology_matchers.retrieval.models import AdaRetrieval, BERTRetrieval, Qwen3EmbeddingRetrieval
 
 from typing import Any
+import os
 import torch
+
+
+class LLaMA3DecoderLM(RAGBasedDecoderLLMArch):
+    tokenizer = AutoTokenizer
+    model = AutoModelForCausalLM
+    path = "meta-llama/Meta-Llama-3-8B"
+
+    def __str__(self):
+        return super().__str__() + "-LLaMA-3-8B"
+
+    def load_tokenizer(self) -> None:
+        self.tokenizer = self.tokenizer.from_pretrained(
+            self.path,
+            token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
+            padding_side="left",
+        )
+        self.tokenizer.pad_token = self.tokenizer.eos_token
 
 
 class LLaMA7BDecoderLM(RAGBasedDecoderLLMArch):
