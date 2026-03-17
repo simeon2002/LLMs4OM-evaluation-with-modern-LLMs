@@ -31,6 +31,13 @@ class SpecterBERTRetrieval(BiEncoderRetrieval):
         return super().__str__() + "SpecterBERTRetrieval"
 
 
+class Qwen3EmbeddingRetrieval(BiEncoderRetrieval):
+    path: str = "Qwen/Qwen3-Embedding-0.6B"
+
+    def __str__(self):
+        return super().__str__() + "Qwen3EmbeddingRetrieval"
+
+
 class FlanT5XLRetrieval(BiEncoderRetrieval):
     path: str = "google/flan-t5-xl"
 
