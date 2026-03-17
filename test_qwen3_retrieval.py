@@ -8,32 +8,33 @@ Usage:
     python test_qwen3_retrieval.py
 """
 
+import json
 import traceback
 
 from ontomap.encoder.lightweight import IRILabelInLightweightEncoder
 from ontomap.evaluation.evaluator import evaluator
 from ontomap.ontology_matchers.retrieval.models import Qwen3EmbeddingRetrieval
 from ontomap.postprocess import process
-from ontomap.utils import io
 
 DATASET_PATH = "datasets/test-small/ncit-doid/om.json"
 DEVICE = "cuda"
 TOP_K = 5
 
-# ── Load ──────────────────────────────────────────────────────────────────────
-print(f"Loading {DATASET_PATH} ...")
-dataset = io.read_json(DATASET_PATH)
+# Load 
+print(f"Loading Dataset ...")
+with open(DATASET_PATH, encoding="utf-8") as f:
+    dataset = json.load(f)
 print(f"Source: {len(dataset['source'])}  Target: {len(dataset['target'])}")
 
-# ── Encode ────────────────────────────────────────────────────────────────────
+# Encode 
 print("Encoding inputs...")
 encoder = IRILabelInLightweightEncoder()
 encoded_inputs = encoder(**dataset)
 
-# ── Run retrieval ─────────────────────────────────────────────────────────────
+# Run retrieval 
 print("Loading Qwen3-Embedding-0.6B...")
 try:
-    model = Qwen3EmbeddingRetrieval(top_k=TOP_K, device=DEVICE)
+    model = Qwen3EmbeddingRetrieval(top_k=5, device="cuda")
 
     print("Generating predictions...")
     predicts = model.generate(input_data=encoded_inputs)
