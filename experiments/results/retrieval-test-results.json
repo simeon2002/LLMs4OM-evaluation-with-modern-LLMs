@@ -1,0 +1,54 @@
+{
+  "Qwen3Embedding4BRetrieval": {
+    "full": {
+      "intersection": 49,
+      "precision": 19.6,
+      "recall": 98.0,
+      "f-score": 32.666666666666664,
+      "predictions-len": 250,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 34,
+      "precision": 13.600000000000001,
+      "recall": 97.14285714285714,
+      "f-score": 23.859649122807017,
+      "predictions-len": 250,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 15,
+      "precision": 6.0,
+      "recall": 100.0,
+      "f-score": 11.320754716981131,
+      "predictions-len": 250,
+      "reference-len": 15
+    }
+  },
+  "Qwen3EmbeddingRetrieval": {
+    "full": {
+      "intersection": 43,
+      "precision": 17.2,
+      "recall": 86.0,
+      "f-score": 28.666666666666664,
+      "predictions-len": 250,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 28,
+      "precision": 11.200000000000001,
+      "recall": 80.0,
+      "f-score": 19.649122807017548,
+      "predictions-len": 250,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 15,
+      "precision": 6.0,
+      "recall": 100.0,
+      "f-score": 11.320754716981131,
+      "predictions-len": 250,
+      "reference-len": 15
+    }
+  }
+}
