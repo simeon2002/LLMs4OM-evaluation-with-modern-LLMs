@@ -24,5 +24,31 @@
       "predictions-len": 40,
       "reference-len": 15
     }
+  },
+  "LLaMA3Qwen34BRAG": {
+    "full": {
+      "intersection": 41,
+      "precision": 93.18181818181817,
+      "recall": 82.0,
+      "f-score": 87.2340425531915,
+      "predictions-len": 44,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 27,
+      "precision": 61.36363636363637,
+      "recall": 77.14285714285715,
+      "f-score": 68.35443037974683,
+      "predictions-len": 44,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 14,
+      "precision": 31.818181818181817,
+      "recall": 93.33333333333333,
+      "f-score": 47.457627118644076,
+      "predictions-len": 44,
+      "reference-len": 15
+    }
   }
 }
