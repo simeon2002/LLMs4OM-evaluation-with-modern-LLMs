@@ -1,0 +1,28 @@
+{
+  "LLaMA3Qwen3RAG": {
+    "full": {
+      "intersection": 35,
+      "precision": 87.5,
+      "recall": 70.0,
+      "f-score": 77.77777777777777,
+      "predictions-len": 40,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 22,
+      "precision": 55.00000000000001,
+      "recall": 62.857142857142854,
+      "f-score": 58.666666666666664,
+      "predictions-len": 40,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 13,
+      "precision": 32.5,
+      "recall": 86.66666666666667,
+      "f-score": 47.27272727272728,
+      "predictions-len": 40,
+      "reference-len": 15
+    }
+  }
+}
