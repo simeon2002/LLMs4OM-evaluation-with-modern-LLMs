@@ -50,5 +50,31 @@
       "predictions-len": 44,
       "reference-len": 15
     }
+  },
+  "LLaMA3NemotronRAG": {
+    "full": {
+      "intersection": 37,
+      "precision": 86.04651162790698,
+      "recall": 74.0,
+      "f-score": 79.56989247311827,
+      "predictions-len": 43,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 25,
+      "precision": 58.139534883720934,
+      "recall": 71.42857142857143,
+      "f-score": 64.1025641025641,
+      "predictions-len": 43,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 12,
+      "precision": 27.906976744186046,
+      "recall": 80.0,
+      "f-score": 41.37931034482758,
+      "predictions-len": 43,
+      "reference-len": 15
+    }
   }
 }
