@@ -50,5 +50,31 @@
       "predictions-len": 250,
       "reference-len": 15
     }
+  },
+  "LlamaNemotronEmbeddingRetrieval": {
+    "full": {
+      "intersection": 44,
+      "precision": 17.599999999999998,
+      "recall": 88.0,
+      "f-score": 29.33333333333333,
+      "predictions-len": 250,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 30,
+      "precision": 12.0,
+      "recall": 85.71428571428571,
+      "f-score": 21.052631578947366,
+      "predictions-len": 250,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 14,
+      "precision": 5.6000000000000005,
+      "recall": 93.33333333333333,
+      "f-score": 10.566037735849058,
+      "predictions-len": 250,
+      "reference-len": 15
+    }
   }
 }
