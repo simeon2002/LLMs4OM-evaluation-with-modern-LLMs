@@ -1,14 +1,14 @@
 #!/bin/bash -l
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=simeon.serafimov@student.kuleuven.be
-#SBATCH --clusters=wice
+#SBATCH --clusters=genius
 #SBATCH --account=intro_vsc38504
-#SBATCH --partition=gpu_h100
+#SBATCH --partition=gpu_v100_long
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --gpus-per-node=1
-#SBATCH --time=1-16:00:00
+#SBATCH --time=15:00:00
 #SBATCH --job-name=pipeline_llama3_qwen3_0_6b
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --error=logs/%x_%j.err
@@ -17,6 +17,7 @@
 set -eo pipefail
 
 source ~/.bashrc
+bash --login
 
 export HF_HOME="$VSC_SCRATCH/.cache/huggingface"
 export HUGGINGFACE_ACCESS_TOKEN=$HF_TOKEN
