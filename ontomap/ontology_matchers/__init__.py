@@ -39,6 +39,7 @@ from ontomap.ontology_matchers.rag.models import (
     MambaLLMAdaRAG,
     MambaLLMBertRAG,
     LLaMA3Qwen3RAG,
+    LLaMA3Qwen34BRAG,
 )
 from ontomap.ontology_matchers.retrieval.models import (
     AdaRetrieval,
@@ -99,6 +100,7 @@ MatcherCatalog = {
         "MambaLLMAdaRAG": MambaLLMAdaRAG,
         "MambaLLMBertRAG": MambaLLMBertRAG,
         "LLaMA3Qwen3RAG": LLaMA3Qwen3RAG,
+        "LLaMA3Qwen34BRAG": LLaMA3Qwen34BRAG,
     },
     "retrieval": {
         "BM25Retrieval": BM25Retrieval,
