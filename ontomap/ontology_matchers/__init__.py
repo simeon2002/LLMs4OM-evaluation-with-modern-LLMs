@@ -42,6 +42,7 @@ from ontomap.ontology_matchers.rag.models import (
     LLaMA3Qwen34BRAG,
     LLaMA3EmbeddingGemmaRAG,
     LLaMA3NemotronRAG,
+    MistralNemoBertRAG,
 )
 from ontomap.ontology_matchers.retrieval.models import (
     AdaRetrieval,
@@ -107,6 +108,7 @@ MatcherCatalog = {
         "LLaMA3Qwen34BRAG": LLaMA3Qwen34BRAG,
         "LLaMA3EmbeddingGemmaRAG": LLaMA3EmbeddingGemmaRAG,
         "LLaMA3NemotronRAG": LLaMA3NemotronRAG,
+        "MistralNemoBertRAG": MistralNemoBertRAG,
     },
     "retrieval": {
         "BM25Retrieval": BM25Retrieval,

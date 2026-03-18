@@ -289,3 +289,27 @@ class LLaMA3NemotronRAG(RAG):
 
     def __str__(self):
         return super().__str__() + "-LLaMA3NemotronRAG"
+
+
+class MistralNemoDecoderLM(RAGBasedDecoderLLMArch):
+    tokenizer = AutoTokenizer
+    model = AutoModelForCausalLM
+    path = "mistralai/Mistral-Nemo-Base-2407"
+
+    def __str__(self):
+        return super().__str__() + "-Mistral-Nemo-12B"
+
+    def load_tokenizer(self) -> None:
+        self.tokenizer = self.tokenizer.from_pretrained(
+            self.path,
+            padding_side="left",
+        )
+        self.tokenizer.pad_token = self.tokenizer.eos_token
+
+
+class MistralNemoBertRAG(RAG):
+    Retrieval = BERTRetrieval
+    LLM = MistralNemoDecoderLM
+
+    def __str__(self):
+        return super().__str__() + "-MistralNemoBertRAG"
