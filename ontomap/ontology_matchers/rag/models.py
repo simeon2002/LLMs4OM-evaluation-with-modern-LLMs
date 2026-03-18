@@ -13,7 +13,7 @@ from ontomap.ontology_matchers.rag.rag import (
     RAGBasedDecoderLLMArch,
     RAGBasedOpenAILLMArch,
 )
-from ontomap.ontology_matchers.retrieval.models import AdaRetrieval, BERTRetrieval, Qwen3EmbeddingRetrieval, Qwen3Embedding4BRetrieval
+from ontomap.ontology_matchers.retrieval.models import AdaRetrieval, BERTRetrieval, Qwen3EmbeddingRetrieval, Qwen3Embedding4BRetrieval, LlamaNemotronEmbeddingRetrieval
 
 from typing import Any
 import os
@@ -273,3 +273,11 @@ class LLaMA3Qwen34BRAG(RAG):
 
     def __str__(self):
         return super().__str__() + "-LLaMA3Qwen34BRAG"
+
+
+class LLaMA3NemotronRAG(RAG):
+    Retrieval = LlamaNemotronEmbeddingRetrieval
+    LLM = LLaMA3DecoderLM
+
+    def __str__(self):
+        return super().__str__() + "-LLaMA3NemotronRAG"
