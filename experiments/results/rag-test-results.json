@@ -76,5 +76,31 @@
       "predictions-len": 43,
       "reference-len": 15
     }
+  },
+  "LLaMA3EmbeddingGemmaRAG": {
+    "full": {
+      "intersection": 32,
+      "precision": 94.11764705882352,
+      "recall": 64.0,
+      "f-score": 76.1904761904762,
+      "predictions-len": 34,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 22,
+      "precision": 64.70588235294117,
+      "recall": 62.857142857142854,
+      "f-score": 63.76811594202899,
+      "predictions-len": 34,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 10,
+      "precision": 29.411764705882355,
+      "recall": 66.66666666666666,
+      "f-score": 40.816326530612244,
+      "predictions-len": 34,
+      "reference-len": 15
+    }
   }
 }
