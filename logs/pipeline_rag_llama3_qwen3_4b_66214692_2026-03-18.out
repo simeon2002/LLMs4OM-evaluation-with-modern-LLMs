@@ -1,0 +1,84 @@
+SLURM_JOB_ID: 66214692
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: intro_vsc38504
+SLURM_JOB_NAME: pipeline_rag_llama3_qwen3_4b
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g09
+SLURM_JOB_CPUS_PER_NODE: 4
+SLURM_JOB_GPUS: 3
+Date: Wed Mar 18 01:00:48 PM CET 2026
+Walltime: 00-03:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g09
+Start: Wed Mar 18 01:00:57 PM CET 2026
+JobID: 66214692
+MODEL: LLaMA3Qwen34BRAG
+CUDA_VISIBLE_DEVICES: 0
+=== GPU check ===
+Wed Mar 18 13:00:57 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 590.48.01              Driver Version: 590.48.01      CUDA Version: 13.1     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          On  |   00000000:C6:00.0 Off |                    0 |
+| N/A   27C    P0             72W /  700W |       0MiB /  81559MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+working on LLaMA3Qwen34BRAG-RAG-LLaMA3Qwen34BRAG
+	Working on bio-ml track
+	Working on bio-ml/ncit-doid.disease task
+		Prompting ID is: label
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-LLaMA3Qwen34BRAG-label-2026.03.18-13:32:15.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-LLaMA3Qwen34BRAG-label-children-2026.03.18-14:03:07.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-LLaMA3Qwen34BRAG-label-parent-2026.03.18-14:33:58.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+Run evaluation on LLaMA3Qwen34BRAG
+	Working on bio-ml track
+	Working on bio-ml/ncit-doid.disease task
+		Prompting ID is: label
+Evaluating output for rag-LLaMA3Qwen34BRAG-label-2026.03.18-13:32:15.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-LLaMA3Qwen34BRAG-label-2026.03.18-13:32:15.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for rag-LLaMA3Qwen34BRAG-label-children-2026.03.18-14:03:07.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-LLaMA3Qwen34BRAG-label-children-2026.03.18-14:03:07.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for rag-LLaMA3Qwen34BRAG-label-parent-2026.03.18-14:33:58.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-LLaMA3Qwen34BRAG-label-parent-2026.03.18-14:33:58.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+End: Wed Mar 18 02:34:41 PM CET 2026
