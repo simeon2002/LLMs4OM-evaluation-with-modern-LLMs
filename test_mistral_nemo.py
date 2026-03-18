@@ -6,15 +6,12 @@ Quick sanity check for MistralNemoDecoderLM:
 - Runs a single yes/no prompt
 """
 import sys
-import torch
-
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 config = {
     "max_token_length": 1,
     "tokenizer_max_length": 500,
     "num_beams": 1,
-    "device": DEVICE,
+    "device": "cuda",
     "truncation": True,
     "top_p": 0.95,
     "temperature": 0.8,

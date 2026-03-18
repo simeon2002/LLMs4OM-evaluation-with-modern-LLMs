@@ -300,11 +300,16 @@ class MistralNemoDecoderLM(RAGBasedDecoderLLMArch):
         return super().__str__() + "-Mistral-Nemo-12B"
 
     def load_tokenizer(self) -> None:
+        # add padding on left to allow for next token generation based on actual input instead of padding tokens
         self.tokenizer = self.tokenizer.from_pretrained(
             self.path,
             padding_side="left",
         )
         self.tokenizer.pad_token = self.tokenizer.eos_token
+
+    def generate_for_llm(self, tokenized_input_data: Any) -> Any:
+        tokenized_input_data.pop("token_type_ids", None)
+        return super().generate_for_llm(tokenized_input_data)
 
 
 class MistralNemoBertRAG(RAG):
