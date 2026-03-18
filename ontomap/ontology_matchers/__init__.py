@@ -50,6 +50,7 @@ from ontomap.ontology_matchers.retrieval.models import (
     FlanT5XXLRetrieval,
     Qwen3EmbeddingRetrieval,
     Qwen3Embedding4BRetrieval,
+    EmbeddingGemma300MRetrieval,
     LlamaNemotronEmbeddingRetrieval,
     SpecterBERTRetrieval,
     SVMBERTRetrieval,
@@ -116,6 +117,7 @@ MatcherCatalog = {
         "AdaRetrieval": AdaRetrieval,
         "Qwen3EmbeddingRetrieval": Qwen3EmbeddingRetrieval,
         "Qwen3Embedding4BRetrieval": Qwen3Embedding4BRetrieval,
+        "EmbeddingGemma300MRetrieval": EmbeddingGemma300MRetrieval,
         "LlamaNemotronEmbeddingRetrieval": LlamaNemotronEmbeddingRetrieval,
     },
     "icv": {

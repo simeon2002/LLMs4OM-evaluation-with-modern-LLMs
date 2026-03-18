@@ -46,6 +46,13 @@ class Qwen3Embedding4BRetrieval(BiEncoderRetrieval):
         return super().__str__() + "Qwen3Embedding4BRetrieval"
 
 
+class EmbeddingGemma300MRetrieval(BiEncoderRetrieval):
+    path: str = "google/embeddinggemma-300m"
+
+    def __str__(self):
+        return super().__str__() + "EmbeddingGemma300MRetrieval"
+
+
 class LlamaNemotronEmbeddingRetrieval(BiEncoderRetrieval):
     path: str = "nvidia/llama-embed-nemotron-8b"
 
