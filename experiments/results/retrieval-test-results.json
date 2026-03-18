@@ -76,5 +76,31 @@
       "predictions-len": 250,
       "reference-len": 15
     }
+  },
+  "EmbeddingGemma300MRetrieval": {
+    "full": {
+      "intersection": 45,
+      "precision": 18.0,
+      "recall": 90.0,
+      "f-score": 30.0,
+      "predictions-len": 250,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 31,
+      "precision": 12.4,
+      "recall": 88.57142857142857,
+      "f-score": 21.754385964912277,
+      "predictions-len": 250,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 14,
+      "precision": 5.6000000000000005,
+      "recall": 93.33333333333333,
+      "f-score": 10.566037735849058,
+      "predictions-len": 250,
+      "reference-len": 15
+    }
   }
 }
