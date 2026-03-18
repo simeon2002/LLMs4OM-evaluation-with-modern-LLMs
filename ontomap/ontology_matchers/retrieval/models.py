@@ -2,6 +2,7 @@
 import os
 from pathlib import Path
 from typing import Any
+from sentence_transformers import SentenceTransformer
 
 import numpy as np
 from rank_bm25 import BM25Okapi
@@ -47,6 +48,9 @@ class Qwen3Embedding4BRetrieval(BiEncoderRetrieval):
 
 class LlamaNemotronEmbeddingRetrieval(BiEncoderRetrieval):
     path: str = "nvidia/llama-embed-nemotron-8b"
+
+    def load(self):
+        self.model = SentenceTransformer(self.path, device=self.kwargs["device"], trust_remote_code=True)
 
     def __str__(self):
         return super().__str__() + "LlamaNemotronEmbeddingRetrieval"
