@@ -108,7 +108,7 @@ class BaseConfig:
                           "LLaMA7BAdaFewShot", "MistralAdaFewShot", "FalconAdaFewShot", "VicunaAdaFewShot", "MPTAdaFewShot",
                           "LLaMA7BBertFewShot", "MistralBertFewShot", "FalconBertFewShot", "VicunaBertFewShot", "MPTBertFewShot",
                           "MambaLLMAdaFewShot", "MambaLLMBertFewShot", "MambaLLMAdaRAG", "MambaLLMBertRAG",
-                          "LLaMA3Qwen3RAG", "LLaMA3Qwen34BRAG", "LLaMA3NemotronRAG"]
+                          "LLaMA3Qwen3RAG", "LLaMA3Qwen34BRAG", "LLaMA3EmbeddingGemmaRAG", "LLaMA3NemotronRAG"]
 
         for rag_icv_model in rag_icv_models:
             self.parser.add_argument("--" + rag_icv_model, type=dict, default=llama_rag_config)
