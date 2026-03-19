@@ -128,5 +128,31 @@
       "predictions-len": 29,
       "reference-len": 15
     }
+  },
+  "Qwen25BertRAG": {
+    "full": {
+      "intersection": 29,
+      "precision": 100.0,
+      "recall": 57.99999999999999,
+      "f-score": 73.41772151898734,
+      "predictions-len": 29,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 19,
+      "precision": 65.51724137931035,
+      "recall": 54.285714285714285,
+      "f-score": 59.374999999999986,
+      "predictions-len": 29,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 10,
+      "precision": 34.48275862068966,
+      "recall": 66.66666666666666,
+      "f-score": 45.454545454545446,
+      "predictions-len": 29,
+      "reference-len": 15
+    }
   }
 }

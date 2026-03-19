@@ -339,3 +339,11 @@ class Qwen25_7BDecoderLM(RAGBasedDecoderLLMArch):
 
     def check_answer_set_tokenizer(self, answer: str) -> bool:
         return len(self.tokenizer(answer).input_ids) == 1
+
+
+class Qwen25BertRAG(RAG):
+    Retrieval = BERTRetrieval
+    LLM = Qwen25_7BDecoderLM
+
+    def __str__(self):
+        return super().__str__() + "-Qwen25BertRAG"
