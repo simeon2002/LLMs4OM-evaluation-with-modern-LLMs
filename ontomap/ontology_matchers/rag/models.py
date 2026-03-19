@@ -321,16 +321,12 @@ class MistralNemoBertRAG(RAG):
         return super().__str__() + "-MistralNemoBertRAG"
 
 
-class Qwen25_7BDecoderLM(RAGBasedDecoderLLMArch):
+class Qwen25DecoderLM(RAGBasedDecoderLLMArch):
+    """Base class for Qwen2.5 models — no BOS token, left padding, single-token answer check."""
     tokenizer = AutoTokenizer
     model = AutoModelForCausalLM
-    path = "Qwen/Qwen2.5-7B"
-
-    def __str__(self):
-        return super().__str__() + "-Qwen2.5-7B"
 
     def load_tokenizer(self) -> None:
-        # this is required because load tokenizer adds a <s> eos token which this doesn't use.
         self.tokenizer = self.tokenizer.from_pretrained(
             self.path,
             padding_side="left",
@@ -341,9 +337,31 @@ class Qwen25_7BDecoderLM(RAGBasedDecoderLLMArch):
         return len(self.tokenizer(answer).input_ids) == 1
 
 
+class Qwen25_7BDecoderLM(Qwen25DecoderLM):
+    path = "Qwen/Qwen2.5-7B"
+
+    def __str__(self):
+        return super().__str__() + "-Qwen2.5-7B"
+
+
+class Qwen25_3BDecoderLM(Qwen25DecoderLM):
+    path = "Qwen/Qwen2.5-3B"
+
+    def __str__(self):
+        return super().__str__() + "-Qwen2.5-3B"
+
+
 class Qwen25BertRAG(RAG):
     Retrieval = BERTRetrieval
     LLM = Qwen25_7BDecoderLM
 
     def __str__(self):
         return super().__str__() + "-Qwen25BertRAG"
+
+
+class Qwen25_3BBertRAG(RAG):
+    Retrieval = BERTRetrieval
+    LLM = Qwen25_3BDecoderLM
+
+    def __str__(self):
+        return super().__str__() + "-Qwen25_3BBertRAG"
