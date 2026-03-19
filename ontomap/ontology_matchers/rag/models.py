@@ -365,3 +365,29 @@ class Qwen25_3BBertRAG(RAG):
 
     def __str__(self):
         return super().__str__() + "-Qwen25_3BBertRAG"
+
+
+class Gemma2_9BDecoderLM(RAGBasedDecoderLLMArch):
+    tokenizer = AutoTokenizer
+    model = AutoModelForCausalLM
+    path = "google/gemma-2-9b"
+
+    def __str__(self):
+        return super().__str__() + "-Gemma-2-9B"
+
+    def load_tokenizer(self) -> None:
+        self.tokenizer = self.tokenizer.from_pretrained(
+            self.path,
+            token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
+            padding_side="left",
+        )
+        self.tokenizer.pad_token = self.tokenizer.eos_token
+
+    def load_model(self) -> None:
+        self.model = self.model.from_pretrained(
+            self.path,
+            load_in_8bit=True,
+            device_map="balanced",
+            token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
+            attn_implementation="eager",
+        )
