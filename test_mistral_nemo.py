@@ -32,6 +32,7 @@ print("\nyes/no token IDs found:")
 print(f"  yes set: {llm.answer_sets_token_id['yes']}")
 print(f"  no  set: {llm.answer_sets_token_id['no']}")
 
+# IMPORTANT CHECK FOR WHETHER YES AND NO TOKENS WERE FOUND IN THE VOCAB IS SIZE 1 AS WE TAKE MAX TOKEN LENGTH = 1
 if not llm.answer_sets_token_id["yes"] or not llm.answer_sets_token_id["no"]:
     print("\nWARNING: yes or no token IDs are empty — check tokenizer vocab!")
     sys.exit(1)
