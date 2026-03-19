@@ -41,7 +41,7 @@ class LLM(BaseOMModel):
             max_length=self.kwargs["tokenizer_max_length"],
             padding=self.kwargs["padding"],
         )
-        inputs.to(self.kwargs["device"])
+        inputs.to(self.kwargs["device"]) # creates gpu tensor.
         return inputs
 
     def generate(self, input_data: List) -> List:
@@ -54,6 +54,8 @@ class LLM(BaseOMModel):
             generated_texts = self.generate_for_multiple_input(
                 tokenized_input_data=tokenized_input_data
             )
+
+        # NOTE: generated_text is essentially the sequence of yes/no answers with their corresponding probabilities.
         generated_texts = self.post_processor(generated_texts=generated_texts)
         return generated_texts
 

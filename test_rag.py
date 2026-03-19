@@ -10,7 +10,7 @@ from ontomap.postprocess import process
 
 DATASET_PATH = "datasets/test-small/ncit-doid/om.json"
 DEVICE = "cuda"
-BATCH_SIZE = 16
+BATCH_SIZE = 32
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--model", type=str, required=True, help="Model name from MatcherCatalog['rag']")

@@ -41,11 +41,21 @@ class RAGBasedDecoderLLMArch(LLaMA2DecoderLLMArch):
 
     def get_probas_yes_no(self, outputs):
         probas_yes_no = outputs.scores[0][
-            :, self.answer_sets_token_id["yes"] + self.answer_sets_token_id["no"]
+            :, self.answer_sets_token_id["yes"] + self.answer_sets_token_id["no"] # this is concatenation of the token ids for yes and no answer sets!!
         ].softmax(-1)
         return probas_yes_no
 
     def generate_for_llm(self, tokenized_input_data: Any) -> Any:
+        '''
+         description of outputs return
+            outputs.sequences  # shape (batch_size, input_len + new_tokens)
+            # these are the generated token IDs — not really used here
+
+            outputs.scores     # tuple of length max_new_tokens (= 1 in our case)
+                # scores[0] → shape (batch_size, vocab_size)
+                # the raw logits for position 0 of generation
+
+        '''
         with torch.no_grad():
             outputs = self.model.generate(
                 **tokenized_input_data,
@@ -56,20 +66,22 @@ class RAGBasedDecoderLLMArch(LLaMA2DecoderLLMArch):
                 return_dict_in_generate=True
             )
         return outputs
+        
+
 
     def generate_for_one_input(self, tokenized_input_data: Any) -> List:
         outputs = self.generate_for_llm(tokenized_input_data=tokenized_input_data)
         probas_yes_no = self.get_probas_yes_no(outputs=outputs)
         yes_probas = probas_yes_no[:, : len(self.ANSWER_SET["yes"])].sum(dim=1)
         no_proba = probas_yes_no[:, len(self.ANSWER_SET["yes"]) :].sum(dim=1)
-        probas = torch.cat((yes_probas.reshape(-1, 1), no_proba.reshape(-1, 1)), -1)
-        probas_per_candidate_tokens = torch.max(probas, dim=1)
+        probas = torch.cat((yes_probas.reshape(-1, 1), no_proba.reshape(-1, 1)), -1) # shape (batch_size, 2) with each batch elmeents being [yes_proba, no_proba]
+        probas_per_candidate_tokens = torch.max(probas, dim=1) # return the max proba (either the yes or no proba) and the corresponding indice (0 for yes, 1 for no) for each batch element
         sequence_probas = [float(proba) for proba in probas_per_candidate_tokens.values]
         sequences = [
             self.index2label[int(indice)]
             for indice in probas_per_candidate_tokens.indices
-        ]
-        return [sequences, sequence_probas]
+        ] # here, the indice is used to determine whether the sequence is a "yes" value or "no" value 
+        return [sequences, sequence_probas] # example: [["yes", "no", "yes"], [0.8, 0.3, 0.6]]
 
     def generate_for_multiple_input(self, tokenized_input_data: Any) -> List:
         return self.generate_for_one_input(tokenized_input_data=tokenized_input_data)

@@ -308,6 +308,7 @@ class MistralNemoDecoderLM(RAGBasedDecoderLLMArch):
         self.tokenizer.pad_token = self.tokenizer.eos_token
 
     def generate_for_llm(self, tokenized_input_data: Any) -> Any:
+        # modified to remove token_type_ids and not throw an error since the model does not use token_type_ids and the tokenizer adds it by default
         tokenized_input_data.pop("token_type_ids", None)
         return super().generate_for_llm(tokenized_input_data)
 
@@ -318,3 +319,20 @@ class MistralNemoBertRAG(RAG):
 
     def __str__(self):
         return super().__str__() + "-MistralNemoBertRAG"
+
+
+class Qwen25_7BDecoderLM(RAGBasedDecoderLLMArch):
+    tokenizer = AutoTokenizer
+    model = AutoModelForCausalLM
+    path = "Qwen/Qwen2.5-7B"
+
+    def __str__(self):
+        return super().__str__() + "-Qwen2.5-7B"
+
+    def load_tokenizer(self) -> None:
+        # this is required because load tokenizer adds a <s> eos token which this doesn't use.
+        self.tokenizer = self.tokenizer.from_pretrained(
+            self.path,
+            padding_side="left",
+        )
+        self.tokenizer.pad_token = self.tokenizer.eos_token
