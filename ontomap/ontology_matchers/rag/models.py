@@ -336,3 +336,6 @@ class Qwen25_7BDecoderLM(RAGBasedDecoderLLMArch):
             padding_side="left",
         )
         self.tokenizer.pad_token = self.tokenizer.eos_token
+
+    def check_answer_set_tokenizer(self, answer: str) -> bool:
+        return len(self.tokenizer(answer).input_ids) == 1
