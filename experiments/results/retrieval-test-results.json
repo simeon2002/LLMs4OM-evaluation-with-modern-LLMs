@@ -102,5 +102,83 @@
       "predictions-len": 250,
       "reference-len": 15
     }
+  },
+  "BERTRetrieval": {
+    "full": {
+      "intersection": 45,
+      "precision": 18.0,
+      "recall": 90.0,
+      "f-score": 30.0,
+      "predictions-len": 250,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 31,
+      "precision": 12.4,
+      "recall": 88.57142857142857,
+      "f-score": 21.754385964912277,
+      "predictions-len": 250,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 14,
+      "precision": 5.6000000000000005,
+      "recall": 93.33333333333333,
+      "f-score": 10.566037735849058,
+      "predictions-len": 250,
+      "reference-len": 15
+    }
+  },
+  "SpecterBERTRetrieval": {
+    "full": {
+      "intersection": 45,
+      "precision": 18.0,
+      "recall": 90.0,
+      "f-score": 30.0,
+      "predictions-len": 250,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 31,
+      "precision": 12.4,
+      "recall": 88.57142857142857,
+      "f-score": 21.754385964912277,
+      "predictions-len": 250,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 14,
+      "precision": 5.6000000000000005,
+      "recall": 93.33333333333333,
+      "f-score": 10.566037735849058,
+      "predictions-len": 250,
+      "reference-len": 15
+    }
+  },
+  "TFIDFRetrieval": {
+    "full": {
+      "intersection": 41,
+      "precision": 19.431279620853083,
+      "recall": 82.0,
+      "f-score": 31.417624521072796,
+      "predictions-len": 211,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 29,
+      "precision": 13.744075829383887,
+      "recall": 82.85714285714286,
+      "f-score": 23.577235772357728,
+      "predictions-len": 211,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 12,
+      "precision": 5.687203791469194,
+      "recall": 80.0,
+      "f-score": 10.619469026548671,
+      "predictions-len": 211,
+      "reference-len": 15
+    }
   }
 }

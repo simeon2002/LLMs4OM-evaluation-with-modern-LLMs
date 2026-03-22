@@ -1,0 +1,52 @@
+#!/bin/bash -l
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=simeon.serafimov@student.kuleuven.be
+#SBATCH --clusters=wice
+#SBATCH --account=intro_vsc38504
+#SBATCH --partition=batch
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --time=01:00:00
+#SBATCH --job-name=pipeline_retrieval
+#SBATCH --output=logs/%x_%j.out
+#SBATCH --error=logs/%x_%j.err
+#SBATCH --export=ALL
+
+set -eo pipefail
+
+if [[ -z "${MODEL}" ]]; then
+    echo "ERROR: MODEL environment variable is not set."
+    echo "Usage: sbatch --export=ALL,MODEL=BERTRetrieval pipeline_retrieval.batch"
+    exit 1
+fi
+
+source ~/.bashrc
+bash --login
+
+export HF_HOME="$VSC_SCRATCH/.cache/huggingface"
+export HUGGINGFACE_ACCESS_TOKEN=$HF_TOKEN
+tok="${HUGGINGFACE_ACCESS_TOKEN:-}"
+echo "HF_TOKEN preview: ${tok:0:4}...${tok: -4}"
+
+echo "Host: $(hostname)"
+echo "Start: $(date)"
+echo "JobID: ${SLURM_JOB_ID}"
+echo "MODEL: ${MODEL}"
+
+echo "=== Python/env check ==="
+python - <<'PY'
+import os, sys
+print("Python:", sys.executable)
+print("CONDA_DEFAULT_ENV:", os.environ.get("CONDA_DEFAULT_ENV"))
+print("HF_TOKEN set:", bool(os.environ.get("HUGGINGFACE_ACCESS_TOKEN")))
+print("HF_HOME:", os.environ.get("HF_HOME"))
+PY
+
+python pipeline_retrieval.py --model "${MODEL}"
+
+echo "End: $(date)"
+
+d=$(date +%F)
+mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.out" "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}_${d}.out" 2>/dev/null || true
+mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.err" "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}_${d}.err" 2>/dev/null || true
