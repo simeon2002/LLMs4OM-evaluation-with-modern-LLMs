@@ -180,5 +180,31 @@
       "predictions-len": 29,
       "reference-len": 15
     }
+  },
+  "Gemma2_9BBertRAG": {
+    "full": {
+      "intersection": 28,
+      "precision": 100.0,
+      "recall": 56.00000000000001,
+      "f-score": 71.7948717948718,
+      "predictions-len": 28,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 18,
+      "precision": 64.28571428571429,
+      "recall": 51.42857142857142,
+      "f-score": 57.14285714285714,
+      "predictions-len": 28,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 10,
+      "precision": 35.714285714285715,
+      "recall": 66.66666666666666,
+      "f-score": 46.51162790697674,
+      "predictions-len": 28,
+      "reference-len": 15
+    }
   }
 }

@@ -391,3 +391,11 @@ class Gemma2_9BDecoderLM(RAGBasedDecoderLLMArch):
             token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
             attn_implementation="eager",
         )
+
+
+class Gemma2_9BBertRAG(RAG):
+    Retrieval = BERTRetrieval
+    LLM = Gemma2_9BDecoderLM
+
+    def __str__(self):
+        return super().__str__() + "-Gemma2_9BBertRAG"
