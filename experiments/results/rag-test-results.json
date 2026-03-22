@@ -206,5 +206,31 @@
       "predictions-len": 28,
       "reference-len": 15
     }
+  },
+  "Gemma2_2BBertRAG": {
+    "full": {
+      "intersection": 0,
+      "precision": 0,
+      "recall": 0.0,
+      "f-score": 0,
+      "predictions-len": 0,
+      "reference-len": 50
+    },
+    "test": {
+      "intersection": 0,
+      "precision": 0,
+      "recall": 0.0,
+      "f-score": 0,
+      "predictions-len": 0,
+      "reference-len": 35
+    },
+    "train": {
+      "intersection": 0,
+      "precision": 0,
+      "recall": 0.0,
+      "f-score": 0,
+      "predictions-len": 0,
+      "reference-len": 15
+    }
   }
 }
