@@ -399,3 +399,37 @@ class Gemma2_9BBertRAG(RAG):
 
     def __str__(self):
         return super().__str__() + "-Gemma2_9BBertRAG"
+
+
+class Gemma2_2BDecoderLM(RAGBasedDecoderLLMArch):
+    tokenizer = AutoTokenizer
+    model = AutoModelForCausalLM
+    path = "google/gemma-2-2b"
+
+    def __str__(self):
+        return super().__str__() + "-Gemma-2-2B"
+
+    def load_tokenizer(self) -> None:
+        self.tokenizer = self.tokenizer.from_pretrained(
+            self.path,
+            token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
+            padding_side="left",
+        )
+        self.tokenizer.pad_token = self.tokenizer.eos_token
+
+    def load_model(self) -> None:
+        self.model = self.model.from_pretrained(
+            self.path,
+            load_in_8bit=True,
+            device_map="balanced",
+            token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
+            attn_implementation="eager",
+        )
+
+
+class Gemma2_2BBertRAG(RAG):
+    Retrieval = BERTRetrieval
+    LLM = Gemma2_2BDecoderLM
+
+    def __str__(self):
+        return super().__str__() + "-Gemma2_2BBertRAG"
