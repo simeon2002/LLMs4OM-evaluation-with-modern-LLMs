@@ -63,6 +63,28 @@ class LlamaNemotronEmbeddingRetrieval(BiEncoderRetrieval):
         return super().__str__() + "LlamaNemotronEmbeddingRetrieval"
 
 
+class NVEmbedV2Retrieval(BiEncoderRetrieval):
+    path: str = "nvidia/NV-Embed-v2"
+
+    def load(self):
+        self.model = SentenceTransformer(self.path, device=self.kwargs["device"], trust_remote_code=True)
+        self.model.max_seq_length = 32768 # due to being based on Mistral
+        self.model.tokenizer.padding_side = "right" # as per recomm
+
+    def _add_eos(self, inputs):
+        eos = self.model.tokenizer.eos_token
+        return [text + eos for text in inputs]
+
+    def fit(self, inputs: Any) -> Any:
+        return self.model.encode(self._add_eos(inputs), show_progress_bar=True, batch_size=16, normalize_embeddings=True) # added eos token and embedded normalization as per recommendation
+
+    def transform(self, inputs: Any) -> Any:
+        return self.model.encode(self._add_eos(inputs), show_progress_bar=True, batch_size=16, normalize_embeddings=True) # adding embedding normalization as per recommendation
+
+    def __str__(self):
+        return super().__str__() + "NVEmbedV2Retrieval"
+
+
 class FlanT5XLRetrieval(BiEncoderRetrieval):
     path: str = "google/flan-t5-xl"
 

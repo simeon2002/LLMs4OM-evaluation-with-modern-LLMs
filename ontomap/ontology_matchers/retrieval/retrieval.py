@@ -46,7 +46,7 @@ class Retrieval(BaseOMModel):
             top_k_indexes.append(top_k[1])
         return top_k_indexes, top_k_scores
 
-    def generate(self, input_data: List) -> List:
+    def generate(self, input_data: List) -> List: # computes similarity one source at a time, compared to biencoder which uses GPU to compute similarity for all sources at once
         source_ontology = input_data[0]
         target_ontology = input_data[1]
         predictions = []
@@ -93,8 +93,8 @@ class BiEncoderRetrieval(Retrieval):
 
         estimated_similarity = cosine_similarity(queries_embedding, candidates_embedding)
 
-        for source_id, similarities in tqdm(enumerate(estimated_similarity)):
-            values, indexes = torch.topk(torch.Tensor(similarities), k=self.kwargs["top_k"], axis=-1)
+        for source_id, similarities in tqdm(enumerate(estimated_similarity)): # tqdm means progress bar
+            values, indexes = torch.topk(torch.Tensor(similarities), k=self.kwargs["top_k"], axis=-1) # score-cands = values, target-cands = indexes
             scores = [float(value) for value in values]
             ids = [int(index) for index in indexes]
             candidates_iris, candidates_scores = [], []
