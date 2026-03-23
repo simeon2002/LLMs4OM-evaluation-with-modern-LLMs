@@ -35,6 +35,12 @@ class SpecterBERTRetrieval(BiEncoderRetrieval):
 class Qwen3EmbeddingRetrieval(BiEncoderRetrieval):
     path: str = "Qwen/Qwen3-Embedding-0.6B"
 
+    def fit(self, inputs: Any) -> Any:
+        return self.model.encode(inputs, show_progress_bar=True, batch_size=4)
+
+    def transform(self, inputs: Any) -> Any:
+        return self.model.encode(inputs, show_progress_bar=True, batch_size=4)
+
     def __str__(self):
         return super().__str__() + "Qwen3EmbeddingRetrieval"
 

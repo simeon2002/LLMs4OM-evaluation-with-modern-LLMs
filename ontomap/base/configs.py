@@ -95,7 +95,9 @@ class BaseConfig:
         # Retrieval Configurations
         retriever_config = self.retrieval()
         retriever_models = ["BM25Retrieval", "TFIDFRetrieval", "BERTRetrieval", "SpecterBERTRetrieval",
-                            "FlanT5XLRetrieval", "FlanT5XXLRetrieval", "SVMBERTRetrieval", "AdaRetrieval"]
+                            "FlanT5XLRetrieval", "FlanT5XXLRetrieval", "SVMBERTRetrieval", "AdaRetrieval",
+                            "Qwen3EmbeddingRetrieval", "Qwen3Embedding4BRetrieval", "EmbeddingGemma300MRetrieval",
+                            "LlamaNemotronEmbeddingRetrieval", "NVEmbedV2Retrieval"]
         for retriever_model in retriever_models:
             self.parser.add_argument("--" + retriever_model, type=dict, default=retriever_config)
 
@@ -109,7 +111,8 @@ class BaseConfig:
                           "LLaMA7BBertFewShot", "MistralBertFewShot", "FalconBertFewShot", "VicunaBertFewShot", "MPTBertFewShot",
                           "MambaLLMAdaFewShot", "MambaLLMBertFewShot", "MambaLLMAdaRAG", "MambaLLMBertRAG",
                           "LLaMA3Qwen3RAG", "LLaMA3Qwen34BRAG", "LLaMA3EmbeddingGemmaRAG", "LLaMA3NemotronRAG",
-                          "MistralNemoBertRAG", "Qwen25BertRAG", "Qwen25_3BBertRAG", "Gemma2_9BBertRAG"]
+                          "MistralNemoBertRAG", "Qwen25BertRAG", "Qwen25_3BBertRAG", "Gemma2_9BBertRAG",
+                          "Gemma2_2BBertRAG"]
 
         for rag_icv_model in rag_icv_models:
             self.parser.add_argument("--" + rag_icv_model, type=dict, default=llama_rag_config)
