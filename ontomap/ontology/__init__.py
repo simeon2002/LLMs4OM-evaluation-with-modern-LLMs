@@ -42,8 +42,8 @@ ontology_matching = {
         NCITDOIDDiseaseOMDataset,
         OMIMORDODiseaseOMDataset,
         SNOMEDFMABodyOMDataset,
-        SNOMEDNCITNeoplasOMDataset,
-        SNOMEDNCITPharmOMDataset,
+        # SNOMEDNCITNeoplasOMDataset,
+        # SNOMEDNCITPharmOMDataset,
     ],
     # "mse": [
     #     MaterialInformationEMMOOMDataset,

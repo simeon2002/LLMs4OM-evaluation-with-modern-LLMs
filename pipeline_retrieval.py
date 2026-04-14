@@ -37,9 +37,9 @@ config = {
     "llm_confidence_th": 0.7,
 }
 
-# generation first
-pipeline = OMPipelines(**config)
-pipeline()
+# # generation first
+# pipeline = OMPipelines(**config)
+# pipeline()
 
 # evaluation afterwards
 config["do-evaluation"] = True

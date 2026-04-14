@@ -210,10 +210,12 @@ class LLaMA2DecoderLLMArch(BaseLLMArch):
         # self.tokenizer.add_special_tokens({'pad_token': '[PAD]'})
 
     def load_model(self) -> None:
+        from transformers import BitsAndBytesConfig
         if self.kwargs["device"] != "cpu":
+            quantization_config = BitsAndBytesConfig(load_in_8bit=True)
             self.model = self.model.from_pretrained(
                 self.path,
-                load_in_8bit=True,
+                quantization_config=quantization_config,
                 device_map="balanced",
                 token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
             )

@@ -367,6 +367,34 @@ class Qwen25_3BBertRAG(RAG):
         return super().__str__() + "-Qwen25_3BBertRAG"
 
 
+class Qwen35_9BDecoderLM(RAGBasedDecoderLLMArch):
+    tokenizer = AutoTokenizer
+    model = AutoModelForCausalLM
+    path = "Qwen/Qwen3.5-9B-Base"
+
+    def load_tokenizer(self) -> None:
+        self.tokenizer = self.tokenizer.from_pretrained(
+            self.path,
+            token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
+            padding_side="left",
+        )
+        self.tokenizer.pad_token = self.tokenizer.eos_token
+
+    def check_answer_set_tokenizer(self, answer: str) -> bool:
+        return len(self.tokenizer(answer).input_ids) == 1
+
+    def __str__(self):
+        return super().__str__() + "-Qwen3.5-9B-Base"
+
+
+class Qwen35_9BBertRAG(RAG):
+    Retrieval = BERTRetrieval
+    LLM = Qwen35_9BDecoderLM
+
+    def __str__(self):
+        return super().__str__() + "-Qwen35_9BBertRAG"
+
+
 class Gemma2_9BDecoderLM(RAGBasedDecoderLLMArch):
     tokenizer = AutoTokenizer
     model = AutoModelForCausalLM
