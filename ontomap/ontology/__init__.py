@@ -40,8 +40,8 @@ ontology_matching = {
     # "commonkg": [NellDbpediaOMDataset, YagoWikidataOMDataset],
     "bio-ml": [
         NCITDOIDDiseaseOMDataset,
-        OMIMORDODiseaseOMDataset,
-        SNOMEDFMABodyOMDataset,
+        # OMIMORDODiseaseOMDataset,
+        # SNOMEDFMABodyOMDataset,
         # SNOMEDNCITNeoplasOMDataset,
         # SNOMEDNCITPharmOMDataset,
     ],

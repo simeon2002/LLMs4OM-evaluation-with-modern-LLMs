@@ -259,6 +259,14 @@ class MambaLLMBertRAG(RAG):
         return super().__str__() + "-MambaLLMBertRAG"
 
 
+class LLaMA3BertRAG(RAG):
+    Retrieval = BERTRetrieval
+    LLM = LLaMA3DecoderLM
+
+    def __str__(self):
+        return super().__str__() + "-LLaMA3BertRAG"
+
+
 class LLaMA3Qwen3RAG(RAG):
     Retrieval = Qwen3EmbeddingRetrieval
     LLM = LLaMA3DecoderLM

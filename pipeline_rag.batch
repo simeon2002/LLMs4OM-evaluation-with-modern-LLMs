@@ -2,7 +2,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=simeon.serafimov@student.kuleuven.be
 #SBATCH --clusters=wice
-#SBATCH --account=intro_vsc38504
+#SBATCH --account=lp_dtaikg
 #SBATCH --partition=gpu_h100
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
