@@ -2,12 +2,13 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=simeon.serafimov@student.kuleuven.be
 #SBATCH --clusters=wice
-#SBATCH --account=intro_vsc38504
+#SBATCH --account=lp_dtaikg
 #SBATCH --partition=gpu_h100
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --gpus-per-node=1
-#SBATCH --time=01:00:00
+#SBATCH --mem=64G
+#SBATCH --time=05:00:00
 #SBATCH --job-name=pipeline_retrieval
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --error=logs/%x_%j.err

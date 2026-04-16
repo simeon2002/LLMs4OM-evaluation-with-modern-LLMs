@@ -37,7 +37,7 @@ config = {
     "llm_confidence_th": 0.7,
 }
 
-# # generation first
+# # # generation first
 # pipeline = OMPipelines(**config)
 # pipeline()
 

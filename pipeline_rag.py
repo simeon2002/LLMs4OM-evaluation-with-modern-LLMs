@@ -38,10 +38,10 @@ config = {
 }
 
 # generation first
-# pipeline = OMPipelines(**config)
-# pipeline()
+pipeline = OMPipelines(**config)
+pipeline()
 
-# evaluation afterwards
+# evaluation only
 config["do-evaluation"] = True
 pipeline_evaluation = OMPipelines(**config)
 pipeline_evaluation()
