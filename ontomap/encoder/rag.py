@@ -23,3 +23,21 @@ class IRILabelParentsInRAGEncoder(RAGEncoder):
     items_in_owl: str = "(Label, Parent)"
     retrieval_encoder: Any = IRILabelInLightweightEncoder
     llm_encoder: str = "LabelParentRAGDataset"
+
+
+class IRILabelInRAGInstructEncoder(RAGEncoder):
+    items_in_owl: str = "(Label)"
+    retrieval_encoder: Any = IRILabelInLightweightEncoder
+    llm_encoder: str = "LabelRAGInstructDataset"
+
+
+class IRILabelChildrensInRAGInstructEncoder(RAGEncoder):
+    items_in_owl: str = "(Label, Children)"
+    retrieval_encoder: Any = IRILabelInLightweightEncoder
+    llm_encoder: str = "LabelChildrenRAGInstructDataset"
+
+
+class IRILabelParentsInRAGInstructEncoder(RAGEncoder):
+    items_in_owl: str = "(Label, Parent)"
+    retrieval_encoder: Any = IRILabelInLightweightEncoder
+    llm_encoder: str = "LabelParentRAGInstructDataset"
