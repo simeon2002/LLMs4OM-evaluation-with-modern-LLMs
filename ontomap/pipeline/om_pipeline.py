@@ -113,10 +113,14 @@ class OMPipelines:
                                 print(f"Evaluating output for {file_path} run!")
                                 track_task_output_path = os.path.join(output_dir_path, file_path)
                                 output_dict_obj = io.read_json(input_path=track_task_output_path)
+                                generated_output = output_dict_obj["generated-output"]
+                                if not generated_output or isinstance(generated_output[0], str): # I added this for when OOM error is present.
+                                    print(f"\t\tSkipping evaluation — output contains error or is empty: {str(generated_output)[:120]}")
+                                    continue
                                 evaluation_results = evaluator_module(
                                     track=task_owl["dataset-info"]["track"],
                                     approach=self.approach,
-                                    predicts=output_dict_obj["generated-output"],
+                                    predicts=generated_output,
                                     references=task_owl["reference"],
                                     llm_confidence_th=self.llm_confidence_th
                                 )
