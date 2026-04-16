@@ -16,7 +16,7 @@ from ontomap.ontology_matchers.rag.rag import (
 )
 from ontomap.ontology_matchers.retrieval.models import AdaRetrieval, BERTRetrieval, Qwen3EmbeddingRetrieval, Qwen3Embedding4BRetrieval, EmbeddingGemma300MRetrieval, LlamaNemotronEmbeddingRetrieval
 
-from typing import Any
+from typing import Any, List
 import os
 import torch
 
@@ -508,3 +508,67 @@ class Gemma4_26B_A4BBertRAG(RAG):
 
     def __str__(self):
         return super().__str__() + "-Gemma4_26B_A4BBertRAG"
+
+
+# ── Instruct / chat models ────────────────────────────────────────────────────
+
+class LLaMA3InstructDecoderLM(RAGBasedInstructDecoderLLMArch):
+    tokenizer = AutoTokenizer
+    model = AutoModelForCausalLM
+    path = "meta-llama/Meta-Llama-3-8B-Instruct"
+
+    ANSWER_SET = {
+        "yes": ["yes", "Yes", "correct", "true", "positive", "valid", "right", "accurate", "ok"],
+        "no": ["no", "No", "incorrect", "false", "negative", "invalid", "wrong", "not"],
+    }
+
+    def __str__(self):
+        return super().__str__() + "-LLaMA-3-8B-Instruct"
+
+    def load_tokenizer(self) -> None:
+        self.tokenizer = self.tokenizer.from_pretrained(
+            self.path,
+            token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
+            padding_side="left",
+        )
+        self.tokenizer.pad_token = self.tokenizer.eos_token
+
+    def load_model(self) -> None:
+        from transformers import BitsAndBytesConfig
+        quantization_config = BitsAndBytesConfig(load_in_8bit=True)
+        self.model = self.model.from_pretrained(
+            self.path,
+            quantization_config=quantization_config,
+            device_map="balanced",
+            token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
+        )
+
+    def tokenize(self, input_data: List) -> Any:
+        formatted = [
+            self.tokenizer.apply_chat_template(
+                [
+                    {"role": "system", "content": "You are an ontology matching expert. Answer with exactly one word: yes or no."},
+                    {"role": "user", "content": text},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+            )
+            for text in input_data
+        ]
+        inputs = self.tokenizer(
+            formatted,
+            return_tensors="pt",
+            truncation=self.kwargs["truncation"],
+            max_length=self.kwargs["tokenizer_max_length"],
+            padding=self.kwargs["padding"],
+        )
+        inputs.to(self.kwargs["device"])
+        return inputs
+
+
+class LLaMA3InstructBertRAG(RAG):
+    Retrieval = BERTRetrieval
+    LLM = LLaMA3InstructDecoderLM
+
+    def __str__(self):
+        return super().__str__() + "-LLaMA3InstructBertRAG"
