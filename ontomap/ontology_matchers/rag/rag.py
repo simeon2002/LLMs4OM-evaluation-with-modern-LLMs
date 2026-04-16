@@ -87,6 +87,33 @@ class RAGBasedDecoderLLMArch(LLaMA2DecoderLLMArch):
         return self.generate_for_one_input(tokenized_input_data=tokenized_input_data)
 
 
+class RAGBasedInstructDecoderLLMArch(RAGBasedDecoderLLMArch):
+    """Base class for instruction-tuned/chat models.
+    Overrides tokenize() to apply the model's chat template before tokenization."""
+
+    def __str__(self):
+        return "RAGBasedInstructDecoderLLMArch"
+
+    def tokenize(self, input_data: List) -> Any:
+        formatted = [
+            self.tokenizer.apply_chat_template(
+                [{"role": "user", "content": text}],
+                tokenize=False,
+                add_generation_prompt=True,
+            )
+            for text in input_data
+        ]
+        inputs = self.tokenizer(
+            formatted,
+            return_tensors="pt",
+            truncation=self.kwargs["truncation"],
+            max_length=self.kwargs["tokenizer_max_length"],
+            padding=self.kwargs["padding"],
+        )
+        inputs.to(self.kwargs["device"])
+        return inputs
+
+
 class RAGBasedOpenAILLMArch(OpenAILLMArch):
     def __str__(self):
         return "RAGBasedOpenAILLMArch"

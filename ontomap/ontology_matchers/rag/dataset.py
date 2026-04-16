@@ -98,3 +98,69 @@ Children: {target_children}
             .replace("{target_children}", target_children)
         )
         return template
+
+
+# ── Instruct / chat model datasets ───────────────────────────────────────────
+
+class LabelRAGInstructDataset(RAGDataset):
+    prompt = """You are an ontology matching expert. Determine whether the following two concepts refer to the same real-world entity.
+
+Concept 1: {source}
+Concept 2: {target}
+
+Answer with exactly one word: yes or no."""
+
+    def fill_one_sample(self, input_data: Any) -> str:
+        source = self.preprocess(input_data["source"]["label"])
+        target = self.preprocess(input_data["target"]["label"])
+        return self.prompt.replace("{source}", source).replace("{target}", target)
+
+
+class LabelParentRAGInstructDataset(RAGDataset):
+    prompt = """You are an ontology matching expert. Determine whether the following two concepts refer to the same real-world entity.
+
+Concept 1: {source}
+Parents of Concept 1: {source_parents}
+
+Concept 2: {target}
+Parents of Concept 2: {target_parents}
+
+Answer with exactly one word: yes or no."""
+
+    def fill_one_sample(self, input_data: Any) -> str:
+        source = self.preprocess(input_data["source"]["label"])
+        target = self.preprocess(input_data["target"]["label"])
+        source_parents = ", ".join([self.preprocess(p["label"]) for p in input_data["source"]["parents"]])
+        target_parents = ", ".join([self.preprocess(p["label"]) for p in input_data["target"]["parents"]])
+        return (
+            self.prompt
+            .replace("{source}", source)
+            .replace("{target}", target)
+            .replace("{source_parents}", source_parents)
+            .replace("{target_parents}", target_parents)
+        )
+
+
+class LabelChildrenRAGInstructDataset(RAGDataset):
+    prompt = """You are an ontology matching expert. Determine whether the following two concepts refer to the same real-world entity.
+
+Concept 1: {source}
+Children of Concept 1: {source_children}
+
+Concept 2: {target}
+Children of Concept 2: {target_children}
+
+Answer with exactly one word: yes or no."""
+
+    def fill_one_sample(self, input_data: Any) -> str:
+        source = self.preprocess(input_data["source"]["label"])
+        target = self.preprocess(input_data["target"]["label"])
+        source_children = ", ".join([self.preprocess(c["label"]) for c in input_data["source"]["childrens"]])
+        target_children = ", ".join([self.preprocess(c["label"]) for c in input_data["target"]["childrens"]])
+        return (
+            self.prompt
+            .replace("{source}", source)
+            .replace("{target}", target)
+            .replace("{source_children}", source_children)
+            .replace("{target_children}", target_children)
+        )

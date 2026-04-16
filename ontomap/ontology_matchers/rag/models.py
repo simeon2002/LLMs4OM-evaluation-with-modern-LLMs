@@ -11,6 +11,7 @@ from transformers import (
 from ontomap.ontology_matchers.rag.rag import (
     RAG,
     RAGBasedDecoderLLMArch,
+    RAGBasedInstructDecoderLLMArch,
     RAGBasedOpenAILLMArch,
 )
 from ontomap.ontology_matchers.retrieval.models import AdaRetrieval, BERTRetrieval, Qwen3EmbeddingRetrieval, Qwen3Embedding4BRetrieval, EmbeddingGemma300MRetrieval, LlamaNemotronEmbeddingRetrieval
@@ -420,9 +421,11 @@ class Gemma2_9BDecoderLM(RAGBasedDecoderLLMArch):
         self.tokenizer.pad_token = self.tokenizer.eos_token
 
     def load_model(self) -> None:
+        from transformers import BitsAndBytesConfig
+        quantization_config = BitsAndBytesConfig(load_in_8bit=True)
         self.model = self.model.from_pretrained(
             self.path,
-            load_in_8bit=True,
+            quantization_config=quantization_config,
             device_map="balanced",
             token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
             attn_implementation="eager",
@@ -454,9 +457,11 @@ class Gemma2_2BDecoderLM(RAGBasedDecoderLLMArch):
         self.tokenizer.pad_token = self.tokenizer.eos_token
 
     def load_model(self) -> None:
+        from transformers import BitsAndBytesConfig
+        quantization_config = BitsAndBytesConfig(load_in_8bit=True)
         self.model = self.model.from_pretrained(
             self.path,
-            load_in_8bit=True,
+            quantization_config=quantization_config,
             device_map="balanced",
             token=os.environ["HUGGINGFACE_ACCESS_TOKEN"],
             attn_implementation="eager",
@@ -469,3 +474,37 @@ class Gemma2_2BBertRAG(RAG):
 
     def __str__(self):
         return super().__str__() + "-Gemma2_2BBertRAG"
+
+
+class Gemma4_26B_A4BDecoderLM(RAGBasedDecoderLLMArch):
+    tokenizer = AutoTokenizer
+    model = AutoModelForCausalLM
+    path = "google/gemma-4-26B-A4B"
+
+    def __str__(self):
+        return super().__str__() + "-Gemma-4-26B-A4B"
+
+    def load_tokenizer(self) -> None:
+        self.tokenizer = self.tokenizer.from_pretrained(
+            self.path,
+            padding_side="left",
+        )
+        self.tokenizer.pad_token = self.tokenizer.eos_token
+
+    def load_model(self) -> None:
+        from transformers import BitsAndBytesConfig
+        quantization_config = BitsAndBytesConfig(load_in_8bit=True)
+        self.model = self.model.from_pretrained(
+            self.path,
+            quantization_config=quantization_config,
+            device_map="balanced",
+            attn_implementation="eager",
+        )
+
+
+class Gemma4_26B_A4BBertRAG(RAG):
+    Retrieval = BERTRetrieval
+    LLM = Gemma4_26B_A4BDecoderLM
+
+    def __str__(self):
+        return super().__str__() + "-Gemma4_26B_A4BBertRAG"
