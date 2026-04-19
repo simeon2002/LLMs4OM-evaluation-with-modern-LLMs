@@ -48,6 +48,12 @@ class Qwen3EmbeddingRetrieval(BiEncoderRetrieval):
 class Qwen3Embedding4BRetrieval(BiEncoderRetrieval):
     path: str = "Qwen/Qwen3-Embedding-4B"
 
+    def fit(self, inputs: Any) -> Any:
+        return self.model.encode(inputs, show_progress_bar=True, batch_size=4)
+
+    def transform(self, inputs: Any) -> Any:
+        return self.model.encode(inputs, show_progress_bar=True, batch_size=4)
+
     def __str__(self):
         return super().__str__() + "Qwen3Embedding4BRetrieval"
 
@@ -64,6 +70,12 @@ class LlamaNemotronEmbeddingRetrieval(BiEncoderRetrieval):
 
     def load(self):
         self.model = SentenceTransformer(self.path, device=self.kwargs["device"], trust_remote_code=True)
+
+    def fit(self, inputs: Any) -> Any:
+        return self.model.encode(inputs, show_progress_bar=True, batch_size=4)
+
+    def transform(self, inputs: Any) -> Any:
+        return self.model.encode(inputs, show_progress_bar=True, batch_size=4)
 
     def __str__(self):
         return super().__str__() + "LlamaNemotronEmbeddingRetrieval"
