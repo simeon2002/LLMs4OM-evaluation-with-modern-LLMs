@@ -71,7 +71,7 @@ class LLM(BaseOMModel):
         return generated_texts
 
 
-class BaseLLMArch(LLM):
+class BaseLLMArch(LLM): ## naive llm version, not rag. 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
@@ -86,7 +86,7 @@ class BaseLLMArch(LLM):
         else:
             super().load_model()
 
-    def generate_for_one_input(self, tokenized_input_data: Any) -> List:
+    def generate_for_one_input(self, tokenized_input_data: Any) -> List: 
         with torch.no_grad():
             sequence_ids = self.model.generate(
                 tokenized_input_data.input_ids,
@@ -184,7 +184,7 @@ class DecoderLLMArch(BaseLLMArch):
         return "DecoderLLMArch"
 
 
-class LLaMA2DecoderLLMArch(BaseLLMArch):
+class LLaMA2DecoderLLMArch(BaseLLMArch): # Used to load models from HF.
     def __str__(self):
         return "LLaMA2DecoderLLMArch"
 

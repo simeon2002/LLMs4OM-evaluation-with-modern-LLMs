@@ -27,6 +27,7 @@ bash --login
 
 export HF_HOME="$VSC_SCRATCH/.cache/huggingface"
 export HUGGINGFACE_ACCESS_TOKEN=$HF_TOKEN
+# export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 tok="${HUGGINGFACE_ACCESS_TOKEN:-}"
 echo "HF_TOKEN preview: ${tok:0:4}...${tok: -4}"
 

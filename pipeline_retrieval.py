@@ -26,7 +26,7 @@ config = {
     "use-all-models": False,
     "models-to-consider": [model_name],
     "use-all-encoders": False,
-    "approach-encoders-to-consider": ["label", "label-children", "label-parent"],
+    "approach-encoders-to-consider": ["label-children"],
     "do-evaluation": False,
     "load-from-json": True,
     "root_dir": "datasets",
@@ -37,9 +37,9 @@ config = {
     "llm_confidence_th": 0.7,
 }
 
-# # # generation first
-# pipeline = OMPipelines(**config)
-# pipeline()
+# generation first
+pipeline = OMPipelines(**config)
+pipeline()
 
 # evaluation afterwards
 config["do-evaluation"] = True
