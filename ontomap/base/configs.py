@@ -113,7 +113,8 @@ class BaseConfig:
                           "LLaMA3Qwen3RAG", "LLaMA3Qwen34BRAG", "LLaMA3EmbeddingGemmaRAG", "LLaMA3NemotronRAG",
                           "MistralNemoBertRAG", "Qwen25BertRAG", "Qwen25_3BBertRAG", "Gemma2_9BBertRAG",
                           "Gemma2_2BBertRAG", "Qwen35_9BBertRAG", "LLaMA3BertRAG", "Gemma4_26B_A4BBertRAG",
-                          "LLaMA3InstructBertRAG"]
+                          "LLaMA3InstructBertRAG",
+                          "LLaMA3ListwiseBertRAG", "Gemma4ListwiseBertRAG"]
 
         for rag_icv_model in rag_icv_models:
             self.parser.add_argument("--" + rag_icv_model, type=dict, default=llama_rag_config)

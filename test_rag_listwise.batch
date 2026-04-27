@@ -1,0 +1,64 @@
+#!/bin/bash -l
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=simeon.serafimov@student.kuleuven.be
+#SBATCH --clusters=wice
+#SBATCH --account=lp_dtaikg
+#SBATCH --partition=gpu_h100
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --gpus-per-node=1
+#SBATCH --mem=64G
+#SBATCH --time=03:00:00
+#SBATCH --job-name=test_rag_listwise
+#SBATCH --output=logs/%x_%j.out
+#SBATCH --error=logs/%x_%j.err
+#SBATCH --export=ALL
+
+set -eo pipefail
+
+MODEL="${MODEL:-Gemma4ListwiseBertRAG}"
+DATASET="${DATASET:-omim-ordo}"
+N_SOURCES="${N_SOURCES:-1000}"
+TOP_K="${TOP_K:-5}"
+BATCH_SIZE="${BATCH_SIZE:-4}"
+
+source ~/.bashrc
+bash --login
+
+export HF_HOME="$VSC_SCRATCH/.cache/huggingface"
+export HUGGINGFACE_HUB_CACHE="$VSC_SCRATCH/.cache/huggingface"
+export HUGGINGFACE_ACCESS_TOKEN=$HF_TOKEN
+tok="${HUGGINGFACE_ACCESS_TOKEN:-}"
+echo "HF_TOKEN preview: ${tok:0:4}...${tok: -4}"
+
+echo "Host: $(hostname)"
+echo "Start: $(date)"
+echo "JobID: ${SLURM_JOB_ID}"
+echo "MODEL: ${MODEL}  DATASET: ${DATASET}  N_SOURCES: ${N_SOURCES}  TOP_K: ${TOP_K}  BATCH_SIZE: ${BATCH_SIZE}"
+echo "CUDA_VISIBLE_DEVICES: ${CUDA_VISIBLE_DEVICES:-<unset>}"
+
+echo "=== GPU check ==="
+nvidia-smi || true
+
+echo "=== Python/env check ==="
+python - <<'PY'
+import os, sys
+print("Python:", sys.executable)
+print("CONDA_DEFAULT_ENV:", os.environ.get("CONDA_DEFAULT_ENV"))
+print("HF_TOKEN set:", bool(os.environ.get("HUGGINGFACE_ACCESS_TOKEN")))
+print("HF_HOME:", os.environ.get("HF_HOME"))
+PY
+
+python test_rag_listwise.py \
+    --model "${MODEL}" \
+    --dataset "${DATASET}" \
+    --n-sources "${N_SOURCES}" \
+    --top-k "${TOP_K}" \
+    --batch-size "${BATCH_SIZE}"
+
+echo "End: $(date)"
+
+d=$(date +%F)
+mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.out" "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}_${d}.out" 2>/dev/null || true
+mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.err" "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}_${d}.err" 2>/dev/null || true
