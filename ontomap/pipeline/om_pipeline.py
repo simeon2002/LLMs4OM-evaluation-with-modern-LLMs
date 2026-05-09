@@ -46,7 +46,7 @@ class OMPipelines:
     def __call__(self):
         for model_id, matcher_model in self.matcher_catalog.items():
             if not self.do_evaluation: # if do_evaluation is False, we need to initialize the model to generate outputs, otherwise we just need the model_id to read the outputs and evaluate them!
-                MODEL = matcher_model(**vars(self.config)[model_id])
+                MODEL = matcher_model(**vars(self.config)[model_id]) #calls the model with its configuration from BaseConfig.
                 print(f"working on {model_id}-{MODEL}")
             else:
                 print(f"Run evaluation on {model_id}")
@@ -72,8 +72,8 @@ class OMPipelines:
                             }  # objec that will be stored as JSON as output, contains all the relevant info about the model, dataset, encoder and the generated output and evaluation results if do_evaluation is True!
                             if self.approach == "rag": # this is what we need. RAG. retriever fetches top-k candidates and LLM generates the predection, post-filtering done and that is the result, other approaches irrelevant for me.
                                 # task_owl["dataset-module"] = self.dataset_module
-                                task_owl["llm"] = model_id # this essentially adds an LLM so that it becomes RAG
-                            encoded_inputs = encoder_module()(**task_owl) # contains the retriever encoder, the llm generator, the task itself (json format), and IRI to index mapping for for efficient matching of onotlogy elements.
+                                task_owl["llm"] = model_id # add the llm type used to task_owl dict.
+                            encoded_inputs = encoder_module()(**task_owl) # each encoder's parse method is called with task_owl dict as input. __call__ setup in baseEncoder class.
                             print(f"\t\tEncoded input pairs: {len(encoded_inputs)}")
                             #TODO: check encoder_module out a bit more, because apperantly this also encodes the dataset task into a prompt format that can be fed to the LLM, so it is not only encoding the retrieved candidates but also the task itself, which is important to understand for the next steps!
                             print("\t\tWorking on generating response!")
@@ -114,7 +114,7 @@ class OMPipelines:
                                 track_task_output_path = os.path.join(output_dir_path, file_path)
                                 output_dict_obj = io.read_json(input_path=track_task_output_path)
                                 generated_output = output_dict_obj["generated-output"]
-                                if not generated_output or isinstance(generated_output[0], str): # I added this for when OOM error is present.
+                                if not generated_output or isinstance(generated_output[0], str): # Npte: I added this for when OOM error is present.
                                     print(f"\t\tSkipping evaluation — output contains error or is empty: {str(generated_output)[:120]}")
                                     continue
                                 evaluation_results = evaluator_module(

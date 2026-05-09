@@ -15,7 +15,7 @@ class Retrieval(BaseOMModel):
     path: str = ""
     model: Any = None
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs) -> None: #kwargs is going to be the model configuration stored as a kwarg property for the class.
         super().__init__(**kwargs)
         self.load()
 

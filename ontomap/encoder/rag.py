@@ -10,7 +10,7 @@ from ontomap.encoder.lightweight import (
 class IRILabelInRAGEncoder(RAGEncoder):
     items_in_owl: str = "(Label)"
     retrieval_encoder: Any = IRILabelInLightweightEncoder
-    llm_encoder: str = "LabelRAGDataset"
+    llm_encoder: str = "LabelRAGDataset" #dataset --> it's really just a prompt formatter...
 
 
 class IRILabelChildrensInRAGEncoder(RAGEncoder):

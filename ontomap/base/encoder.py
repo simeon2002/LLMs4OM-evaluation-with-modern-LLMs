@@ -23,5 +23,5 @@ class BaseEncoder(ABC):
     def get_encoder_info(self) -> str:
         pass
 
-    def __call__(self, **kwargs):
+    def __call__(self, **kwargs): #so whenever an encoder is called it executed the parse method.
         return self.parse(**kwargs)

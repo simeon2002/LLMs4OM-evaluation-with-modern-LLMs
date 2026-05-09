@@ -99,7 +99,7 @@ class BioLLMAlignmentsParser(BaseAlignmentsParser):
 
 class BioMLOMDataset(OMDataset):
     def collect(self, root_dir: str) -> Dict:
-        om_root_path = os.path.join(root_dir, self.track, self.ontology_name)
+        om_root_path = os.path.join(relf.ontology_oot_dir, self.track, sname)
         data = {
             "dataset-info": {"track": self.track, "ontology-name": self.ontology_name},
             "source": self.source_ontology.parse(root_dir=om_root_path),

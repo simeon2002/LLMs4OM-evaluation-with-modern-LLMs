@@ -107,7 +107,7 @@ class BaseOntologyParser(ABC):
         input_file_path = os.path.join(root_dir, ontology_file_name)
         print(f"\t\tworking on {input_file_path}")
         ontology = self.load_ontology(input_file_path=input_file_path)
-        return self.extract_data(ontology)
+        return self.extract_data(ontology) # this data contains all the owl classes in the ontology parsed with their name, iri, label, childrens, parents, synonyms and comment
 
 
 class BaseAlignmentsParser(ABC):

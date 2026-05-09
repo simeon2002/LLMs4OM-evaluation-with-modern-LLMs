@@ -215,7 +215,7 @@ class RAG(BaseOMModel):
                 {
                     "retriever-encoder": self.retrieval_encoder,
                     "llm-encoder": self.llm_encoder,
-                    "task-args": kwargs,
+                    "task-args": kwargs, aka task_owl with {source, target, dataset-info, alignment reference}
                     "source-onto-iri2index": source_onto_iri2index,
                     "target-onto-iri2index": target_onto_iri2index
                 }

@@ -4,8 +4,8 @@ from typing import Any, Dict
 from ontomap.base import BaseEncoder
 
 
-class LightweightEncoder(BaseEncoder):
-    def parse(self, **kwargs) -> Any:
+class LightweightEncoder(BaseEncoder): 
+    def parse(self, **kwargs) -> Any: # executed whenever the encoder is called!
         source_onto, target_onto = kwargs["source"], kwargs["target"]
         source_ontos = []
         for source in source_onto:
