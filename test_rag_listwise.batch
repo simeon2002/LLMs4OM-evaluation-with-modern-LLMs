@@ -3,13 +3,13 @@
 #SBATCH --mail-user=simeon.serafimov@student.kuleuven.be
 #SBATCH --clusters=wice
 #SBATCH --account=lp_dtaikg
-#SBATCH --partition=gpu_h100
-#SBATCH --nodes=1
+#SBATCH --partition=gpu_a100
+#SBATCH --nodes=1 
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --gpus-per-node=1
 #SBATCH --mem=64G
-#SBATCH --time=03:00:00
+#SBATCH --time=06:00:00
 #SBATCH --job-name=test_rag_listwise
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --error=logs/%x_%j.err
@@ -19,12 +19,16 @@ set -eo pipefail
 
 MODEL="${MODEL:-Gemma4ListwiseBertRAG}"
 DATASET="${DATASET:-omim-ordo}"
-N_SOURCES="${N_SOURCES:-1000}"
+N_SOURCES="${N_SOURCES:-9648}"
 TOP_K="${TOP_K:-5}"
 BATCH_SIZE="${BATCH_SIZE:-4}"
+TIMESTAMP=$(date +%Y.%m.%d-%H:%M:%S)
+OUT_DIR="experiments/outputs/bio-ml/${DATASET}.disease"
+RANKINGS_FILE="${OUT_DIR}/listwise-rankings-${MODEL}-label-${TIMESTAMP}.json"
+mkdir -p "${OUT_DIR}"
 
 source ~/.bashrc
-bash --login
+conda activate llms4om
 
 export HF_HOME="$VSC_SCRATCH/.cache/huggingface"
 export HUGGINGFACE_HUB_CACHE="$VSC_SCRATCH/.cache/huggingface"
@@ -55,7 +59,8 @@ python test_rag_listwise.py \
     --dataset "${DATASET}" \
     --n-sources "${N_SOURCES}" \
     --top-k "${TOP_K}" \
-    --batch-size "${BATCH_SIZE}"
+    --batch-size "${BATCH_SIZE}" \
+    --save-rankings "${RANKINGS_FILE}"
 
 echo "End: $(date)"
 

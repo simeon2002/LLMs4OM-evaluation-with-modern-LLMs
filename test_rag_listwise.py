@@ -60,6 +60,7 @@ def main():
     parser.add_argument("--no-per-source", action="store_true", help="suppress per-source output")
     parser.add_argument("--top-k", type=int, default=5)
     parser.add_argument("--batch-size", type=int, default=4)
+    parser.add_argument("--save-rankings", type=str, default=None, help="path to save LLM rankings as JSON for offline weight sweep")
     args = parser.parse_args()
 
     device = "cuda"
@@ -155,6 +156,7 @@ def main():
 
     # build a lookup from source_iri → listwise_input item for per-source display
     item_by_iri = {item["source_iri"]: item for item in listwise_inputs}
+    saved_rankings = []  # collected for --save-rankings
 
     print(f"\n{SEP}")
     for batch in tqdm(dataloader):
@@ -175,6 +177,14 @@ def main():
             n = len(target_iris)
             llm_ranking = parse_ranking(ranking_text, n)
             rrf_scores = apply_rrf(ir_scores, llm_ranking)
+            saved_rankings.append({
+                "source_iri": src_iri,
+                "target_iris": list(target_iris),
+                "ir_scores": list(ir_scores),
+                "llm_ranking": list(llm_ranking),
+                "llm_raw": ranking_text.strip(),
+                "gt_target": gt_target,
+            })
             best_rrf_idx = max(range(n), key=lambda i: rrf_scores[i])
 
             ir_best_iri = target_iris[0]
@@ -247,6 +257,15 @@ def main():
                 print(f"  IR  result     : {ir_result}")
                 print(f"  RRF result     : {rrf_result}")
                 print(SEP)
+
+        if args.save_rankings and len(saved_rankings) % 500 == 0:
+            with open(args.save_rankings, "w") as f:
+                json.dump(saved_rankings, f)
+
+    if args.save_rankings:
+        with open(args.save_rankings, "w") as f:
+            json.dump(saved_rankings, f)
+        print(f"\nRankings saved to {args.save_rankings}")
 
     total = args.n_sources
     unreachable = total - gt_in_topk_count
