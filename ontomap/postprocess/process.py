@@ -235,7 +235,6 @@ def apply_rrf(
 
 def postprocess_listwise(
     predicts: List,
-    ir_score_threshold: float = 0.9,
     ir_weight: float = 0.3,
     llm_weight: float = 0.7,
     k: int = 1,
@@ -299,14 +298,12 @@ def postprocess_listwise(
 
     final_predict = []
     for si, ti in zip(*rrf_matrix.nonzero()):
-        if ir_score_matrix[si, ti] >= ir_score_threshold:
-            final_predict.append({
-                "source": index2source[si],
-                "target": index2target[ti],
-                "score": float(rrf_matrix[si, ti]),
-            })
+        final_predict.append({
+            "source": index2source[si],
+            "target": index2target[ti],
+            "score": float(rrf_matrix[si, ti]),
+        })
     configs = {
-        "ir-score-th": ir_score_threshold,
         "llm-confidence-th": 0.0,
         "ir-weight": ir_weight,
         "llm-weight": llm_weight,

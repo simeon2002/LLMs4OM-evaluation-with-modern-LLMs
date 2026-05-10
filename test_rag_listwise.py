@@ -164,6 +164,7 @@ def main():
     ir_wrong_llm_right = 0            # IR wrong but LLM ranked GT first
     ir_wrong_llm_right_rrf_wrong = 0  # LLM was right but RRF still failed
     ir_right_llm_wrong_rrf_right = 0  # IR right, LLM wrong, but RRF still correct (IR weight saved it)
+    ir_right_llm_wrong_rrf_wrong = 0  # IR right, LLM wrong, RRF wrong (Set C — LLM hurt result)
 
     # build a lookup from source_iri → listwise_input item for per-source display
     item_by_iri = {item["source_iri"]: item for item in listwise_inputs}
@@ -231,6 +232,8 @@ def main():
                         ir_wrong_llm_right_rrf_wrong += 1
                 if ir_hit and not llm_hit and rrf_hit:
                     ir_right_llm_wrong_rrf_right += 1
+                if ir_hit and not llm_hit and not rrf_hit:
+                    ir_right_llm_wrong_rrf_wrong += 1
 
             if not args.no_per_source:
                 llm_rank_of = [0] * n
@@ -300,6 +303,7 @@ def main():
     print(f"  {'IR wrong but LLM rank-1 correct':<50} : {ir_wrong_llm_right} / {gt_in_topk_count}  ({pct(ir_wrong_llm_right, gt_in_topk_count)})  — cases LLM could fix")
     print(f"  {'IR wrong + LLM right + RRF still wrong':<50} : {ir_wrong_llm_right_rrf_wrong} / {gt_in_topk_count}  ({pct(ir_wrong_llm_right_rrf_wrong, gt_in_topk_count)})  — RRF suppressed LLM signal")
     print(f"  {'IR right + LLM wrong + RRF still correct':<50} : {ir_right_llm_wrong_rrf_right} / {gt_in_topk_count}  ({pct(ir_right_llm_wrong_rrf_right, gt_in_topk_count)})  — IR weight saved result (robustness)")
+    print(f"  {'IR right + LLM wrong + RRF wrong (Set C)':<50} : {ir_right_llm_wrong_rrf_wrong} / {gt_in_topk_count}  ({pct(ir_right_llm_wrong_rrf_wrong, gt_in_topk_count)})  — LLM hurt IR result")
     if improvement_cases:
         print(f"")
         print(f"  RRF fixed these IR errors ({len(improvement_cases)}): {improvement_cases}")
