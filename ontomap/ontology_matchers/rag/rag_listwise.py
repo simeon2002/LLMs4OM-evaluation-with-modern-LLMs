@@ -7,7 +7,11 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 from ontomap.ontology_matchers.llm.llm import LLaMA2DecoderLLMArch
-from ontomap.ontology_matchers.rag.dataset_listwise import LabelListwiseRAGDataset
+from ontomap.ontology_matchers.rag.dataset_listwise import (
+    LabelListwiseRAGDataset,
+    LabelParentListwiseRAGDataset,
+    LabelChildrenListwiseRAGDataset,
+)
 from ontomap.ontology_matchers.rag.rag import RAG
 from ontomap.ontology_matchers.retrieval.models import BERTRetrieval
 
@@ -221,7 +225,7 @@ class ListwiseRAG(RAG):
 
     def llm_generate(self, input_data: Any, ir_output: Any) -> List:
         listwise_inputs = self.build_listwise_inputs(input_data, ir_output)
-        dataset = LabelListwiseRAGDataset(data=listwise_inputs)
+        dataset = eval(input_data["llm-encoder"])(data=listwise_inputs)
         dataloader = DataLoader(
             dataset,
             batch_size=1,
@@ -268,3 +272,59 @@ class Gemma4ListwiseBertRAG(ListwiseRAG):
 
     def __str__(self):
         return super().__str__() + "-Gemma4ListwiseBertRAG"
+
+
+class Qwen35_9BListwiseDecoderLM(RAGBasedListwiseLLMArch):
+    path = "Qwen/Qwen3.5-9B-Base"
+
+    def __str__(self):
+        return super().__str__() + "-Qwen3.5-9B-Listwise"
+
+    def load_tokenizer(self) -> None:
+        import os
+        from transformers import AutoTokenizer
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            self.path,
+            token=os.environ.get("HUGGINGFACE_ACCESS_TOKEN"),
+            padding_side="left",
+        )
+        self.tokenizer.pad_token = self.tokenizer.eos_token
+
+    def load_model(self) -> None:
+        import os
+        from transformers import AutoModelForCausalLM, BitsAndBytesConfig
+        quantization_config = BitsAndBytesConfig(load_in_8bit=True)
+        self.model = AutoModelForCausalLM.from_pretrained(
+            self.path,
+            quantization_config=quantization_config,
+            device_map="balanced",
+            token=os.environ.get("HUGGINGFACE_ACCESS_TOKEN"),
+        )
+
+    def tokenize(self, input_data: List) -> Any:
+        formatted = [
+            self.tokenizer.apply_chat_template(
+                [{"role": "user", "content": text}],
+                tokenize=False,
+                add_generation_prompt=True,
+                enable_thinking=False,
+            )
+            for text in input_data
+        ]
+        inputs = self.tokenizer(
+            formatted,
+            return_tensors="pt",
+            truncation=self.kwargs["truncation"],
+            max_length=self.kwargs["tokenizer_max_length"],
+            padding=self.kwargs["padding"],
+        )
+        inputs.to(self.kwargs["device"])
+        return inputs
+
+
+class Qwen35_9BListwiseBertRAG(ListwiseRAG):
+    Retrieval = BERTRetrieval
+    LLM = Qwen35_9BListwiseDecoderLM
+
+    def __str__(self):
+        return super().__str__() + "-Qwen35_9BListwiseBertRAG"
