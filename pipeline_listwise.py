@@ -30,7 +30,7 @@ config = {
     "load-from-json": True,
     "root_dir": "datasets",
     "device": "cuda",
-    "batch-size": 4,
+    "batch-size": 16,
     "nshots": 0,
     "outputs-dir": "outputs",
     "llm_confidence_th": 0.0,

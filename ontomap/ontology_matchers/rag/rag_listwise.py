@@ -56,7 +56,7 @@ class RAGBasedListwiseLLMArch(LLaMA2DecoderLLMArch):
             outputs = self.model.generate(
                 **tokenized,
                 pad_token_id=self.tokenizer.eos_token_id,
-                max_new_tokens=80,
+                max_new_tokens=30,
                 do_sample=False,
             )
         new_tokens = outputs[:, input_len:]
