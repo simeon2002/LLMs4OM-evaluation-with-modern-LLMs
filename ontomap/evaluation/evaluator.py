@@ -23,9 +23,11 @@ def evaluator(track: str, predicts: List, references: Any):
 def evaluator_module(track: str, approach: str, predicts: List, references: Any, llm_confidence_th: float = 0.7) -> Dict:
     if approach == "retrieval":
         predicts = process.eval_preprocess_ir_outputs(predicts=predicts)
-    elif approach in ["rag" , "icv", "fewshot"]:
+    elif approach in ["rag", "icv", "fewshot"]:
         predicts, configs = process.postprocess_hybrid(predicts=predicts, llm_confidence_th=llm_confidence_th)
+    elif approach == "listwise":
+        predicts, configs = process.postprocess_listwise(predicts=predicts)
     results = evaluator(track=track, predicts=predicts, references=references)
-    if approach in ["rag" , "icv", "fewshot"]:
+    if approach in ["rag", "icv", "fewshot", "listwise"]:
         results = {**results, **configs}
     return results
