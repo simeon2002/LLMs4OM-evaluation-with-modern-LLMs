@@ -238,6 +238,7 @@ def postprocess_listwise(
     ir_score_threshold: float = 0.9,
     ir_weight: float = 0.3,
     llm_weight: float = 0.7,
+    ir_confidence_gate: float = 0.9,
 ) -> [List, Dict]:
     ir_outputs = predicts[0]["ir-outputs"]
     llm_outputs = predicts[1]["llm-output"]
@@ -281,6 +282,14 @@ def postprocess_listwise(
 
     rrf_matrix = apply_rrf(ir_rank_matrix, llm_rank_matrix, ir_weight, llm_weight)
 
+    # IR confidence gate: if top IR score >= gate, force IR top-1 (override LLM)
+    if ir_confidence_gate > 0.0:
+        for si in range(n_s):
+            best_ir_ti = int(np.argmax(ir_score_matrix[si, :]))
+            if ir_score_matrix[si, best_ir_ti] >= ir_confidence_gate:
+                rrf_matrix[si, :] = 0.0
+                rrf_matrix[si, best_ir_ti] = 1.0 + ir_score_matrix[si, best_ir_ti]
+
     for col in range(n_t):
         best = np.argmax(rrf_matrix[:, col])
         mask = np.arange(n_s) != best
@@ -309,5 +318,6 @@ def postprocess_listwise(
         "llm-confidence-th": 0.0,
         "ir-weight": ir_weight,
         "llm-weight": llm_weight,
+        "ir-confidence-gate": ir_confidence_gate,
     }
     return final_predict, configs
