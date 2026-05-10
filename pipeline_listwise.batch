@@ -54,5 +54,5 @@ python pipeline_listwise.py --model "${MODEL}"
 echo "End: $(date)"
 
 d=$(date +%F)
-mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.out" "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}_${d}.out" 2>/dev/null || true
-mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.err" "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}_${d}.err" 2>/dev/null || true
+mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.out" "logs/${SLURM_JOB_NAME}_${MODEL}_${SLURM_JOB_ID}_${d}.out" 2>/dev/null || true
+mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.err" "logs/${SLURM_JOB_NAME}_${MODEL}_${SLURM_JOB_ID}_${d}.err" 2>/dev/null || true

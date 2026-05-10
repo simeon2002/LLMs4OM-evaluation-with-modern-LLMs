@@ -171,6 +171,12 @@ class ListwiseRAG(RAG):
     def __str__(self):
         return "ListwiseRAG"
 
+    def generate(self, input_data: List) -> List:
+        # Skip preprocess_ir_outputs — listwise needs raw target-cands/score-cands format
+        ir_output = self.ir_generate(input_data=input_data)
+        llm_predictions = self.llm_generate(input_data=input_data, ir_output=ir_output)
+        return [{"ir-outputs": ir_output}, {"llm-output": llm_predictions}]
+
     def build_listwise_inputs(self, input_data: Any, ir_output: Any) -> List:
         source_onto = input_data["task-args"]["source"]
         target_onto = input_data["task-args"]["target"]
@@ -196,7 +202,7 @@ class ListwiseRAG(RAG):
         dataset = eval(input_data["llm-encoder"])(data=listwise_inputs)
         dataloader = DataLoader(
             dataset,
-            batch_size=1,
+            batch_size=self.kwargs["llm-config"]["batch_size"],
             shuffle=False,
             collate_fn=dataset.collate_fn,
         )
@@ -206,12 +212,11 @@ class ListwiseRAG(RAG):
             texts = batch["texts"]
             source_iris = batch["source_iris"]
             target_iris_list = batch["target_iris"]
-            ir_scores_list = batch["ir_scores"]
 
             ranking_texts = self.LLM.generate(texts)
 
-            for source_iri, target_iris, ir_scores, ranking_text in zip(
-                source_iris, target_iris_list, ir_scores_list, ranking_texts
+            for source_iri, target_iris, ranking_text in zip(
+                source_iris, target_iris_list, ranking_texts
             ):
                 n = len(target_iris)
                 llm_ranking = parse_ranking(ranking_text, n)
