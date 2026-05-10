@@ -214,3 +214,64 @@ def postprocess_hybrid(predicts: List, ir_score_threshold: float = 0.9, llm_conf
         "ir-score-th": ir_score_threshold,
     }
     return final_predict, configs
+
+
+def postprocess_listwise(predicts: List, ir_score_threshold: float = 0.9) -> [List, Dict]:
+    ir_outputs = predicts[0]["ir-outputs"]
+    llm_outputs = predicts[1]["llm-output"]
+
+    seen = set()
+    ir_cleaned = []
+    for ir in ir_outputs:
+        if ir["source"] not in seen:
+            seen.add(ir["source"])
+            ir_cleaned.append(ir)
+    ir_outputs = ir_cleaned
+
+    ir_dict = {ir["source"]: ir for ir in ir_outputs}
+    targets = list(set(t for ir in ir_outputs for t in ir["target-cands"]))
+    target2index = {t: i for i, t in enumerate(targets)}
+    source2index = {ir["source"]: i for i, ir in enumerate(ir_outputs)}
+    n_s, n_t = len(source2index), len(target2index)
+
+    rrf_matrix = np.zeros((n_s, n_t))
+    ir_score_matrix = np.zeros((n_s, n_t))
+
+    for pred in llm_outputs:
+        src, tgt, rrf_score = pred["source"], pred["target"], pred["score"]
+        if src not in source2index or tgt not in target2index:
+            continue
+        si, ti = source2index[src], target2index[tgt]
+        rrf_matrix[si, ti] = rrf_score
+        ir_out = ir_dict.get(src)
+        if ir_out:
+            for ir_cand, ir_s in zip(ir_out["target-cands"], ir_out["score-cands"]):
+                if ir_cand == tgt:
+                    ir_score_matrix[si, ti] = ir_s
+                    break
+
+    for col in range(n_t):
+        best = np.argmax(rrf_matrix[:, col])
+        mask = np.arange(n_s) != best
+        rrf_matrix[mask, col] = 0
+        ir_score_matrix[mask, col] = 0
+
+    for row in range(n_s):
+        best = np.argmax(rrf_matrix[row, :])
+        mask = np.arange(n_t) != best
+        rrf_matrix[row, mask] = 0
+        ir_score_matrix[row, mask] = 0
+
+    index2source = {v: k for k, v in source2index.items()}
+    index2target = {v: k for k, v in target2index.items()}
+
+    final_predict = []
+    for si, ti in zip(*rrf_matrix.nonzero()):
+        if ir_score_matrix[si, ti] >= ir_score_threshold:
+            final_predict.append({
+                "source": index2source[si],
+                "target": index2target[ti],
+                "score": float(rrf_matrix[si, ti]),
+            })
+    configs = {"ir-score-th": ir_score_threshold, "llm-confidence-th": 0.0}
+    return final_predict, configs
