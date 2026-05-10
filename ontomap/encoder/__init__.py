@@ -18,6 +18,9 @@ from ontomap.encoder.rag import (
     IRILabelInRAGInstructEncoder,
     IRILabelChildrensInRAGInstructEncoder,
     IRILabelParentsInRAGInstructEncoder,
+    IRILabelInListwiseEncoder,
+    IRILabelParentsInListwiseEncoder,
+    IRILabelChildrensInListwiseEncoder,
 )
 from ontomap.encoder.fewshot import (
     IRILabelParentsInFewShotEncoder,
@@ -50,9 +53,13 @@ EncoderCatalog = {
     "fewshot": {
         "label": IRILabelInFewShotEncoder,
         "label-children": IRILabelChildrensInFewShotEncoder,
-        "label-parent": IRILabelParentsInFewShotEncoder
-
-    }
+        "label-parent": IRILabelParentsInFewShotEncoder,
+    },
+    "listwise": {
+        "label": IRILabelInListwiseEncoder,
+        "label-parent": IRILabelParentsInListwiseEncoder,
+        "label-children": IRILabelChildrensInListwiseEncoder,
+    },
 }
 
 
