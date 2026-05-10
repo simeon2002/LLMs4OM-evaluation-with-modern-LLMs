@@ -24,6 +24,11 @@ from ontomap.ontology_matchers.llm.models import (
     MistralLM7BDecoderLM,
     WizardLM13BDecoderLM,
 )
+from ontomap.ontology_matchers.rag.rag_listwise import (
+    LLaMA3ListwiseBertRAG,
+    Gemma4ListwiseBertRAG,
+    Qwen35_9BListwiseBertRAG,
+)
 from ontomap.ontology_matchers.rag.models import (
     ChatGPTOpenAIAdaRAG,
     FalconLLMAdaRAG,
@@ -126,6 +131,11 @@ MatcherCatalog = {
         "Gemma2_2BBertRAG": Gemma2_2BBertRAG,
         "Gemma4_26B_A4BBertRAG": Gemma4_26B_A4BBertRAG,
         "LLaMA3InstructBertRAG": LLaMA3InstructBertRAG,
+    },
+    "listwise": {
+        "LLaMA3ListwiseBertRAG": LLaMA3ListwiseBertRAG,
+        "Gemma4ListwiseBertRAG": Gemma4ListwiseBertRAG,
+        "Qwen35_9BListwiseBertRAG": Qwen35_9BListwiseBertRAG,
     },
     "retrieval": {
         "BM25Retrieval": BM25Retrieval,
