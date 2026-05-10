@@ -216,7 +216,29 @@ def postprocess_hybrid(predicts: List, ir_score_threshold: float = 0.9, llm_conf
     return final_predict, configs
 
 
-def postprocess_listwise(predicts: List, ir_score_threshold: float = 0.9) -> [List, Dict]:
+def apply_rrf(
+    ir_rank_matrix: np.ndarray,
+    llm_rank_matrix: np.ndarray,
+    ir_weight: float = 0.3,
+    llm_weight: float = 0.7,
+    k: int = 1,
+) -> np.ndarray:
+    n_t = ir_rank_matrix.shape[1]
+    lr = np.where(llm_rank_matrix != np.inf, llm_rank_matrix, n_t)
+    irr = np.where(ir_rank_matrix != np.inf, ir_rank_matrix, n_t)
+    return np.where(
+        llm_rank_matrix != np.inf,
+        ir_weight / (k + irr + 1) + llm_weight / (k + lr + 1),
+        0.0,
+    )
+
+
+def postprocess_listwise(
+    predicts: List,
+    ir_score_threshold: float = 0.9,
+    ir_weight: float = 0.3,
+    llm_weight: float = 0.7,
+) -> [List, Dict]:
     ir_outputs = predicts[0]["ir-outputs"]
     llm_outputs = predicts[1]["llm-output"]
 
@@ -234,21 +256,30 @@ def postprocess_listwise(predicts: List, ir_score_threshold: float = 0.9) -> [Li
     source2index = {ir["source"]: i for i, ir in enumerate(ir_outputs)}
     n_s, n_t = len(source2index), len(target2index)
 
-    rrf_matrix = np.zeros((n_s, n_t))
+    llm_rank_matrix = np.full((n_s, n_t), np.inf)
     ir_score_matrix = np.zeros((n_s, n_t))
+    ir_rank_matrix = np.full((n_s, n_t), np.inf)
 
     for pred in llm_outputs:
-        src, tgt, rrf_score = pred["source"], pred["target"], pred["score"]
+        src, tgt = pred["source"], pred["target"]
         if src not in source2index or tgt not in target2index:
             continue
         si, ti = source2index[src], target2index[tgt]
-        rrf_matrix[si, ti] = rrf_score
-        ir_out = ir_dict.get(src)
-        if ir_out:
-            for ir_cand, ir_s in zip(ir_out["target-cands"], ir_out["score-cands"]):
-                if ir_cand == tgt:
-                    ir_score_matrix[si, ti] = ir_s
-                    break
+        llm_rank_matrix[si, ti] = pred["score"]  # 0-indexed LLM rank, 0 = best
+
+    for iri, ir_out in ir_dict.items():
+        si = source2index[iri]
+        ir_cands = ir_out["target-cands"]
+        ir_scores = ir_out["score-cands"]
+        ir_order = sorted(range(len(ir_cands)), key=lambda idx: ir_scores[idx], reverse=True)
+        for ir_rank_pos, cand_idx in enumerate(ir_order):
+            tgt = ir_cands[cand_idx]
+            if tgt in target2index:
+                ti = target2index[tgt]
+                ir_score_matrix[si, ti] = ir_scores[cand_idx]
+                ir_rank_matrix[si, ti] = ir_rank_pos
+
+    rrf_matrix = apply_rrf(ir_rank_matrix, llm_rank_matrix, ir_weight, llm_weight)
 
     for col in range(n_t):
         best = np.argmax(rrf_matrix[:, col])
@@ -273,5 +304,10 @@ def postprocess_listwise(predicts: List, ir_score_threshold: float = 0.9) -> [Li
                 "target": index2target[ti],
                 "score": float(rrf_matrix[si, ti]),
             })
-    configs = {"ir-score-th": ir_score_threshold, "llm-confidence-th": 0.0}
+    configs = {
+        "ir-score-th": ir_score_threshold,
+        "llm-confidence-th": 0.0,
+        "ir-weight": ir_weight,
+        "llm-weight": llm_weight,
+    }
     return final_predict, configs

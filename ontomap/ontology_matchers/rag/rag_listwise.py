@@ -37,38 +37,6 @@ def parse_ranking(text: str, n_candidates: int) -> List[int]:
     return ranking  # ranking[rank_position] = candidate_index
 
 
-def apply_rrf(
-    ir_scores: List[float],
-    llm_ranking: List[int],
-    k: int = 1,
-    ir_weight: float = 0.3,
-    llm_weight: float = 0.7,
-) -> List[float]:
-    """Weighted Reciprocal Rank Fusion of IR scores and LLM ranking.
-
-    ir_scores:  cosine score per candidate (higher = better)
-    llm_ranking: list where llm_ranking[rank] = candidate_index (0 = best)
-    k:          smoothing constant (k=1 recommended with weights)
-    ir_weight:  weight for IR contribution (default 0.3)
-    llm_weight: weight for LLM contribution (default 0.7)
-    Returns RRF score per candidate (higher = better).
-    """
-    n = len(ir_scores)
-    ir_order = sorted(range(n), key=lambda i: ir_scores[i], reverse=True)
-    ir_rank = [0] * n
-    for rank, idx in enumerate(ir_order):
-        ir_rank[idx] = rank
-
-    llm_rank = [0] * n
-    for rank, idx in enumerate(llm_ranking):
-        llm_rank[idx] = rank
-
-    return [
-        ir_weight / (k + ir_rank[i] + 1) + llm_weight / (k + llm_rank[i] + 1)
-        for i in range(n)
-    ]
-
-
 # ── LLM architectures ────────────────────────────────────────────────────────
 
 class RAGBasedListwiseLLMArch(LLaMA2DecoderLLMArch):
@@ -247,13 +215,16 @@ class ListwiseRAG(RAG):
             ):
                 n = len(target_iris)
                 llm_ranking = parse_ranking(ranking_text, n)
-                rrf_scores = apply_rrf(ir_scores, llm_ranking)
-                best_idx = max(range(n), key=lambda i: rrf_scores[i])
-                predictions.append({
-                    "source": source_iri,
-                    "target": target_iris[best_idx],
-                    "score": rrf_scores[best_idx],
-                })
+                # llm_ranking[rank_pos] = candidate_idx → invert to get rank of each candidate
+                llm_rank_of_candidate = [0] * n
+                for rank_pos, cand_idx in enumerate(llm_ranking):
+                    llm_rank_of_candidate[cand_idx] = rank_pos
+                for i, tgt in enumerate(target_iris):
+                    predictions.append({
+                        "source": source_iri,
+                        "target": tgt,
+                        "score": llm_rank_of_candidate[i],  # 0-indexed rank, 0 = best
+                    })
 
         return predictions
 
