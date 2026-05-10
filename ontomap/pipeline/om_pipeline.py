@@ -32,7 +32,7 @@ class OMPipelines:
                 if encoder_type in kwargs["approach-encoders-to-consider"]: #same approach as above.
                     self.encoder_catalog[encoder_type] = encoder_module
 
-        if self.approach in ["rag", "icv", "fewshot"]:
+        if self.approach in ["rag", "icv", "fewshot", "listwise"]:
             batch_size = kwargs["batch-size"]
             self.config = BaseConfig(approach=kwargs["approach"]).get_args(device=kwargs["device"],
                                                                            batch_size=int(batch_size),
@@ -70,7 +70,7 @@ class OMPipelines:
                                 "encoder-id": encoder_id,
                                 "encoder-info": encoder_module().get_encoder_info(),
                             }  # objec that will be stored as JSON as output, contains all the relevant info about the model, dataset, encoder and the generated output and evaluation results if do_evaluation is True!
-                            if self.approach == "rag": # this is what we need. RAG. retriever fetches top-k candidates and LLM generates the predection, post-filtering done and that is the result, other approaches irrelevant for me.
+                            if self.approach in ["rag", "listwise"]: # this is what we need. RAG. retriever fetches top-k candidates and LLM generates the predection, post-filtering done and that is the result, other approaches irrelevant for me.
                                 # task_owl["dataset-module"] = self.dataset_module
                                 task_owl["llm"] = model_id # add the llm type used to task_owl dict.
                             encoded_inputs = encoder_module()(**task_owl) # each encoder's parse method is called with task_owl dict as input. __call__ setup in baseEncoder class.
