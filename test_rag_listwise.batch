@@ -3,7 +3,7 @@
 #SBATCH --mail-user=simeon.serafimov@student.kuleuven.be
 #SBATCH --clusters=wice
 #SBATCH --account=lp_dtaikg
-#SBATCH --partition=gpu_a100
+#SBATCH --partition=gpu_h100
 #SBATCH --nodes=1 
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
@@ -65,5 +65,5 @@ python test_rag_listwise.py \
 echo "End: $(date)"
 
 d=$(date +%F)
-mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.out" "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}_${d}.out" 2>/dev/null || true
-mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.err" "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}_${d}.err" 2>/dev/null || true
+mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.out" "logs/${SLURM_JOB_NAME}_${MODEL}_${SLURM_JOB_ID}_${d}.out" 2>/dev/null || true
+mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.err" "logs/${SLURM_JOB_NAME}_${MODEL}_${SLURM_JOB_ID}_${d}.err" 2>/dev/null || true

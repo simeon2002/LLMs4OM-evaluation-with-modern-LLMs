@@ -43,6 +43,9 @@ class BaseConfig:
         if self.approach == "naiv-conv-oaei":
             config["tokenizer_max_length"] = 4096
             config["max_token_length"] = 5000
+        elif self.approach == "listwise":
+            config["max_token_length"] = 40
+            config["tokenizer_max_length"] = 2048
         return config
 
     def gpt(self) -> Dict:
@@ -114,7 +117,7 @@ class BaseConfig:
                           "MistralNemoBertRAG", "Qwen25BertRAG", "Qwen25_3BBertRAG", "Gemma2_9BBertRAG",
                           "Gemma2_2BBertRAG", "Qwen35_9BBertRAG", "LLaMA3BertRAG", "Gemma4_26B_A4BBertRAG",
                           "LLaMA3InstructBertRAG",
-                          "LLaMA3ListwiseBertRAG", "Gemma4ListwiseBertRAG"]
+                          "LLaMA3ListwiseBertRAG", "Gemma4ListwiseBertRAG", "Qwen35_9BListwiseBertRAG"]
 
         for rag_icv_model in rag_icv_models:
             self.parser.add_argument("--" + rag_icv_model, type=dict, default=llama_rag_config)
