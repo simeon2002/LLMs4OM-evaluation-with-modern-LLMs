@@ -26,9 +26,20 @@ from ontomap.ontology_matchers.rag.dataset_listwise import LabelListwiseRAGDatas
 from ontomap.ontology_matchers.rag.rag_listwise import (
     LLaMA3ListwiseBertRAG,
     Gemma4ListwiseBertRAG,
-    apply_rrf,
     parse_ranking,
 )
+
+
+def apply_rrf(ir_scores, llm_ranking, k=1, ir_weight=0.3, llm_weight=0.7):
+    n = len(ir_scores)
+    ir_order = sorted(range(n), key=lambda i: ir_scores[i], reverse=True)
+    ir_rank = [0] * n
+    for rank, idx in enumerate(ir_order):
+        ir_rank[idx] = rank
+    llm_rank = [0] * n
+    for rank, idx in enumerate(llm_ranking):
+        llm_rank[idx] = rank
+    return [ir_weight / (k + ir_rank[i] + 1) + llm_weight / (k + llm_rank[i] + 1) for i in range(n)]
 from ontomap.ontology_matchers.retrieval.models import BERTRetrieval
 from ontomap.encoder.lightweight import IRILabelInLightweightEncoder
 
