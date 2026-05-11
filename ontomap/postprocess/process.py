@@ -238,6 +238,7 @@ def postprocess_listwise(
     ir_weight: float = 0.3,
     llm_weight: float = 0.7,
     k: int = 1,
+    ir_score_threshold: float = 0.9,
 ) -> [List, Dict]:
     ir_outputs = predicts[0]["ir-outputs"]
     llm_outputs = predicts[1]["llm-output"]
@@ -250,63 +251,49 @@ def postprocess_listwise(
             ir_cleaned.append(ir)
     ir_outputs = ir_cleaned
 
-    ir_dict = {ir["source"]: ir for ir in ir_outputs}
-    targets = list(set(t for ir in ir_outputs for t in ir["target-cands"]))
-    target2index = {t: i for i, t in enumerate(targets)}
-    source2index = {ir["source"]: i for i, ir in enumerate(ir_outputs)}
-    n_s, n_t = len(source2index), len(target2index)
+    llm_rank_lookup = {(p["source"], p["target"]): p["score"] for p in llm_outputs}
 
-    llm_rank_matrix = np.full((n_s, n_t), np.inf)
-    ir_score_matrix = np.zeros((n_s, n_t))
-    ir_rank_matrix = np.full((n_s, n_t), np.inf)
+    # Compute RRF score per (source, candidate) pair — O(n_s * k), no large matrices
+    pairs = []  # (rrf_score, ir_score, source, target)
+    for ir_out in ir_outputs:
+        src = ir_out["source"]
+        cands = ir_out["target-cands"]
+        scores = ir_out["score-cands"]
+        ir_order = sorted(range(len(cands)), key=lambda i: scores[i], reverse=True)
+        ir_rank = {cands[idx]: pos for pos, idx in enumerate(ir_order)}
+        for tgt, ir_sc in zip(cands, scores):
+            llm_rank = llm_rank_lookup.get((src, tgt))
+            if llm_rank is None:
+                continue
+            irr = ir_rank[tgt]
+            rrf_score = ir_weight / (k + irr + 1) + llm_weight / (k + llm_rank + 1)
+            pairs.append((rrf_score, ir_sc, src, tgt))
 
-    for pred in llm_outputs:
-        src, tgt = pred["source"], pred["target"]
-        if src not in source2index or tgt not in target2index:
-            continue
-        si, ti = source2index[src], target2index[tgt]
-        llm_rank_matrix[si, ti] = pred["score"]  # 0-indexed LLM rank, 0 = best
+    # Column pass: for each target keep the source with the highest RRF score
+    target_best: Dict = {}
+    for rrf_score, ir_sc, src, tgt in pairs:
+        if tgt not in target_best or rrf_score > target_best[tgt][0]:
+            target_best[tgt] = (rrf_score, ir_sc, src)
 
-    for iri, ir_out in ir_dict.items():
-        si = source2index[iri]
-        ir_cands = ir_out["target-cands"]
-        ir_scores = ir_out["score-cands"]
-        ir_order = sorted(range(len(ir_cands)), key=lambda idx: ir_scores[idx], reverse=True)
-        for ir_rank_pos, cand_idx in enumerate(ir_order):
-            tgt = ir_cands[cand_idx]
-            if tgt in target2index:
-                ti = target2index[tgt]
-                ir_score_matrix[si, ti] = ir_scores[cand_idx]
-                ir_rank_matrix[si, ti] = ir_rank_pos
-
-    rrf_matrix = apply_rrf(ir_rank_matrix, llm_rank_matrix, ir_weight, llm_weight, k)
-
-    for col in range(n_t):
-        best = np.argmax(rrf_matrix[:, col])
-        mask = np.arange(n_s) != best
-        rrf_matrix[mask, col] = 0
-        ir_score_matrix[mask, col] = 0
-
-    for row in range(n_s):
-        best = np.argmax(rrf_matrix[row, :])
-        mask = np.arange(n_t) != best
-        rrf_matrix[row, mask] = 0
-        ir_score_matrix[row, mask] = 0
-
-    index2source = {v: k for k, v in source2index.items()}
-    index2target = {v: k for k, v in target2index.items()}
+    # Row pass: for each source keep the target with the highest RRF score
+    source_best: Dict = {}
+    for tgt, (rrf_score, ir_sc, src) in target_best.items():
+        if src not in source_best or rrf_score > source_best[src][0]:
+            source_best[src] = (rrf_score, ir_sc, tgt)
 
     final_predict = []
-    for si, ti in zip(*rrf_matrix.nonzero()):
-        final_predict.append({
-            "source": index2source[si],
-            "target": index2target[ti],
-            "score": float(rrf_matrix[si, ti]),
-        })
+    for src, (rrf_score, ir_sc, tgt) in source_best.items():
+        if ir_sc >= ir_score_threshold:
+            final_predict.append({
+                "source": src,
+                "target": tgt,
+                "score": float(rrf_score),
+            })
     configs = {
         "llm-confidence-th": 0.0,
         "ir-weight": ir_weight,
         "llm-weight": llm_weight,
         "rrf-k": k,
+        "ir-score-th": ir_score_threshold,
     }
     return final_predict, configs
