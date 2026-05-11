@@ -11,8 +11,9 @@ class LabelListwiseRAGDataset(Dataset):
         "Rank the following {n} candidate concepts from most to least likely to refer to "
         "the same real-world entity as the source concept.\n\n"
         "Candidates:\n{candidates}\n\n"
-        "You MUST output all {n} numbers ranked from best to worst, separated by commas "
-        "(e.g. \"3, 1, 5, 2, 4\"). Output exactly {n} numbers. No explanation."
+        "If NONE of the candidates refer to the same real-world entity as the source concept, output: 0\n"
+        "Otherwise, output all {n} numbers ranked from best to worst, separated by commas "
+        "(e.g. \"3, 1, 5, 2, 4\"). Output exactly {n} numbers or just 0. No explanation."
     )
 
     def __init__(self, data: List):
@@ -64,8 +65,9 @@ class LabelParentListwiseRAGDataset(LabelListwiseRAGDataset):
         "Rank the following {n} candidate concepts from most to least likely to refer to "
         "the same real-world entity as the source concept.\n\n"
         "Candidates:\n{candidates}\n\n"
-        "You MUST output all {n} numbers ranked from best to worst, separated by commas "
-        "(e.g. \"3, 1, 5, 2, 4\"). Output exactly {n} numbers. No explanation."
+        "If NONE of the candidates refer to the same real-world entity as the source concept, output: 0\n"
+        "Otherwise, output all {n} numbers ranked from best to worst, separated by commas "
+        "(e.g. \"3, 1, 5, 2, 4\"). Output exactly {n} numbers or just 0. No explanation."
     )
 
     def fill_one_sample(self, item: Any) -> str:
@@ -91,8 +93,9 @@ class LabelChildrenListwiseRAGDataset(LabelListwiseRAGDataset):
         "Rank the following {n} candidate concepts from most to least likely to refer to "
         "the same real-world entity as the source concept.\n\n"
         "Candidates:\n{candidates}\n\n"
-        "You MUST output all {n} numbers ranked from best to worst, separated by commas "
-        "(e.g. \"3, 1, 5, 2, 4\"). Output exactly {n} numbers. No explanation."
+        "If NONE of the candidates refer to the same real-world entity as the source concept, output: 0\n"
+        "Otherwise, output all {n} numbers ranked from best to worst, separated by commas "
+        "(e.g. \"3, 1, 5, 2, 4\"). Output exactly {n} numbers or just 0. No explanation."
     )
 
     def fill_one_sample(self, item: Any) -> str:

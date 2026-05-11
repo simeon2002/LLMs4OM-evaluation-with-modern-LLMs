@@ -18,15 +18,20 @@ from ontomap.ontology_matchers.retrieval.models import BERTRetrieval
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
-def parse_ranking(text: str, n_candidates: int) -> List[int]:
-    """Parse LLM output like '3, 1, 5, 2, 4' into a 0-indexed list ordered by rank.
+def parse_ranking(text: str, n_candidates: int):
+    """Parse LLM output into a 0-indexed ranking list, or None if the model abstained.
 
-    Returns a list of length n_candidates where index 0 is the best candidate.
+    Returns None if the model output '0' (no match).
+    Otherwise returns a list of length n_candidates where index 0 is the best candidate.
     Missing or out-of-range numbers are appended at the end as fallback.
     """
+    tokens = re.findall(r"\d+", text.strip())
+    # Abstention: model output only "0"
+    if tokens and tokens[0] == "0" and all(t == "0" for t in tokens):
+        return None
     seen: set = set()
     ranking: List[int] = []
-    for token in re.findall(r"\d+", text):
+    for token in tokens:
         idx = int(token) - 1  # 1-indexed → 0-indexed
         if 0 <= idx < n_candidates and idx not in seen:
             ranking.append(idx)
@@ -220,6 +225,9 @@ class ListwiseRAG(RAG):
             ):
                 n = len(target_iris)
                 llm_ranking = parse_ranking(ranking_text, n)
+                if llm_ranking is None:
+                    # LLM abstained — no match for this source
+                    continue
                 # llm_ranking[rank_pos] = candidate_idx → invert to get rank of each candidate
                 llm_rank_of_candidate = [0] * n
                 for rank_pos, cand_idx in enumerate(llm_ranking):
