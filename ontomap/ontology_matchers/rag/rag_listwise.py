@@ -259,7 +259,7 @@ class Gemma4ListwiseBertRAG(ListwiseRAG):
 
 
 class Qwen35_9BListwiseDecoderLM(RAGBasedListwiseLLMArch):
-    path = "Qwen/Qwen3.5-9B-Base"
+    path = "Qwen/Qwen3.5-9B"
 
     def __str__(self):
         return super().__str__() + "-Qwen3.5-9B-Listwise"
@@ -282,6 +282,7 @@ class Qwen35_9BListwiseDecoderLM(RAGBasedListwiseLLMArch):
             self.path,
             quantization_config=quantization_config,
             device_map="balanced",
+            attn_implementation="eager",
             token=os.environ.get("HUGGINGFACE_ACCESS_TOKEN"),
         )
 

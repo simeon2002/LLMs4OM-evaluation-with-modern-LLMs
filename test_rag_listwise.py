@@ -26,6 +26,7 @@ from ontomap.ontology_matchers.rag.dataset_listwise import LabelListwiseRAGDatas
 from ontomap.ontology_matchers.rag.rag_listwise import (
     LLaMA3ListwiseBertRAG,
     Gemma4ListwiseBertRAG,
+    Qwen35_9BListwiseBertRAG,
     parse_ranking,
 )
 
@@ -46,6 +47,7 @@ from ontomap.encoder.lightweight import IRILabelInLightweightEncoder
 MODELS = {
     "LLaMA3ListwiseBertRAG": LLaMA3ListwiseBertRAG,
     "Gemma4ListwiseBertRAG": Gemma4ListwiseBertRAG,
+    "Qwen35_9BListwiseBertRAG": Qwen35_9BListwiseBertRAG,
 }
 
 DATASETS = {
@@ -165,6 +167,8 @@ def main():
     ir_wrong_llm_right_rrf_wrong = 0  # LLM was right but RRF still failed
     ir_right_llm_wrong_rrf_right = 0  # IR right, LLM wrong, but RRF still correct (IR weight saved it)
     ir_right_llm_wrong_rrf_wrong = 0  # IR right, LLM wrong, RRF wrong (Set C — LLM hurt result)
+    abstain_count = 0
+    abstain_true_match = 0            # abstained but source had a true match (false negative)
 
     # build a lookup from source_iri → listwise_input item for per-source display
     item_by_iri = {item["source_iri"]: item for item in listwise_inputs}
@@ -188,6 +192,41 @@ def main():
 
             n = len(target_iris)
             llm_ranking = parse_ranking(ranking_text, n)
+
+            ir_best_iri = target_iris[0]
+            gt_in_topk = (gt_target is not None) and (gt_target in target_iris)
+            ir_hit = (gt_target is not None) and (ir_best_iri == gt_target)
+
+            if llm_ranking is None:
+                abstain_count += 1
+                if gt_target is not None:
+                    abstain_true_match += 1
+                if gt_in_topk:
+                    gt_in_topk_count += 1
+                    if ir_hit:
+                        ir_correct_of_topk += 1
+                if ir_hit:
+                    ir_correct += 1
+                saved_rankings.append({
+                    "source_iri": src_iri,
+                    "target_iris": list(target_iris),
+                    "ir_scores": list(ir_scores),
+                    "llm_ranking": None,
+                    "llm_raw": ranking_text.strip(),
+                    "gt_target": gt_target,
+                })
+                if not args.no_per_source:
+                    gt_display = [item["targets"][i]["label"] for i, iri in enumerate(target_iris) if iri == gt_target]
+                    gt_in_topk_str = f"'{gt_display[0]}'" if gt_display else "NOT IN TOP-K"
+                    ir_result = "CORRECT" if ir_hit else ("WRONG" if gt_in_topk else "GT NOT IN TOP-K")
+                    print(f"\nSource : '{src_label}'  [ABSTAINED — LLM output '0']")
+                    print(f"GT     : {gt_in_topk_str}")
+                    print(f"  LLM raw output : \"{ranking_text.strip()}\"")
+                    print(f"  IR  result     : {ir_result}")
+                    print(f"  RRF result     : ABSTAINED (no prediction)")
+                    print(SEP)
+                continue
+
             rrf_scores = apply_rrf(ir_scores, llm_ranking)
             saved_rankings.append({
                 "source_iri": src_iri,
@@ -199,13 +238,10 @@ def main():
             })
             best_rrf_idx = max(range(n), key=lambda i: rrf_scores[i])
 
-            ir_best_iri = target_iris[0]
             rrf_best_iri = target_iris[best_rrf_idx]
 
             if best_rrf_idx != 0:
                 rrf_disagrees_count += 1
-            gt_in_topk = (gt_target is not None) and (gt_target in target_iris)
-            ir_hit = (gt_target is not None) and (ir_best_iri == gt_target)
             rrf_hit = (gt_target is not None) and (rrf_best_iri == gt_target)
             if gt_in_topk:
                 gt_in_topk_count += 1
@@ -288,6 +324,8 @@ def main():
     print(f"\n{'SUMMARY':=^95}")
     print(f"")
     print(f"  Total sources evaluated        : {total}")
+    print(f"  LLM abstained (output '0')     : {abstain_count} / {total}  ({pct(abstain_count, total)})")
+    print(f"  Abstained + had true match     : {abstain_true_match} / {abstain_count}  ({pct(abstain_true_match, abstain_count)})  — false negatives from abstention")
     print(f"  GT in top-{args.top_k} (reachable)    : {gt_in_topk_count} / {total}  ({pct(gt_in_topk_count, total)})  —  ceiling for both IR and RRF")
     print(f"  GT not in top-{args.top_k} (unreachable): {unreachable} / {total}  ({pct(unreachable, total)})  —  neither method can win here")
     print(f"  RRF overrides IR               : {rrf_disagrees_count} / {total}  ({pct(rrf_disagrees_count, total)})")
