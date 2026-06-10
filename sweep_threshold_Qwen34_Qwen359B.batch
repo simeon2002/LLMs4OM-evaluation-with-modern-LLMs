@@ -1,0 +1,32 @@
+#!/bin/bash -l
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=simeon.serafimov@student.kuleuven.be
+#SBATCH --clusters=wice
+#SBATCH --account=lp_dtaikg
+#SBATCH --partition=bigmem
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=256G
+#SBATCH --time=8:00:00
+#SBATCH --job-name=thresh_sweep_Qwen34_Qwen359B
+#SBATCH --output=logs/%x_%j.out
+#SBATCH --error=logs/%x_%j.err
+
+set -eo pipefail
+
+source ~/.bashrc
+
+export HF_HOME="$VSC_SCRATCH/.cache/huggingface"
+
+echo "Host: $(hostname)"
+echo "Start: $(date)"
+echo "JobID: ${SLURM_JOB_ID}"
+
+python sweep_threshold_Qwen34_Qwen359B.py
+
+echo "End: $(date)"
+
+d=$(date +%F)
+mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.out" "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}_${d}.out" 2>/dev/null || true
+mv "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.err" "logs/${SLURM_JOB_NAME}_${SLURM_JOB_ID}_${d}.err" 2>/dev/null || true
