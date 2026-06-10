@@ -1,0 +1,132 @@
+SLURM_JOB_ID: 66453904
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: pipeline_retrieval_Qwen3_0.6B
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g12
+SLURM_JOB_CPUS_PER_NODE: 6
+SLURM_JOB_GPUS: 2
+Date: Thu Apr 16 23:19:53 CEST 2026
+Walltime: 00-05:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g12
+Start: Thu Apr 16 23:20:13 CEST 2026
+JobID: 66453904
+MODEL: Qwen3EmbeddingRetrieval
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+working on Qwen3EmbeddingRetrieval-RetrievalQwen3EmbeddingRetrieval
+	Working on bio-ml track
+	Working on bio-ml/snomed-fma.body task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-Qwen3EmbeddingRetrieval-label-2026.04.16-23:30:25.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.16-23:40:25.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-Qwen3EmbeddingRetrieval-label-parent-2026.04.16-23:50:20.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.neoplas task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/retrieval-Qwen3EmbeddingRetrieval-label-2026.04.16-23:53:46.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.16-23:57:11.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/retrieval-Qwen3EmbeddingRetrieval-label-parent-2026.04.17-00:00:37.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.pharm task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/retrieval-Qwen3EmbeddingRetrieval-label-2026.04.17-00:04:42.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.17-00:08:49.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/retrieval-Qwen3EmbeddingRetrieval-label-parent-2026.04.17-00:12:55.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+Run evaluation on Qwen3EmbeddingRetrieval
+	Working on bio-ml track
+	Working on bio-ml/snomed-fma.body task
+		Prompting ID is: label
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-2026.03.23-17:50:33.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-Qwen3EmbeddingRetrieval-label-2026.03.23-17:50:33.json.
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-2026.04.16-23:30:25.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-Qwen3EmbeddingRetrieval-label-2026.04.16-23:30:25.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.16-23:40:25.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.16-23:40:25.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-parent-2026.04.16-23:50:20.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-Qwen3EmbeddingRetrieval-label-parent-2026.04.16-23:50:20.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.neoplas task
+		Prompting ID is: label
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-2026.04.16-23:53:46.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/retrieval-Qwen3EmbeddingRetrieval-label-2026.04.16-23:53:46.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.16-23:57:11.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.16-23:57:11.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-parent-2026.04.17-00:00:37.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/retrieval-Qwen3EmbeddingRetrieval-label-parent-2026.04.17-00:00:37.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.pharm task
+		Prompting ID is: label
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-2026.04.17-00:04:42.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/retrieval-Qwen3EmbeddingRetrieval-label-2026.04.17-00:04:42.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.17-00:08:49.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.17-00:08:49.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-parent-2026.04.17-00:12:55.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/retrieval-Qwen3EmbeddingRetrieval-label-parent-2026.04.17-00:12:55.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+End: Fri Apr 17 00:22:28 CEST 2026

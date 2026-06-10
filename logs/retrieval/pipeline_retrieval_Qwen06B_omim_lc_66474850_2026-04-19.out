@@ -1,0 +1,46 @@
+SLURM_JOB_ID: 66474850
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: pipeline_retrieval_Qwen06B_omim_lc
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g15
+SLURM_JOB_CPUS_PER_NODE: 6
+SLURM_JOB_GPUS: 3
+Date: Sun Apr 19 14:43:32 CEST 2026
+Walltime: 00-05:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g15
+Start: Sun Apr 19 14:44:01 CEST 2026
+JobID: 66474850
+MODEL: Qwen3EmbeddingRetrieval
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+working on Qwen3EmbeddingRetrieval-RetrievalQwen3EmbeddingRetrieval
+	Working on bio-ml track
+	Working on bio-ml/omim-ordo.disease task
+		Prompting ID is: label-children
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.19-14:45:59.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+Run evaluation on Qwen3EmbeddingRetrieval
+	Working on bio-ml track
+	Working on bio-ml/omim-ordo.disease task
+		Prompting ID is: label-children
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-children-2026.03.23-17:47:28.json run!
+		Skipping evaluation — output contains error or is empty: ['CUDA out of memory. Tried to allocate 64.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 36.19 GiB is free. I
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.19-14:40:29.json run!
+		Skipping evaluation — output contains error or is empty: ['CUDA out of memory. Tried to allocate 2.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 384.94 MiB is free. I
+Evaluating output for retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.19-14:45:59.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-Qwen3EmbeddingRetrieval-label-children-2026.04.19-14:45:59.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+End: Sun Apr 19 14:46:12 CEST 2026

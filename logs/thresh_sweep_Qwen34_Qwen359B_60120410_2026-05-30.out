@@ -1,0 +1,350 @@
+SLURM_JOB_ID: 60120410
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: thresh_sweep_Qwen34_Qwen359B
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: bigmem
+SLURM_NNODES: 1
+SLURM_NODELIST: k28l03
+SLURM_JOB_CPUS_PER_NODE: 10
+Date: Sat May 30 11:09:04 CEST 2026
+Walltime: 00-08:00:00
+========================================================================
+Host: k28l03
+Start: Sat May 30 11:09:11 CEST 2026
+JobID: 60120410
+[NCIT-DOID / C] rag-Qwen35_9BQwen34BRAG-label-2026.05.18-01:17:20.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[NCIT-DOID / CC] rag-Qwen35_9BQwen34BRAG-label-children-2026.05.18-02:20:44.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[NCIT-DOID / CP] rag-Qwen35_9BQwen34BRAG-label-parent-2026.05.18-03:23:59.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[OMIM-ORDO / C] rag-Qwen35_9BQwen34BRAG-label-2026.05.18-04:03:10.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[OMIM-ORDO / CC] rag-Qwen35_9BQwen34BRAG-label-children-2026.05.18-04:42:25.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[OMIM-ORDO / CP] rag-Qwen35_9BQwen34BRAG-label-parent-2026.05.18-05:21:39.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[SNOMED-FMA / C] rag-Qwen35_9BQwen34BRAG-label-2026.05.18-07:45:55.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[SNOMED-FMA / CC] rag-Qwen35_9BQwen34BRAG-label-children-2026.05.18-10:11:10.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[SNOMED-FMA / CP] rag-Qwen35_9BQwen34BRAG-label-parent-2026.05.18-12:36:13.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[SNOMED-NCIT (N) / C] rag-Qwen35_9BQwen34BRAG-label-2026.05.18-14:08:38.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[SNOMED-NCIT (N) / CC] rag-Qwen35_9BQwen34BRAG-label-children-2026.05.18-15:41:04.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[SNOMED-NCIT (N) / CP] rag-Qwen35_9BQwen34BRAG-label-parent-2026.05.18-17:13:23.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[SNOMED-NCIT (P) / C] rag-Qwen35_9BQwen34BRAG-label-2026.05.18-19:11:37.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[SNOMED-NCIT (P) / CC] rag-Qwen35_9BQwen34BRAG-label-children-2026.05.18-21:10:13.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+[SNOMED-NCIT (P) / CP] rag-Qwen35_9BQwen34BRAG-label-parent-2026.05.18-23:08:54.json
+  threshold=0.00
+  threshold=0.05
+  threshold=0.10
+  threshold=0.15
+  threshold=0.20
+  threshold=0.25
+  threshold=0.30
+  threshold=0.35
+  threshold=0.40
+  threshold=0.45
+  threshold=0.50
+  threshold=0.55
+  threshold=0.60
+  threshold=0.65
+  threshold=0.70
+  threshold=0.75
+  threshold=0.80
+  threshold=0.85
+  threshold=0.90
+  threshold=0.95
+
+Saved to /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/threshold_sweep_Qwen35_9BQwen34BRAG.csv
+threshold                 0.00   0.05   0.10   0.15   0.20   0.25   0.30   0.35   0.40   0.45   0.50   0.55   0.60   0.65   0.70   0.75   0.80   0.85   0.90   0.95
+dataset         encoder                                                                                                                                            
+NCIT-DOID       C        78.58  78.58  78.58  78.58  78.58  78.58  78.58  78.58  78.58  78.58  78.58  78.59  78.71  79.07  79.78  80.61  81.71  83.56  85.08  81.13
+                CC       78.56  78.56  78.56  78.56  78.56  78.56  78.56  78.56  78.56  78.56  78.56  78.57  78.69  79.04  79.75  80.58  81.68  83.54  85.07  81.13
+                CP       78.58  78.58  78.58  78.58  78.58  78.58  78.58  78.58  78.58  78.58  78.58  78.59  78.71  79.07  79.78  80.61  81.71  83.56  85.08  81.13
+OMIM-ORDO       C        52.13  52.13  52.13  52.13  52.13  52.13  52.13  52.13  52.13  52.13  52.13  52.14  52.22  52.49  53.16  54.17  56.01  58.67  58.78  46.35
+                CC       51.99  51.99  51.99  51.99  51.99  51.99  51.99  51.99  51.99  51.99  51.99  52.01  52.08  52.35  53.03  54.03  55.87  58.52  58.66  46.32
+                CP       52.13  52.13  52.13  52.13  52.13  52.13  52.13  52.13  52.13  52.13  52.13  52.14  52.22  52.49  53.16  54.17  56.01  58.67  58.78  46.35
+SNOMED-FMA      C        18.24  18.24  18.24  18.24  18.24  18.24  18.24  18.24  18.24  18.24  18.24  18.25  18.27  18.31  18.41  18.90  20.67  22.94  13.52   0.82
+                CC       18.22  18.22  18.22  18.22  18.22  18.22  18.22  18.22  18.22  18.22  18.22  18.23  18.24  18.28  18.39  18.87  20.64  22.91  13.50   0.82
+                CP       18.24  18.24  18.24  18.24  18.24  18.24  18.24  18.24  18.24  18.24  18.24  18.25  18.27  18.31  18.41  18.90  20.67  22.94  13.52   0.82
+SNOMED-NCIT (N) C        41.39  41.39  41.39  41.39  41.39  41.39  41.39  41.39  41.39  41.39  41.39  41.41  41.48  41.65  42.04  43.11  45.24  49.28  53.82  21.68
+                CC       41.36  41.36  41.36  41.36  41.36  41.36  41.36  41.36  41.36  41.36  41.37  41.39  41.46  41.63  42.01  43.08  45.23  49.26  53.82  21.68
+                CP       41.39  41.39  41.39  41.39  41.39  41.39  41.39  41.39  41.39  41.39  41.39  41.41  41.48  41.65  42.04  43.11  45.24  49.28  53.82  21.68
+SNOMED-NCIT (P) C        51.53  51.53  51.53  51.53  51.53  51.53  51.53  51.53  51.53  51.53  51.53  51.55  51.59  51.79  52.41  54.39  59.46  64.11  65.16  30.10
+                CC       51.48  51.48  51.48  51.48  51.48  51.48  51.48  51.48  51.48  51.48  51.48  51.50  51.54  51.74  52.36  54.35  59.40  64.08  65.16  30.10
+                CP       51.53  51.53  51.53  51.53  51.53  51.53  51.53  51.53  51.53  51.53  51.53  51.55  51.59  51.79  52.41  54.39  59.46  64.11  65.16  30.10
+End: Sat May 30 16:18:28 CEST 2026

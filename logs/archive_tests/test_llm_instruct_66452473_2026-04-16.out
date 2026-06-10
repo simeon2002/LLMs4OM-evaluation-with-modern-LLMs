@@ -1,0 +1,84 @@
+SLURM_JOB_ID: 66452473
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: test_llm_instruct
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g18
+SLURM_JOB_CPUS_PER_NODE: 6
+SLURM_JOB_GPUS: 2
+Date: Thu Apr 16 17:23:11 CEST 2026
+Walltime: 00-01:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g18
+Start: Thu Apr 16 17:23:29 CEST 2026
+JobID: 66452473
+MODEL: LLaMA3InstructDecoderLM
+CUDA_VISIBLE_DEVICES: 0
+=== GPU check ===
+Thu Apr 16 17:23:30 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          On  |   00000000:A6:00.0 Off |                    0 |
+| N/A   33C    P0             74W /  700W |       0MiB /  81559MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+Loading LLaMA3InstructDecoderLM...
+Tokenizer padding_side: left
+Tokenizer pad_token: <|eot_id|>
+Tokenizer eos_token: <|eot_id|>
+Tokenizer bos_token: <|begin_of_text|>
+Vocab size: 128000
+
+yes/no token IDs found:
+  yes set: [9891, 9642, 20523, 1904, 31587, 1930, 1315, 564]
+  no  set: [2201, 2822, 63054, 3934, 43324, 12071, 35970, 1962]
+  yes token ID 9891 corresponds to tokens: yes
+  yes token ID 9642 corresponds to tokens: Yes
+  yes token ID 20523 corresponds to tokens: correct
+  yes token ID 1904 corresponds to tokens: true
+  yes token ID 31587 corresponds to tokens: positive
+  yes token ID 1930 corresponds to tokens: valid
+  yes token ID 1315 corresponds to tokens: right
+  yes token ID 564 corresponds to tokens: ok
+  no token ID 2201 corresponds to tokens: no
+  no token ID 2822 corresponds to tokens: No
+  no token ID 63054 corresponds to tokens: incorrect
+  no token ID 3934 corresponds to tokens: false
+  no token ID 43324 corresponds to tokens: negative
+  no token ID 12071 corresponds to tokens: invalid
+  no token ID 35970 corresponds to tokens: wrong
+  no token ID 1962 corresponds to tokens: not
+
+Test prompt:
+You are an ontology matching expert. Determine whether the following two concepts refer to the same real-world entity.
+
+Concept 1: malignant neoplasm of lung
+Concept 2: lung cancer
+
+Answer with exactly one word: yes or no.
+
+Answer: yes  (confidence: 1.0000)
+
+Sanity check passed!
+End: Thu Apr 16 17:24:24 CEST 2026

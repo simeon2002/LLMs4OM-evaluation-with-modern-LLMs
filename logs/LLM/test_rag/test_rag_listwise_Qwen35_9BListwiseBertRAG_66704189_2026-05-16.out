@@ -1,0 +1,251 @@
+SLURM_JOB_ID: 66704189
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: test_rag_listwise
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g12
+SLURM_JOB_CPUS_PER_NODE: 6
+SLURM_JOB_GPUS: 2
+Date: Sat May 16 14:25:17 CEST 2026
+Walltime: 00-06:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g12
+Start: Sat May 16 14:25:27 CEST 2026
+JobID: 66704189
+MODEL: Qwen35_9BListwiseBertRAG  DATASET: ncit-doid  N_SOURCES: 20  TOP_K: 5  BATCH_SIZE: 1
+CUDA_VISIBLE_DEVICES: 0
+=== GPU check ===
+Sat May 16 14:25:27 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          On  |   00000000:A6:00.0 Off |                    0 |
+| N/A   30C    P0             71W /  700W |       0MiB /  81559MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+Running BERT retrieval...
+Loading LLM (Qwen35_9BListwiseBertRAG)...
+
+===============================================================================================
+
+Source : 'Renal Cell Carcinoma Associated with Neuroblastoma'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Central Nervous System Nongerminomatous Germ Cell Tumor'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Sign or Symptom'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Colon Atresia'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7925  intestinal atresia                                       1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7440  colon sarcoma                                            4         3     0.2400
+        3    0.7407  esophageal atresia                                       2         2     0.3083
+        4    0.7353  colon adenocarcinoma                                     5         5     0.1767
+        5    0.7282  colonic disease                                          3         4     0.2250
+
+  LLM raw output : "1, 3, 5, 2, 4"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Duodenal Atresia'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Atrioventricular Septal Defect'
+GT     : 'atrioventricular septal defect'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  atrioventricular septal defect               <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.9133  atrial heart septal defect                               2         2     0.3333
+        3    0.9010  ventricular septal defect                                5         4     0.1917
+        4    0.8751  atrial heart septal defect 5                             3         3     0.2350
+        5    0.8726  atrial heart septal defect 1                             4         5     0.1900
+
+  LLM raw output : "1, 2, 4, 5, 3"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Lethal Multiple Pterygium Syndrome'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Escobar Syndrome'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Spina Bifida Occulta'
+GT     : 'spina bifida occulta'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  spina bifida occulta                         <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8805  spina bifida                                             2         2     0.3333
+        3    0.6375  fibrosarcoma                                             3         3     0.2500
+        4    0.6328  spinocerebellar ataxia type 17                           4         4     0.2000
+        5    0.6327  spinocerebellar ataxia type 12                           5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Drug Induced Methemoglobinemia'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7971  methemoglobinemia                                        1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7179  drug-induced mental disorder                             3         3     0.2750
+        3    0.6789  drug-induced hepatitis                                   5         4     0.1917
+        4    0.6482  substance-related disorder                               2         2     0.2933
+        5    0.6354  sulfhemoglobinemia                                       4         5     0.1900
+
+  LLM raw output : "1, 4, 2, 5, 3"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'ATIC/ALK Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Aortopulmonary Window'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'CBFB/MYH11 Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'COL1A2/PLAG1 Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'HAS2/PLAG1 Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'FUS/CREB3L1 Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'MLL/ELL Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'MSN/ALK Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Total Intestinal Aganglionosis'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'TFG/ALK Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Rankings saved to experiments/outputs/bio-ml/ncit-doid.disease/listwise-rankings-Qwen35_9BListwiseBertRAG-label-2026.05.16-14:25:25.json
+
+============================================SUMMARY============================================
+
+  Total sources evaluated        : 20
+  LLM abstained (output '0')     : 16 / 20  (80.0%)
+  Abstained + had true match     : 0 / 16  (0.0%)  — false negatives from abstention
+  GT in top-5 (reachable)    : 2 / 20  (10.0%)  —  ceiling for both IR and RRF
+  GT not in top-5 (unreachable): 18 / 20  (90.0%)  —  neither method can win here
+  RRF overrides IR               : 0 / 20  (0.0%)
+
+  Metric                                  IR-only         RRF     Delta
+  -----------------------------------  ----------  ----------  --------
+  Correct (all sources)                   2 / 20     2 / 20        +0
+  Correct (GT in top-k only)              2 / 2     2 / 2        +0
+  Accuracy (GT in top-k only)              100.0%      100.0%
+
+  -- LLM signal analysis (of 2 reachable sources) --
+  LLM rank-1 correct                                 : 2 / 2  (100.0%)  — if we used LLM alone
+  IR wrong but LLM rank-1 correct                    : 0 / 2  (0.0%)  — cases LLM could fix
+  IR wrong + LLM right + RRF still wrong             : 0 / 2  (0.0%)  — RRF suppressed LLM signal
+  IR right + LLM wrong + RRF still correct           : 0 / 2  (0.0%)  — IR weight saved result (robustness)
+  IR right + LLM wrong + RRF wrong (Set C)           : 0 / 2  (0.0%)  — LLM hurt IR result
+===============================================================================================
+End: Sat May 16 14:27:01 CEST 2026

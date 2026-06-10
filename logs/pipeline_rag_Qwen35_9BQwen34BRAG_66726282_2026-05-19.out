@@ -1,0 +1,69 @@
+SLURM_JOB_ID: 66726282
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: pipeline_rag
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: bigmem
+SLURM_NNODES: 1
+SLURM_NODELIST: k28l09
+SLURM_JOB_CPUS_PER_NODE: 10
+Date: Tue May 19 16:13:26 CEST 2026
+Walltime: 00-01:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: k28l09
+Start: Tue May 19 16:13:52 CEST 2026
+JobID: 66726282
+MODEL: Qwen35_9BQwen34BRAG
+CUDA_VISIBLE_DEVICES: <unset>
+=== GPU check ===
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+Run evaluation on Qwen35_9BQwen34BRAG
+	Working on bio-ml track
+	Working on bio-ml/snomed-fma.body task
+		Prompting ID is: label
+Evaluating output for rag-Qwen35_9BQwen34BRAG-label-2026.05.18-07:45:55.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/rag-Qwen35_9BQwen34BRAG-label-2026.05.18-07:45:55.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for rag-Qwen35_9BQwen34BRAG-label-children-2026.05.18-10:11:10.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/rag-Qwen35_9BQwen34BRAG-label-children-2026.05.18-10:11:10.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for rag-Qwen35_9BQwen34BRAG-label-parent-2026.05.18-12:36:13.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/rag-Qwen35_9BQwen34BRAG-label-parent-2026.05.18-12:36:13.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.neoplas task
+		Prompting ID is: label
+Evaluating output for rag-Qwen35_9BQwen34BRAG-label-2026.05.18-14:08:38.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/rag-Qwen35_9BQwen34BRAG-label-2026.05.18-14:08:38.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for rag-Qwen35_9BQwen34BRAG-label-children-2026.05.18-15:41:04.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/rag-Qwen35_9BQwen34BRAG-label-children-2026.05.18-15:41:04.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for rag-Qwen35_9BQwen34BRAG-label-parent-2026.05.18-17:13:23.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/rag-Qwen35_9BQwen34BRAG-label-parent-2026.05.18-17:13:23.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.pharm task
+		Prompting ID is: label
+Evaluating output for rag-Qwen35_9BQwen34BRAG-label-2026.05.18-19:11:37.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/rag-Qwen35_9BQwen34BRAG-label-2026.05.18-19:11:37.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for rag-Qwen35_9BQwen34BRAG-label-children-2026.05.18-21:10:13.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/rag-Qwen35_9BQwen34BRAG-label-children-2026.05.18-21:10:13.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for rag-Qwen35_9BQwen34BRAG-label-parent-2026.05.18-23:08:54.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/rag-Qwen35_9BQwen34BRAG-label-parent-2026.05.18-23:08:54.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+End: Tue May 19 16:27:43 CEST 2026

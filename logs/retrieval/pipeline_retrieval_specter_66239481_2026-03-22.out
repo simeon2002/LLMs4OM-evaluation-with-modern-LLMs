@@ -1,0 +1,198 @@
+SLURM_JOB_ID: 66239481
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: intro_vsc38504
+SLURM_JOB_NAME: pipeline_retrieval
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g15
+SLURM_JOB_CPUS_PER_NODE: 4
+SLURM_JOB_GPUS: 3
+Date: Sun Mar 22 06:43:59 PM CET 2026
+Walltime: 00-01:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g15
+Start: Sun Mar 22 06:44:26 PM CET 2026
+JobID: 66239481
+MODEL: SpecterBERTRetrieval
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+working on SpecterBERTRetrieval-RetrievalSpecterBERTRetrieval
+	Working on bio-ml track
+	Working on bio-ml/ncit-doid.disease task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/retrieval-SpecterBERTRetrieval-label-2026.03.22-18:44:50.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:44:58.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:45:07.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/omim-ordo.disease task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-SpecterBERTRetrieval-label-2026.03.22-18:45:13.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:45:20.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:45:26.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-fma.body task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-SpecterBERTRetrieval-label-2026.03.22-18:46:20.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:47:18.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:48:14.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.neoplas task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/retrieval-SpecterBERTRetrieval-label-2026.03.22-18:48:30.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:48:46.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:49:02.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.pharm task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/retrieval-SpecterBERTRetrieval-label-2026.03.22-18:49:22.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:49:42.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:50:02.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+Run evaluation on SpecterBERTRetrieval
+	Working on bio-ml track
+	Working on bio-ml/ncit-doid.disease task
+		Prompting ID is: label
+Evaluating output for retrieval-SpecterBERTRetrieval-label-2026.03.22-18:44:50.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/retrieval-SpecterBERTRetrieval-label-2026.03.22-18:44:50.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:44:58.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:44:58.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:45:07.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:45:07.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/omim-ordo.disease task
+		Prompting ID is: label
+Evaluating output for retrieval-SpecterBERTRetrieval-label-2026.03.22-18:45:13.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-SpecterBERTRetrieval-label-2026.03.22-18:45:13.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:45:20.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:45:20.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:45:26.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:45:26.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-fma.body task
+		Prompting ID is: label
+Evaluating output for retrieval-SpecterBERTRetrieval-label-2026.03.22-18:46:20.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-SpecterBERTRetrieval-label-2026.03.22-18:46:20.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:47:18.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:47:18.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:48:14.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-fma.body/retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:48:14.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.neoplas task
+		Prompting ID is: label
+Evaluating output for retrieval-SpecterBERTRetrieval-label-2026.03.22-18:48:30.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/retrieval-SpecterBERTRetrieval-label-2026.03.22-18:48:30.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:48:46.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:48:46.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:49:02.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.neoplas/retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:49:02.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-ncit.pharm task
+		Prompting ID is: label
+Evaluating output for retrieval-SpecterBERTRetrieval-label-2026.03.22-18:49:22.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/retrieval-SpecterBERTRetrieval-label-2026.03.22-18:49:22.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:49:42.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/retrieval-SpecterBERTRetrieval-label-children-2026.03.22-18:49:42.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:50:02.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/snomed-ncit.pharm/retrieval-SpecterBERTRetrieval-label-parent-2026.03.22-18:50:02.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+End: Sun Mar 22 07:00:04 PM CET 2026

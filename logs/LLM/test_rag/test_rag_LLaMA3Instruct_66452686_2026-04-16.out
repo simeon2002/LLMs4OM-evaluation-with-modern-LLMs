@@ -1,0 +1,82 @@
+SLURM_JOB_ID: 66452686
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: test_rag_LLaMA3Instruct
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g15
+SLURM_JOB_CPUS_PER_NODE: 6
+SLURM_JOB_GPUS: 0
+Date: Thu Apr 16 18:02:01 CEST 2026
+Walltime: 00-01:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g15
+Start: Thu Apr 16 18:02:21 CEST 2026
+JobID: 66452686
+MODEL: LLaMA3InstructBertRAG
+CUDA_VISIBLE_DEVICES: 0
+=== GPU check ===
+Thu Apr 16 18:02:21 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          On  |   00000000:46:00.0 Off |                    0 |
+| N/A   28C    P0             71W /  700W |       0MiB /  81559MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+Loading dataset...
+Source: 50  Target: 8465
+Encoding inputs...
+Loading LLaMA3InstructBertRAG...
+Generating predictions...
+
+============================================================
+RESULTS — LLaMA3InstructBertRAG on ncit-doid test subset
+============================================================
+
+  full:
+    intersection: 29.0000
+    precision: 100.0000
+    recall: 58.0000
+    f-score: 73.4177
+    predictions-len: 29.0000
+    reference-len: 50.0000
+
+  test:
+    intersection: 19.0000
+    precision: 65.5172
+    recall: 54.2857
+    f-score: 59.3750
+    predictions-len: 29.0000
+    reference-len: 35.0000
+
+  train:
+    intersection: 10.0000
+    precision: 34.4828
+    recall: 66.6667
+    f-score: 45.4545
+    predictions-len: 29.0000
+    reference-len: 15.0000
+============================================================
+
+Results saved to experiments/results/rag-test-results.json
+End: Thu Apr 16 18:03:13 CEST 2026

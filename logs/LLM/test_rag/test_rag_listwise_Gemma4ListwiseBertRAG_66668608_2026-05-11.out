@@ -1,0 +1,697 @@
+SLURM_JOB_ID: 66668608
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: test_rag_listwise
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g15
+SLURM_JOB_CPUS_PER_NODE: 6
+SLURM_JOB_GPUS: 3
+Date: Mon May 11 16:03:09 CEST 2026
+Walltime: 00-06:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g15
+Start: Mon May 11 16:03:20 CEST 2026
+JobID: 66668608
+MODEL: Gemma4ListwiseBertRAG  DATASET: ncit-doid  N_SOURCES: 50  TOP_K: 5  BATCH_SIZE: 4
+CUDA_VISIBLE_DEVICES: 0
+=== GPU check ===
+Mon May 11 16:03:20 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          On  |   00000000:A6:00.0 Off |                    0 |
+| N/A   30C    P0             71W /  700W |       0MiB /  81559MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+Running BERT retrieval...
+Loading LLM (Gemma4ListwiseBertRAG)...
+
+===============================================================================================
+
+Source : 'Renal Cell Carcinoma Associated with Neuroblastoma'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Central Nervous System Nongerminomatous Germ Cell Tumor'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.9465  central nervous system germ cell tumor                   1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.9176  central nervous system adult germ cell tum               2         2     0.3333
+        3    0.8815  central nervous system childhood germ cell               3         3     0.2500
+        4    0.8601  adult central nervous system mixed germ ce               4         4     0.2000
+        5    0.8182  childhood central nervous system mixed ger               5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Sign or Symptom'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Colon Atresia'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7925  intestinal atresia                                       1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7440  colon sarcoma                                            5         4     0.2167
+        3    0.7407  esophageal atresia                                       3         3     0.2500
+        4    0.7353  colon adenocarcinoma                                     4         5     0.2000
+        5    0.7282  colonic disease                                          2         2     0.2833
+
+  LLM raw output : "1, 5, 3, 4, 2"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Duodenal Atresia'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7581  biliary atresia                                          2         2     0.3833 <-- IR picks this
+        2    0.7408  esophageal atresia                                       1         1     0.4500 <-- RRF picks this
+        3    0.7345  duodenitis                                               3         3     0.2500
+        4    0.7254  duodenal gastrinoma                                      4         4     0.2000
+        5    0.7248  duodenal disease                                         5         5     0.1667
+
+  LLM raw output : "2, 1, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Atrioventricular Septal Defect'
+GT     : 'atrioventricular septal defect'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  atrioventricular septal defect               <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.9133  atrial heart septal defect                               2         2     0.3333
+        3    0.9010  ventricular septal defect                                5         5     0.1917
+        4    0.8751  atrial heart septal defect 5                             4         4     0.2000
+        5    0.8726  atrial heart septal defect 1                             3         3     0.2250
+
+  LLM raw output : "1, 2, 5, 4, 3"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Lethal Multiple Pterygium Syndrome'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8403  multiple pterygium syndrome                              3         2     0.3250 <-- IR picks this
+        2    0.7057  popliteal pterygium syndrome                             4         4     0.2400
+        3    0.6765  lethal congenital contracture syndrome 3                 1         1     0.4250 <-- RRF picks this
+        4    0.6625  lethal congenital contracture syndrome 4                 2         3     0.2933
+        5    0.6506  double pterygium                                         5         5     0.1667
+
+  LLM raw output : "3, 4, 1, 2, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Escobar Syndrome'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.6945  Sotos syndrome                                           3         2     0.3250 <-- IR picks this
+        2    0.6550  Angelucci's syndrome                                     4         4     0.2400
+        3    0.6503  orofaciodigital syndrome X                               2         3     0.3083
+        4    0.6466  syndrome                                                 5         5     0.1767
+        5    0.6449  orofaciodigital syndrome IX                              1         1     0.4000 <-- RRF picks this
+
+  LLM raw output : "5, 3, 1, 2, 4"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Spina Bifida Occulta'
+GT     : 'spina bifida occulta'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  spina bifida occulta                         <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8805  spina bifida                                             2         2     0.3333
+        3    0.6375  fibrosarcoma                                             5         4     0.1917
+        4    0.6328  spinocerebellar ataxia type 17                           3         3     0.2350
+        5    0.6327  spinocerebellar ataxia type 12                           4         5     0.1900
+
+  LLM raw output : "1, 2, 4, 5, 3"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Drug Induced Methemoglobinemia'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7971  methemoglobinemia                                        1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7179  drug-induced mental disorder                             5         4     0.2167
+        3    0.6789  drug-induced hepatitis                                   4         5     0.2150
+        4    0.6482  substance-related disorder                               3         3     0.2350
+        5    0.6354  sulfhemoglobinemia                                       2         2     0.2833
+
+  LLM raw output : "1, 5, 4, 3, 2"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'ATIC/ALK Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Aortopulmonary Window'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'CBFB/MYH11 Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'COL1A2/PLAG1 Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'HAS2/PLAG1 Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'FUS/CREB3L1 Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'MLL/ELL Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'MSN/ALK Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Total Intestinal Aganglionosis'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.6604  integrative agnosia                                      5         3     0.2667 <-- IR picks this
+        2    0.6543  intestinal disease                                       1         1     0.4500 <-- RRF picks this
+        3    0.6522  geniculate ganglionitis                                  4         5     0.2150
+        4    0.6514  gastroduodenitis                                         3         4     0.2350
+        5    0.6460  intestinal infectious disease                            2         2     0.2833
+
+  LLM raw output : "2, 5, 4, 3, 1"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'TFG/ALK Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'TPM3/ALK Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'TPM4/ALK Fusion Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'BCOR Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'YWHAE Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Myelomeningocele'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  myelomeningocele                                         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7362  meningocele                                              2         2     0.3333
+        3    0.6212  myeloid neoplasm                                         3         3     0.2500
+        4    0.6045  myelofibrosis                                            4         4     0.2000
+        5    0.5927  myoepithelioma                                           5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Spinal Meningocele'
+GT     : 'meningocele'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8631  spinal meningioma                                        2         2     0.3833 <-- IR picks this
+        2    0.7840  meningocele                                  <GT>         1         1     0.4500 <-- RRF picks this
+        3    0.7669  thoracic spinal canal and spinal cord meni               3         3     0.2500
+        4    0.7641  spinal canal and spinal cord meningioma                  4         4     0.2000
+        5    0.7601  epidural spinal canal meningioma                         5         5     0.1667
+
+  LLM raw output : "2, 1, 3, 4, 5"
+  IR  result     : WRONG
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Spina Bifida'
+GT     : 'spina bifida'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  spina bifida                                 <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8805  spina bifida occulta                                     2         2     0.3333
+        3    0.6604  fibrosarcoma                                             4         4     0.2150
+        4    0.6578  quadriplegia                                             3         3     0.2350
+        5    0.6577  osteitis fibrosa                                         5         5     0.1667
+
+  LLM raw output : "1, 2, 4, 3, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Myopathy'
+GT     : 'myopathy'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  myopathy                                     <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7969  arthropathy                                              5         4     0.2167
+        3    0.7877  Native American myopathy                                 4         5     0.2150
+        4    0.7841  Bethlem myopathy                                         3         3     0.2350
+        5    0.7796  myofibrillar myopathy 6                                  2         2     0.2833
+
+  LLM raw output : "1, 5, 4, 3, 2"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Hemolytic Anemia due to Membrane Defect'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8021  hemolytic anemia                                         4         3     0.2900 <-- IR picks this
+        2    0.7703  congenital hemolytic anemia                              2         2     0.3333
+        3    0.7255  congenital nonspherocytic hemolytic anemia               1         1     0.4250 <-- RRF picks this
+        4    0.7245  autoimmune hemolytic anemia                              3         4     0.2350
+        5    0.6864  anemia                                                   5         5     0.1667
+
+  LLM raw output : "3, 2, 4, 1, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Bilateral Renal Agenesis'
+GT     : 'bilateral renal aplasia'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8744  renal agenesis                                           2         2     0.3833 <-- IR picks this
+        2    0.7855  bilateral renal aplasia                      <GT>         1         1     0.4500 <-- RRF picks this
+        3    0.6711  renal hypertension                                       4         4     0.2150
+        4    0.6653  impaired renal function disease                          3         3     0.2350
+        5    0.6633  renal hypomagnesemia 2                                   5         5     0.1667
+
+  LLM raw output : "2, 1, 4, 3, 5"
+  IR  result     : WRONG
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Unilateral Renal Agenesis'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8349  renal agenesis                                           1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.6802  unilateral retinoblastoma                                5         4     0.2167
+        3    0.6682  nonpapillary renal cell carcinoma                        3         3     0.2500
+        4    0.6620  impaired renal function disease                          2         2     0.2933
+        5    0.6568  renal hypomagnesemia 6                                   4         5     0.1900
+
+  LLM raw output : "1, 4, 3, 5, 2"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Complete Trisomy 13 Syndrome'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Aorta Disease'
+GT     : 'aortic disease'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8683  aortic disease                               <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8227  aortic valve disease                                     2         2     0.3333
+        3    0.7992  aortitis                                                 3         3     0.2500
+        4    0.7886  aorta angiosarcoma                                       4         4     0.2000
+        5    0.7426  aorta atresia                                            5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Renal Artery Disease'
+GT     : 'renal artery disease'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  renal artery disease                         <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8306  artery disease                                           4         3     0.2400
+        3    0.8212  renal artery atheroma                                    2         2     0.3083
+        4    0.8175  renal artery obstruction                                 3         4     0.2350
+        5    0.7932  renal hypertension                                       5         5     0.1667
+
+  LLM raw output : "1, 3, 4, 2, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Kernicterus Related to Isoimmunization'
+GT     : 'kernicterus due to isoimmunization'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.9495  kernicterus due to isoimmunization           <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7662  kernicterus                                              2         2     0.3333
+        3    0.6363  Rh isoimmunization                                       3         3     0.2500
+        4    0.5469  pericoronitis                                            5         5     0.1767
+        5    0.5360  isovaleric acidemia                                      4         4     0.1900
+
+  LLM raw output : "1, 2, 3, 5, 4"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Hemolytic Disease of the Newborn'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7362  hemolytic-uremic syndrome                                4         3     0.2900 <-- IR picks this
+        2    0.7235  congenital hemolytic anemia                              1         1     0.4500 <-- RRF picks this
+        3    0.7181  hemolytic anemia                                         2         2     0.3083
+        4    0.6885  hemorrhagic disease                                      5         5     0.1767
+        5    0.6701  congenital nonspherocytic hemolytic anemia               3         4     0.2250
+
+  LLM raw output : "2, 3, 5, 1, 4"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Mitochondrial Myopathy'
+GT     : 'mitochondrial myopathy'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  mitochondrial myopathy                       <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7789  myopathy                                                 4         4     0.2400
+        3    0.7090  mitochondrial metabolism disease                         3         3     0.2500
+        4    0.6943  mitochondrial encephalomyopathy                          2         2     0.2933
+        5    0.6869  Bethlem myopathy                                         5         5     0.1667
+
+  LLM raw output : "1, 4, 3, 2, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Organic Acid Metabolism Disorder'
+GT     : 'organic acidemia'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8217  organic acidemia                             <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8016  metabolic acidosis                                       2         2     0.3333
+        3    0.7994  amino acid metabolic disorder                            3         3     0.2500
+        4    0.7768  lipid metabolism disorder                                4         4     0.2000
+        5    0.7319  carbohydrate metabolism disease                          5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'SH3BP2 Gene'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.5812  3p- syndrome                                             3         2     0.3250 <-- IR picks this
+        2    0.5741  blood protein disease                                    4         4     0.2400
+        3    0.5699  recombinase activating gene 2 deficiency                 5         5     0.1917
+        4    0.5652  amelogenesis imperfecta type 3                           1         1     0.4100 <-- RRF picks this
+        5    0.5603  amelogenesis imperfecta hypomaturation typ               2         3     0.2833
+
+  LLM raw output : "4, 5, 1, 2, 3"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'CAMTA1 Gene'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'PALB2 Gene Mutation'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Uterine Ligament Adenosarcoma'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'Chronic Endometritis'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8844  non specific chronic endometritis                        1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8660  endometritis                                             2         2     0.3333
+        3    0.8584  acute endometritis                                       3         3     0.2500
+        4    0.8351  endometrial disease                                      4         4     0.2000
+        5    0.8271  endometriosis                                            5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Ovarian Non-Dysgerminomatous Germ Cell Tumor'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8837  ovarian germ cell cancer                                 2         2     0.3833 <-- IR picks this
+        2    0.8722  pediatric ovarian germ cell tumor                        4         4     0.2400
+        3    0.8544  ovarian primitive germ cell tumor                        3         3     0.2500
+        4    0.8446  malignant ovarian germ cell neoplasm                     1         1     0.4100 <-- RRF picks this
+        5    0.8123  ovarian germ cell teratoma                               5         5     0.1667
+
+  LLM raw output : "4, 1, 3, 2, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Pharyngeal Squamous Cell Carcinoma'
+GT     : 'pharynx squamous cell carcinoma'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.9240  pharynx squamous cell carcinoma              <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8829  laryngeal squamous cell carcinoma                        3         3     0.2750
+        3    0.8642  squamous cell carcinoma                                  2         2     0.3083
+        4    0.8530  bone squamous cell carcinoma                             4         4     0.2000
+        5    0.8399  prostate squamous cell carcinoma                         5         5     0.1667
+
+  LLM raw output : "1, 3, 2, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'Human Papillomavirus-Related Malignant Neoplasm in AIDS Patient'  [ABSTAINED — LLM output '0']
+GT     : NOT IN TOP-K
+  LLM raw output : "0"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : ABSTAINED (no prediction)
+===============================================================================================
+
+Source : 'High Grade Astrocytic Tumor'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8029  adult astrocytic tumour                                  3         2     0.3250 <-- IR picks this
+        2    0.7461  grade III astrocytoma                                    1         1     0.4500 <-- RRF picks this
+        3    0.7090  gemistocytic astrocytoma                                 2         3     0.3083
+        4    0.7086  juvenile astrocytoma                                     4         4     0.2000
+        5    0.6938  juvenile pilocytic astrocytoma                           5         5     0.1667
+
+  LLM raw output : "2, 3, 1, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Great Blood Vessel'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.6086  dextro-looped transposition of the great a               1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.5897  dextro-looped transposition of the great a               2         2     0.3333
+        3    0.5561  capillary lymphangioma                                   3         3     0.2500
+        4    0.5554  deep angioma                                             4         4     0.2000
+        5    0.5501  thoracic outlet syndrome                                 5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Congenital Hydronephrosis'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8068  hydronephrosis                                           1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7639  congenital mesoblastic nephroma                          2         2     0.3333
+        3    0.7557  congenital hypothyroidism                                3         3     0.2500
+        4    0.7463  congenital adrenal hyperplasia                           4         4     0.2000
+        5    0.7363  congenital heart disease                                 5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Perlman Syndrome'
+GT     : 'Perlman syndrome'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Perlman syndrome                             <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7497  Perrault syndrome                                        2         2     0.3333
+        3    0.7182  Pearson syndrome                                         3         3     0.2500
+        4    0.6934  Kleine-Levin syndrome                                    4         4     0.2000
+        5    0.6895  Wolman disease                                           5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Rankings saved to experiments/outputs/bio-ml/ncit-doid.disease/listwise-rankings-Gemma4ListwiseBertRAG-label-2026.05.11-16:03:18.json
+
+============================================SUMMARY============================================
+
+  Total sources evaluated        : 50
+  LLM abstained (output '0')     : 20 / 50  (40.0%)
+  Abstained + had true match     : 1 / 20  (5.0%)  — false negatives from abstention
+  GT in top-5 (reachable)    : 13 / 50  (26.0%)  —  ceiling for both IR and RRF
+  GT not in top-5 (unreachable): 37 / 50  (74.0%)  —  neither method can win here
+  RRF overrides IR               : 11 / 50  (22.0%)
+
+  Metric                                  IR-only         RRF     Delta
+  -----------------------------------  ----------  ----------  --------
+  Correct (all sources)                  11 / 50    13 / 50        +2
+  Correct (GT in top-k only)             11 / 13    13 / 13        +2
+  Accuracy (GT in top-k only)               84.6%      100.0%
+
+  -- LLM signal analysis (of 13 reachable sources) --
+  LLM rank-1 correct                                 : 13 / 13  (100.0%)  — if we used LLM alone
+  IR wrong but LLM rank-1 correct                    : 2 / 13  (15.4%)  — cases LLM could fix
+  IR wrong + LLM right + RRF still wrong             : 0 / 13  (0.0%)  — RRF suppressed LLM signal
+  IR right + LLM wrong + RRF still correct           : 0 / 13  (0.0%)  — IR weight saved result (robustness)
+  IR right + LLM wrong + RRF wrong (Set C)           : 0 / 13  (0.0%)  — LLM hurt IR result
+
+  RRF fixed these IR errors (2): ['Spinal Meningocele', 'Bilateral Renal Agenesis']
+===============================================================================================
+End: Mon May 11 16:05:23 CEST 2026

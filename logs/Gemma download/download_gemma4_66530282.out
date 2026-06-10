@@ -1,0 +1,16 @@
+SLURM_JOB_ID: 66530282
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: download_gemma4
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: s28c11n2
+SLURM_JOB_CPUS_PER_NODE: 5
+Date: Wed Apr 22 16:10:39 CEST 2026
+Walltime: 02-00:00:00
+========================================================================
+Start: Wed Apr 22 16:10:48 CEST 2026
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+HF token set: True, preview: hf_W...
+Starting download of google/gemma-4-26B-A4B-it ...

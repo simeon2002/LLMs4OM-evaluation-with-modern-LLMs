@@ -1,0 +1,13 @@
+SLURM_JOB_ID: 66453242
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: test_llm_instruct_multiple
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g18
+SLURM_JOB_CPUS_PER_NODE: 6
+SLURM_JOB_GPUS: 2
+Date: Thu Apr 16 18:38:36 CEST 2026
+Walltime: 00-00:30:00
+========================================================================

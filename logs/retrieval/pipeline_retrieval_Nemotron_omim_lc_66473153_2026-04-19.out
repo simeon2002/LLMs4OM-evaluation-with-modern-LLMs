@@ -1,0 +1,71 @@
+SLURM_JOB_ID: 66473153
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: pipeline_retrieval_Nemotron_omim_lc
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g15
+SLURM_JOB_CPUS_PER_NODE: 6
+SLURM_JOB_GPUS: 0
+Date: Sun Apr 19 13:43:22 CEST 2026
+Walltime: 00-05:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g15
+Start: Sun Apr 19 13:43:46 CEST 2026
+JobID: 66473153
+MODEL: LlamaNemotronEmbeddingRetrieval
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+working on LlamaNemotronEmbeddingRetrieval-RetrievalLlamaNemotronEmbeddingRetrieval
+	Working on bio-ml track
+	Working on bio-ml/omim-ordo.disease task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-LlamaNemotronEmbeddingRetrieval-label-2026.04.19-13:44:34.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 2
+		Working on generating response!
+MEMORY EXCEPTION: CUDA out of memory. Tried to allocate 44.80 GiB. GPU 0 has a total capacity of 79.18 GiB of which 12.12 GiB is free. Including non-PyTorch memory, this process has 67.05 GiB memory in use. Of the allocated memory 62.47 GiB is allocated by PyTorch, and 3.92 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-LlamaNemotronEmbeddingRetrieval-label-children-2026.04.19-13:44:34.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-LlamaNemotronEmbeddingRetrieval-label-parent-2026.04.19-13:44:57.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+Run evaluation on LlamaNemotronEmbeddingRetrieval
+	Working on bio-ml track
+	Working on bio-ml/omim-ordo.disease task
+		Prompting ID is: label
+Evaluating output for retrieval-LlamaNemotronEmbeddingRetrieval-label-2026.04.16-16:52:40.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-LlamaNemotronEmbeddingRetrieval-label-2026.04.16-16:52:40.json.
+Evaluating output for retrieval-LlamaNemotronEmbeddingRetrieval-label-2026.04.19-13:44:34.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-LlamaNemotronEmbeddingRetrieval-label-2026.04.19-13:44:34.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for retrieval-LlamaNemotronEmbeddingRetrieval-label-children-2026.04.16-16:52:41.json run!
+		Skipping evaluation — output contains error or is empty: ['CUDA out of memory. Tried to allocate 44.80 GiB. GPU 0 has a total capacity of 79.18 GiB of which 11.98 GiB is free. I
+Evaluating output for retrieval-LlamaNemotronEmbeddingRetrieval-label-children-2026.04.19-13:34:16.json run!
+		Skipping evaluation — output contains error or is empty: ['CUDA out of memory. Tried to allocate 44.80 GiB. GPU 0 has a total capacity of 79.18 GiB of which 10.78 GiB is free. I
+Evaluating output for retrieval-LlamaNemotronEmbeddingRetrieval-label-children-2026.04.19-13:44:34.json run!
+		Skipping evaluation — output contains error or is empty: ['CUDA out of memory. Tried to allocate 44.80 GiB. GPU 0 has a total capacity of 79.18 GiB of which 12.12 GiB is free. I
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for retrieval-LlamaNemotronEmbeddingRetrieval-label-parent-2026.04.16-16:53:04.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-LlamaNemotronEmbeddingRetrieval-label-parent-2026.04.16-16:53:04.json.
+Evaluating output for retrieval-LlamaNemotronEmbeddingRetrieval-label-parent-2026.04.19-13:44:57.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-LlamaNemotronEmbeddingRetrieval-label-parent-2026.04.19-13:44:57.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+End: Sun Apr 19 13:45:44 CEST 2026

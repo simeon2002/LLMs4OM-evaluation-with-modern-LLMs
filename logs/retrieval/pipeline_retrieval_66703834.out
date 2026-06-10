@@ -1,0 +1,28 @@
+SLURM_JOB_ID: 66703834
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: pipeline_retrieval
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: p33c22n1
+SLURM_JOB_CPUS_PER_NODE: 20
+Date: Sat May 16 13:30:00 CEST 2026
+Walltime: 00-05:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: p33c22n1
+Start: Sat May 16 13:30:18 CEST 2026
+JobID: 66703834
+MODEL: TFIDFRetrieval
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+working on TFIDFRetrieval-Retrieval+TFIDFRetrieval
+	Working on bio-ml track
+	Working on bio-ml/ncit-doid.disease task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!

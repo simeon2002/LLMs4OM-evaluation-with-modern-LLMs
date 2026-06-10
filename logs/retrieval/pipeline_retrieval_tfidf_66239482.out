@@ -1,0 +1,69 @@
+SLURM_JOB_ID: 66239482
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: intro_vsc38504
+SLURM_JOB_NAME: pipeline_retrieval
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g18
+SLURM_JOB_CPUS_PER_NODE: 4
+SLURM_JOB_GPUS: 0
+Date: Sun Mar 22 06:44:06 PM CET 2026
+Walltime: 00-01:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g18
+Start: Sun Mar 22 06:44:25 PM CET 2026
+JobID: 66239482
+MODEL: TFIDFRetrieval
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+working on TFIDFRetrieval-Retrieval+TFIDFRetrieval
+	Working on bio-ml track
+	Working on bio-ml/ncit-doid.disease task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/retrieval-TFIDFRetrieval-label-2026.03.22-18:46:31.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/retrieval-TFIDFRetrieval-label-children-2026.03.22-18:48:32.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/retrieval-TFIDFRetrieval-label-parent-2026.03.22-18:50:33.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/omim-ordo.disease task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-TFIDFRetrieval-label-2026.03.22-18:51:54.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-TFIDFRetrieval-label-children-2026.03.22-18:53:14.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 2
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/omim-ordo.disease/retrieval-TFIDFRetrieval-label-parent-2026.03.22-18:54:35.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+	Working on bio-ml/snomed-fma.body task
+		Prompting ID is: label
+		Encoded input pairs: 2
+		Working on generating response!

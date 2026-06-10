@@ -1,0 +1,63 @@
+SLURM_JOB_ID: 66453263
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: test_llm_instruct_multiple
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g18
+SLURM_JOB_CPUS_PER_NODE: 6
+SLURM_JOB_GPUS: 2
+Date: Thu Apr 16 18:39:35 CEST 2026
+Walltime: 00-00:30:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g18
+Start: Thu Apr 16 18:39:54 CEST 2026
+JobID: 66453263
+MODEL: LLaMA3InstructDecoderLM
+=== GPU check ===
+Thu Apr 16 18:39:54 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          On  |   00000000:A6:00.0 Off |                    0 |
+| N/A   32C    P0             74W /  700W |       0MiB /  81559MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+Loading dataset from datasets/test-small/ncit-doid/om.json...
+Running BERTRetrieval (top_k=5) on all source concepts...
+
+Source concept [0]: 'Atrioventricular Septal Defect'
+Ground truth match(es): ['atrioventricular septal defect']
+
+Loading LLaMA3InstructDecoderLM...
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      1.0000     atrioventricular septal defect           YES    yes      0.9999
+2      0.9133     atrial heart septal defect                      yes      0.9998
+3      0.9010     ventricular septal defect                       yes      0.9981
+4      0.8751     atrial heart septal defect 5                    yes      0.9991
+5      0.8726     atrial heart septal defect 1                    yes      0.9993
+-------------------------------------------------------------------------------------
+
+Total 'yes' answers: 5 / 5
+Expected: 1 (ground truth matches in top-5)
+End: Thu Apr 16 18:40:40 CEST 2026

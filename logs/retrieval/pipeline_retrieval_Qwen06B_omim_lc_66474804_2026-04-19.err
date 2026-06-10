@@ -1,0 +1,2 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights:  11%|█         | 34/310 [00:00<00:00, 291.77it/s]Loading weights:  28%|██▊       | 86/310 [00:00<00:00, 369.73it/s]Loading weights:  40%|███▉      | 123/310 [00:00<00:00, 307.06it/s]Loading weights:  59%|█████▉    | 184/310 [00:00<00:00, 373.43it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 517.59it/s]
+Batches:   0%|          | 0/580 [00:00<?, ?it/s]Batches:   0%|          | 0/580 [00:08<?, ?it/s]

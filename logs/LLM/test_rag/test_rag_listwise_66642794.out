@@ -1,0 +1,45 @@
+SLURM_JOB_ID: 66642794
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: test_rag_listwise
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_a100
+SLURM_NNODES: 1
+SLURM_NODELIST: k28g27
+SLURM_JOB_CPUS_PER_NODE: 10
+SLURM_JOB_GPUS: 2
+Date: Thu May  7 18:27:34 CEST 2026
+Walltime: 00-06:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: k28g27
+Start: Thu May  7 18:28:04 CEST 2026
+JobID: 66642794
+MODEL: Gemma4ListwiseBertRAG  DATASET: omim-ordo  N_SOURCES: 9648  TOP_K: 5  BATCH_SIZE: 4
+CUDA_VISIBLE_DEVICES: 0
+=== GPU check ===
+Thu May  7 18:28:04 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-80GB          On  |   00000000:BF:00.0 Off |                    0 |
+| N/A   32C    P0             62W /  500W |       0MiB /  81920MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== Python/env check ===
+Python: /usr/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface

@@ -1,0 +1,298 @@
+SLURM_JOB_ID: 66453278
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: test_llm_instruct_multiple
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g18
+SLURM_JOB_CPUS_PER_NODE: 6
+SLURM_JOB_GPUS: 2
+Date: Thu Apr 16 18:52:55 CEST 2026
+Walltime: 00-00:30:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g18
+Start: Thu Apr 16 18:53:13 CEST 2026
+JobID: 66453278
+MODEL: LLaMA3InstructDecoderLM
+=== GPU check ===
+Thu Apr 16 18:53:13 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          On  |   00000000:A6:00.0 Off |                    0 |
+| N/A   32C    P0             74W /  700W |       0MiB /  81559MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+Loading dataset from datasets/test-small/ncit-doid/om.json...
+Running BERTRetrieval (top_k=5) on all source concepts...
+
+Running LLM on first 20 source concepts, top-5 candidates each...
+
+Loading LLaMA3InstructDecoderLM...
+
+Source: 'Atrioventricular Septal Defect'
+GT match(es) in top-5: ['atrioventricular septal defect']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      1.0000     atrioventricular septal defect           YES    yes      0.9999
+2      0.9133     atrial heart septal defect                      yes      0.9998
+3      0.9010     ventricular septal defect                       yes      0.9981
+4      0.8751     atrial heart septal defect 5                    yes      0.9991
+5      0.8726     atrial heart septal defect 1                    yes      0.9993
+-------------------------------------------------------------------------------------
+Yes answers: 5/5 | Correct matches found: 1/1
+
+Source: 'Spina Bifida Occulta'
+GT match(es) in top-5: ['spina bifida occulta']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      1.0000     spina bifida occulta                     YES    yes      0.9999
+2      0.8805     spina bifida                                    yes      0.9999
+3      0.6375     fibrosarcoma                                    yes      0.8933
+4      0.6328     spinocerebellar ataxia type 17                  no       0.5621
+5      0.6327     spinocerebellar ataxia type 12                  yes      0.5313
+-------------------------------------------------------------------------------------
+Yes answers: 4/5 | Correct matches found: 1/1
+
+Source: 'Spinal Meningocele'
+GT match(es) in top-5: ['meningocele']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      0.8631     spinal meningioma                               no       0.5919
+2      0.7840     meningocele                              YES    yes      0.9999
+3      0.7669     thoracic spinal canal and spinal cord meningioma        yes      0.7372
+4      0.7641     spinal canal and spinal cord meningioma         yes      0.6648
+5      0.7601     epidural spinal canal meningioma                no       0.6343
+-------------------------------------------------------------------------------------
+Yes answers: 3/5 | Correct matches found: 1/1
+
+Source: 'Spina Bifida'
+GT match(es) in top-5: none
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      1.0000     spina bifida                                    yes      0.9999
+2      0.8805     spina bifida occulta                            yes      0.9876
+3      0.6604     fibrosarcoma                                    yes      0.8933
+4      0.6578     quadriplegia                                    yes      0.5623
+5      0.6577     osteitis fibrosa                                yes      0.6514
+-------------------------------------------------------------------------------------
+Yes answers: 5/5 | Correct matches found: 0/0
+
+Source: 'Myopathy'
+GT match(es) in top-5: ['myopathy']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      1.0000     myopathy                                 YES    yes      0.9988
+2      0.7969     arthropathy                                     no       0.8360
+3      0.7877     Native American myopathy                        yes      0.5360
+4      0.7841     Bethlem myopathy                                yes      0.7882
+5      0.7796     myofibrillar myopathy 6                         yes      0.9014
+-------------------------------------------------------------------------------------
+Yes answers: 4/5 | Correct matches found: 1/1
+
+Source: 'Bilateral Renal Agenesis'
+GT match(es) in top-5: ['bilateral renal aplasia']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      0.8744     renal agenesis                                  yes      0.9989
+2      0.7855     bilateral renal aplasia                  YES    yes      0.9995
+3      0.6711     renal hypertension                              yes      0.7549
+4      0.6653     impaired renal function disease                 no       0.5614
+5      0.6633     renal hypomagnesemia 2                          yes      0.7058
+-------------------------------------------------------------------------------------
+Yes answers: 4/5 | Correct matches found: 1/1
+
+Source: 'Complete Trisomy 13 Syndrome'
+GT match(es) in top-5: none
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      0.6670     congenital myasthenic syndrome 13               yes      0.5314
+2      0.6549     chromosome 19p13.13 deletion syndrome           yes      0.7767
+3      0.6443     chromosome 13q14 deletion syndrome              yes      0.9422
+4      0.6394     trichorhinophalangeal syndrome type I           no       0.6800
+5      0.6384     trichorhinophalangeal syndrome type II          no       0.6738
+-------------------------------------------------------------------------------------
+Yes answers: 3/5 | Correct matches found: 0/0
+
+Source: 'Aorta Disease'
+GT match(es) in top-5: none
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      0.8683     aortic disease                                  yes      0.9998
+2      0.8227     aortic valve disease                            yes      0.9709
+3      0.7992     aortitis                                        yes      0.9987
+4      0.7886     aorta angiosarcoma                              yes      0.9185
+5      0.7426     aorta atresia                                   yes      0.8499
+-------------------------------------------------------------------------------------
+Yes answers: 5/5 | Correct matches found: 0/0
+
+Source: 'Renal Artery Disease'
+GT match(es) in top-5: ['renal artery disease']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      1.0000     renal artery disease                     YES    yes      0.9998
+2      0.8306     artery disease                                  yes      0.9709
+3      0.8212     renal artery atheroma                           yes      0.9935
+4      0.8175     renal artery obstruction                        yes      0.9981
+5      0.7932     renal hypertension                              yes      0.9672
+-------------------------------------------------------------------------------------
+Yes answers: 5/5 | Correct matches found: 1/1
+
+Source: 'Kernicterus Related to Isoimmunization'
+GT match(es) in top-5: ['kernicterus due to isoimmunization']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      0.9495     kernicterus due to isoimmunization       YES    yes      0.9999
+2      0.7662     kernicterus                                     yes      0.9999
+3      0.6363     Rh isoimmunization                              yes      0.9982
+4      0.5469     pericoronitis                                   yes      0.7058
+5      0.5360     isovaleric acidemia                             no       0.5582
+-------------------------------------------------------------------------------------
+Yes answers: 4/5 | Correct matches found: 1/1
+
+Source: 'Hemolytic Disease of the Newborn'
+GT match(es) in top-5: none
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      0.7362     hemolytic-uremic syndrome                       yes      0.5623
+2      0.7235     congenital hemolytic anemia                     yes      0.9995
+3      0.7181     hemolytic anemia                                yes      0.8703
+4      0.6885     hemorrhagic disease                             yes      0.9746
+5      0.6701     congenital nonspherocytic hemolytic anemia        yes      0.9991
+-------------------------------------------------------------------------------------
+Yes answers: 5/5 | Correct matches found: 0/0
+
+Source: 'Mitochondrial Myopathy'
+GT match(es) in top-5: ['mitochondrial myopathy']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      1.0000     mitochondrial myopathy                   YES    yes      0.9999
+2      0.7789     myopathy                                        yes      0.9596
+3      0.7090     mitochondrial metabolism disease                yes      0.9992
+4      0.6943     mitochondrial encephalomyopathy                 yes      0.9951
+5      0.6869     Bethlem myopathy                                yes      0.7714
+-------------------------------------------------------------------------------------
+Yes answers: 5/5 | Correct matches found: 1/1
+
+Source: 'Organic Acid Metabolism Disorder'
+GT match(es) in top-5: ['organic acidemia']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      0.8217     organic acidemia                         YES    yes      0.9999
+2      0.8016     metabolic acidosis                              yes      0.9989
+3      0.7994     amino acid metabolic disorder                   yes      0.9937
+4      0.7768     lipid metabolism disorder                       no       0.5111
+5      0.7319     carbohydrate metabolism disease                 yes      0.9316
+-------------------------------------------------------------------------------------
+Yes answers: 4/5 | Correct matches found: 1/1
+
+Source: 'Pharyngeal Squamous Cell Carcinoma'
+GT match(es) in top-5: none
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      0.9240     pharynx squamous cell carcinoma                 yes      0.9994
+2      0.8829     laryngeal squamous cell carcinoma               yes      0.8228
+3      0.8642     squamous cell carcinoma                         yes      0.9941
+4      0.8530     bone squamous cell carcinoma                    no       0.7034
+5      0.8399     prostate squamous cell carcinoma                yes      0.5313
+-------------------------------------------------------------------------------------
+Yes answers: 4/5 | Correct matches found: 0/0
+
+Source: 'Perlman Syndrome'
+GT match(es) in top-5: ['Perlman syndrome']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      1.0000     Perlman syndrome                         YES    yes      0.9998
+2      0.7497     Perrault syndrome                               yes      0.9009
+3      0.7182     Pearson syndrome                                yes      0.8675
+4      0.6934     Kleine-Levin syndrome                           no       0.6249
+5      0.6895     Wolman disease                                  yes      0.7913
+-------------------------------------------------------------------------------------
+Yes answers: 4/5 | Correct matches found: 1/1
+
+Source: 'Sexual Differentiation Disorder'
+GT match(es) in top-5: ['sex differentiation disease']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      0.8782     sex differentiation disease              YES    yes      0.9945
+2      0.8488     sexual disorder                                 yes      0.9234
+3      0.7385     sexual dysfunction                              no       0.5859
+4      0.6843     gender identity disorder                        yes      0.9486
+5      0.6718     vaginal disease                                 yes      0.5628
+-------------------------------------------------------------------------------------
+Yes answers: 4/5 | Correct matches found: 1/1
+
+Source: 'Lissencephaly'
+GT match(es) in top-5: ['lissencephaly']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      1.0000     lissencephaly                            YES    yes      0.9999
+2      0.7575     Miller-Dieker lissencephaly syndrome            yes      0.9867
+3      0.7322     microcephaly                                    yes      0.5009
+4      0.7139     anencephaly                                     yes      0.5002
+5      0.6844     hydranencephaly                                 no       0.5826
+-------------------------------------------------------------------------------------
+Yes answers: 4/5 | Correct matches found: 1/1
+
+Source: 'Pyruvate Dehydrogenase Deficiency'
+GT match(es) in top-5: ['pyruvate decarboxylase deficiency']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      0.8574     pyruvate decarboxylase deficiency        YES    yes      0.9697
+2      0.8162     pyruvate carboxylase deficiency disease         no       0.7823
+3      0.7685     pyruvate kinase deficiency of red cells         yes      0.9544
+4      0.7603     dihydropyrimidine dehydrogenase deficiency        no       0.6953
+5      0.7481     glucosephosphate dehydrogenase deficiency        yes      0.9478
+-------------------------------------------------------------------------------------
+Yes answers: 3/5 | Correct matches found: 1/1
+
+Source: 'Meningocele'
+GT match(es) in top-5: none
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      1.0000     meningocele                                     yes      0.9998
+2      0.7362     myelomeningocele                                yes      0.9953
+3      0.7118     meningioma                                      no       0.6728
+4      0.6866     meningitis                                      yes      0.8176
+5      0.6647     meningoencephalitis                             yes      0.5002
+-------------------------------------------------------------------------------------
+Yes answers: 4/5 | Correct matches found: 0/0
+
+Source: 'Musculoskeletal System Disorder'
+GT match(es) in top-5: ['musculoskeletal system disease']
+Rank   IR Score   Candidate                                GT?    Answer   Confidence
+-------------------------------------------------------------------------------------
+1      0.9271     musculoskeletal system disease           YES    yes      0.9988
+2      0.7503     autoimmune disease of musculoskeletal system        yes      0.9949
+3      0.7359     nervous system disease                          no       0.6700
+4      0.7352     musculoskeletal system cancer                   no       0.7298
+5      0.7155     gastrointestinal system disease                 yes      0.7058
+-------------------------------------------------------------------------------------
+Yes answers: 3/5 | Correct matches found: 1/1
+
+=====================================================================================
+SUMMARY over 20 source concepts:
+  Total 'yes' answers : 82 / 100
+  Correct matches found by LLM: 14 / 14
+  Avg yes per source  : 4.10 / 5
+=====================================================================================
+End: Thu Apr 16 18:53:51 CEST 2026

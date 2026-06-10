@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/pipeline_listwise.py", line 46, in <module>
+    pipeline_evaluation()
+  File "/vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/ontomap/pipeline/om_pipeline.py", line 115, in __call__
+    output_dict_obj = io.read_json(input_path=track_task_output_path)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/ontomap/utils/io.py", line 29, in read_json
+    json_data = json.load(f)
+                ^^^^^^^^^^^^
+  File "/data/leuven/385/vsc38504/miniconda3/envs/llms4om/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/data/leuven/385/vsc38504/miniconda3/envs/llms4om/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/leuven/385/vsc38504/miniconda3/envs/llms4om/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/leuven/385/vsc38504/miniconda3/envs/llms4om/lib/python3.11/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 662043 column 1 (char 31146621)

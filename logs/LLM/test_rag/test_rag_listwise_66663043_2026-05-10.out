@@ -1,0 +1,873 @@
+SLURM_JOB_ID: 66663043
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: lp_dtaikg
+SLURM_JOB_NAME: test_rag_listwise
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g12
+SLURM_JOB_CPUS_PER_NODE: 6
+SLURM_JOB_GPUS: 3
+Date: Sun May 10 16:36:58 CEST 2026
+Walltime: 00-06:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g12
+Start: Sun May 10 16:37:08 CEST 2026
+JobID: 66663043
+MODEL: Gemma4ListwiseBertRAG  DATASET: omim-ordo  N_SOURCES: 50  TOP_K: 5  BATCH_SIZE: 4
+CUDA_VISIBLE_DEVICES: 0
+=== GPU check ===
+Sun May 10 16:37:08 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          On  |   00000000:C6:00.0 Off |                    0 |
+| N/A   29C    P0             70W /  700W |       0MiB /  81559MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+Running BERT retrieval...
+Loading LLM (Gemma4ListwiseBertRAG)...
+
+===============================================================================================
+
+Source : 'aarskog syndrome, autosomal dominant'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7741  Autosomal dominant myoglobinuria                         5         3     0.2667 <-- IR picks this
+        2    0.7725  autosomal dominant                                       2         2     0.3333
+        3    0.7618  Autosomal dominant Alport syndrome                       3         4     0.2500
+        4    0.7535  Aarskog-Scott syndrome                                   1         1     0.4100 <-- RRF picks this
+        5    0.7447  Autosomal dominant hypocalcemia                          4         5     0.1900
+
+  LLM raw output : "4, 2, 3, 5, 1"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'aortic aneurysm, familial abdominal, 1'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.9313  Familial abdominal aortic aneurysm                       1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8006  Familial thoracic aortic aneurysm and aort               2         2     0.3333
+        3    0.7223  Familial cerebral saccular aneurysm                      4         4     0.2150
+        4    0.6844  Congenital coronary artery aneurysm                      5         5     0.1767
+        5    0.6786  Aortic malformation                                      3         3     0.2250
+
+  LLM raw output : "1, 2, 5, 3, 4"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Aortic aneurysm, familial abdominal'
+GT     : 'Familial abdominal aortic aneurysm'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.9584  Familial abdominal aortic aneurysm           <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8283  Familial thoracic aortic aneurysm and aort               2         2     0.3333
+        3    0.7398  Familial cerebral saccular aneurysm                      3         3     0.2500
+        4    0.6985  Familial bicuspid aortic valve                           4         4     0.2000
+        5    0.6934  Congenital coronary artery aneurysm                      5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'prune belly syndrome'
+GT     : 'Prune belly syndrome'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Prune belly syndrome                         <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.6513  Jeune syndrome                                           2         2     0.3333
+        3    0.5904  Guttmacher syndrome                                      3         3     0.2500
+        4    0.5734  Cooks syndrome                                           4         4     0.2000
+        5    0.5695  Bruck syndrome                                           5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'abducens palsy'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8291  Congenital abducens nerve palsy                          1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.6668  Progressive supranuclear palsy                           2         2     0.3333
+        3    0.6442  Atypical progressive supranuclear palsy sy               3         3     0.2500
+        4    0.6289  Progressive supranuclear palsy-progressive               4         4     0.2000
+        5    0.6274  Cleft palate                                             5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'adams-oliver syndrome 1'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.9618  Adams-Oliver syndrome                                    1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8490  Oliver syndrome                                          2         2     0.3333
+        3    0.7299  Aase-Smith syndrome                                      5         4     0.1917
+        4    0.6993  Kasabach-Merritt syndrome                                3         3     0.2350
+        5    0.6935  Marshall-Smith syndrome                                  4         5     0.1900
+
+  LLM raw output : "1, 2, 4, 5, 3"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Adams-Oliver syndrome'
+GT     : 'Adams-Oliver syndrome'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Adams-Oliver syndrome                        <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8700  Oliver syndrome                                          2         2     0.3333
+        3    0.7397  Aase-Smith syndrome                                      3         3     0.2500
+        4    0.7091  Treacher-Collins syndrome                                4         4     0.2000
+        5    0.7087  Kasabach-Merritt syndrome                                5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'acanthosis nigricans'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7413  Crouzon syndrome-acanthosis nigricans synd               1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.6567  Cutis gyrata-acanthosis nigricans-craniosy               2         2     0.3333
+        3    0.6554  Severe achondroplasia-developmental delay-               3         3     0.2500
+        4    0.6108  Nipah virus disease                                      4         4     0.2000
+        5    0.5915  Gangliocytoma                                            5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'achard syndrome'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7461  Acrorenal syndrome                                       3         2     0.3250 <-- IR picks this
+        2    0.6881  Alagille syndrome                                        1         1     0.4500 <-- RRF picks this
+        3    0.6779  Auriculocondylar syndrome                                4         4     0.2150
+        4    0.6698  Acrocardiofacial syndrome                                2         3     0.2933
+        5    0.6649  Adams-Oliver syndrome                                    5         5     0.1667
+
+  LLM raw output : "2, 4, 1, 3, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'achondroplasia'
+GT     : 'Achondroplasia'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Achondroplasia                               <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7164  Achromatopsia                                            4         3     0.2400
+        3    0.6801  Achondrogenesis                                          2         2     0.3083
+        4    0.6724  Dystonia-aphonia syndrome                                5         5     0.1767
+        5    0.6531  Severe achondroplasia-developmental delay-               3         4     0.2250
+
+  LLM raw output : "1, 3, 5, 2, 4"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'achoo syndrome'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7438  CLAPO syndrome                                           5         3     0.2667 <-- IR picks this
+        2    0.7401  PEHO syndrome                                            4         5     0.2400
+        3    0.7364  PEHO-like syndrome                                       3         4     0.2500
+        4    0.7356  Okamoto syndrome                                         2         2     0.2933
+        5    0.7211  SAPHO syndrome                                           1         1     0.4000 <-- RRF picks this
+
+  LLM raw output : "5, 4, 3, 2, 1"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'neurofibromatosis,  iia 2'
+GT     : 'Neurofibromatosis type 2'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8910  Neurofibromatosis type 2                     <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7869  Neurofibromatosis type 1                                 2         2     0.3333
+        3    0.7763  Neurofibromatosis type 6                                 5         5     0.1917
+        4    0.7355  Neurofibroma                                             4         4     0.2000
+        5    0.7143  Neurofibromatosis-Noonan syndrome                        3         3     0.2250
+
+  LLM raw output : "1, 2, 5, 4, 3"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'acrocephalopolysyndactyly  iia 3'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8208  Acrocephalosyndactyly                                    2         2     0.3833 <-- IR picks this
+        2    0.8132  Acrocephalopolydactyly                                   1         1     0.4500 <-- RRF picks this
+        3    0.6750  Synpolydactyly type 3                                    3         3     0.2500
+        4    0.6737  Mucopolysaccharidosis type 3                             5         5     0.1767
+        5    0.6694  Synpolydactyly type 2                                    4         4     0.1900
+
+  LLM raw output : "2, 1, 3, 5, 4"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'apert syndrome'
+GT     : 'Apert syndrome'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Apert syndrome                               <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.6712  TAFRO syndrome                                           3         3     0.2750
+        3    0.6464  Oculotrichoanal syndrome                                 2         2     0.3083
+        4    0.6427  OSLAM syndrome                                           4         4     0.2000
+        5    0.6412  SHORT syndrome                                           5         5     0.1667
+
+  LLM raw output : "1, 3, 2, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'saethre-chotzen syndrome'
+GT     : 'Saethre-Chotzen syndrome'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Saethre-Chotzen syndrome                     <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7130  Sanjad-Sakati syndrome                                   2         2     0.3333
+        3    0.6906  Christianson syndrome                                    3         3     0.2500
+        4    0.6830  Gerstmann-Straussler-Scheinker syndrome                  5         5     0.1767
+        5    0.6824  Lesch-Nyhan syndrome                                     4         4     0.1900
+
+  LLM raw output : "1, 2, 3, 5, 4"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'pfeiffer syndrome'
+GT     : 'Pfeiffer syndrome'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Pfeiffer syndrome                            <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.9148  Pfeiffer syndrome type 1                                 2         2     0.3333
+        3    0.9074  Pfeiffer syndrome type 2                                 3         3     0.2500
+        4    0.9044  Pfeiffer syndrome type 3                                 4         4     0.2000
+        5    0.7926  Pfeiffer-Palm-Teller syndrome                            5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'acrodysostosis 1 with or without hormone resistance'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8632  Acrodysostosis with multiple hormone resis               1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7487  Acrodysostosis                                           2         2     0.3333
+        3    0.6963  Estrogen resistance syndrome                             3         3     0.2500
+        4    0.6401  Hyperandrogenism due to cortisone reductas               4         4     0.2000
+        5    0.6154  Acrodermatitis enteropathica                             5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Acrodysostosis'
+GT     : 'Acrodysostosis'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Acrodysostosis                               <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7759  Acrofacial dysostosis                                    3         3     0.2750
+        3    0.7638  Dysostosis                                               4         4     0.2150
+        4    0.7578  Acrodermatitis enteropathica                             5         5     0.1767
+        5    0.7497  Acrodysostosis with multiple hormone resis               2         2     0.2833
+
+  LLM raw output : "1, 5, 2, 3, 4"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'acrofacial dysostosis, catania  iia'
+GT     : 'Acrofacial dysostosis, Catania type'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.9390  Acrofacial dysostosis, Catania type          <GT>         2         2     0.3833 <-- IR picks this
+        2    0.8446  Acrofacial dysostosis                                    5         4     0.2167
+        3    0.7931  Acrofacial dysostosis, Kennedy-Teebi type                3         3     0.2500
+        4    0.7856  Acrofacial dysostosis, Weyers type                       4         5     0.2000
+        5    0.7838  Acrofacial dysostosis, Palagonia type                    1         1     0.4000 <-- RRF picks this
+
+  LLM raw output : "5, 1, 3, 4, 2"
+  IR  result     : CORRECT
+  RRF result     : WRONG
+===============================================================================================
+
+Source : 'acrokeratoderma, hereditary papulotranslucent'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8522  Hereditary acrokeratotic poikiloderma                    3         2     0.3250 <-- IR picks this
+        2    0.7941  Genetic acrokeratoderma                                  1         1     0.4500 <-- RRF picks this
+        3    0.7569  Acrokeratoderma                                          2         3     0.3083
+        4    0.7232  Hereditary poikiloderma                                  4         4     0.2000
+        5    0.6837  Hereditary pheochromocytoma-paraganglioma                5         5     0.1667
+
+  LLM raw output : "2, 3, 1, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'palmoplantar keratoderma, punctate  iia 3'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.9122  Punctate palmoplantar keratoderma type 2                 1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8854  Punctate palmoplantar keratoderma                        2         2     0.3333
+        3    0.8769  Punctate palmoplantar keratoderma type 1                 4         4     0.2150
+        4    0.8249  Isolated punctate palmoplantar keratoderma               3         3     0.2350
+        5    0.7871  Hypopigmentation-punctate palmoplantar ker               5         5     0.1667
+
+  LLM raw output : "1, 2, 4, 3, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'acrokeratosis verruciformis'
+GT     : 'Acrokeratosis verruciformis of Hopf'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8335  Acrokeratosis verruciformis of Hopf          <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.6898  Genetic acrokeratoderma                                  2         2     0.3333
+        3    0.6749  Acanthokeratolytic verrucous nevus                       4         4     0.2150
+        4    0.6744  Schwannomatosis                                          5         5     0.1767
+        5    0.6684  Acrokeratoderma                                          3         3     0.2250
+
+  LLM raw output : "1, 2, 5, 3, 4"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'acroleukopathy, symmetric'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.6331  Acrorenal syndrome                                       2         2     0.3833 <-- IR picks this
+        2    0.6307  Cardiomyopathy-hypotonia-lactic acidosis s               1         1     0.4500 <-- RRF picks this
+        3    0.6295  Amyotrophic lateral sclerosis                            5         4     0.1917
+        4    0.6280  Autosomal recessive spastic paraplegia typ               3         3     0.2350
+        5    0.6263  Acrodermatitis enteropathica                             4         5     0.1900
+
+  LLM raw output : "2, 1, 4, 5, 3"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'acromegaloid changes, cutis verticis gyrata, and corneal leukoma'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.6599  Cutis gyrata-acanthosis nigricans-craniosy               3         2     0.3250 <-- IR picks this
+        2    0.6389  Hypertrichosis-acromegaloid facial appeara               1         1     0.4500 <-- RRF picks this
+        3    0.6309  Acromegaloid facial appearance syndrome                  2         3     0.3083
+        4    0.6251  Amyloidosis cutis dyschromia                             4         4     0.2000
+        5    0.6001  Craniosynostosis-anal anomalies-porokerato               5         5     0.1667
+
+  LLM raw output : "2, 3, 1, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'acromegaloid facial appearance syndrome'
+GT     : 'Acromegaloid facial appearance syndrome'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Acromegaloid facial appearance syndrome      <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8725  Hypertrichosis-acromegaloid facial appeara               2         2     0.3333
+        3    0.6684  Craniomicromelic syndrome                                3         3     0.2500
+        4    0.6670  AL amyloidosis                                           4         4     0.2000
+        5    0.6637  AA amyloidosis                                           5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'pituitary adenoma 1, multiple types'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8110  Pituitary adenoma                                        1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7569  Mixed functioning pituitary adenoma                      2         2     0.3333
+        3    0.7400  Functioning pituitary adenoma                            3         3     0.2500
+        4    0.7226  Non-functioning pituitary adenoma                        4         4     0.2000
+        5    0.7082  Null pituitary adenoma                                   5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Pituitary adenoma'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Pituitary adenoma                                        1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8962  Functioning pituitary adenoma                            2         2     0.3333
+        3    0.8604  Silent pituitary adenoma                                 4         4     0.2150
+        4    0.8580  Non-functioning pituitary adenoma                        3         3     0.2350
+        5    0.8504  Null pituitary adenoma                                   5         5     0.1667
+
+  LLM raw output : "1, 2, 4, 3, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'restless legs syndrome, susceptibility to, 1'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.6137  Rolandic epilepsy-paroxysmal exercise-indu               2         2     0.3833 <-- IR picks this
+        2    0.6027  Spastic paraplegia-severe developmental de               3         3     0.2750
+        3    0.6007  Telecanthus-hypertelorism-strabismus-pes c               4         4     0.2150
+        4    0.5996  Legius syndrome                                          1         1     0.4100 <-- RRF picks this
+        5    0.5972  Intellectual disability-strabismus syndrom               5         5     0.1667
+
+  LLM raw output : "4, 1, 2, 3, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Restless legs syndrome'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7457  Legius syndrome                                          1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.6556  RHYNS syndrome                                           2         2     0.3333
+        3    0.6517  Rombo syndrome                                           3         3     0.2500
+        4    0.6508  Epilepsy syndrome                                        4         4     0.2000
+        5    0.6487  Intellectual disability-strabismus syndrom               5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'acromial dimples'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.5924  Congenital alacrima                                      4         2     0.2900 <-- IR picks this
+        2    0.5666  Acromelanosis                                            3         4     0.2750
+        3    0.5599  Pilocytic astrocytoma                                    5         5     0.1917
+        4    0.5546  Acromegaly                                               1         1     0.4100 <-- RRF picks this
+        5    0.5530  Acromicric dysplasia                                     2         3     0.2833
+
+  LLM raw output : "4, 5, 2, 1, 3"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'acromicric dysplasia'
+GT     : 'Acromicric dysplasia'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Acromicric dysplasia                         <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.9558  Acromelic dysplasia                                      2         2     0.3333
+        3    0.9295  Acromesomelic dysplasia                                  3         3     0.2500
+        4    0.8624  Acromelic frontonasal dysplasia                          4         4     0.2000
+        5    0.8442  Acropectorovertebral dysplasia                           5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'acroosteolysis'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.6773  Acrogeria                                                2         2     0.3833 <-- IR picks this
+        2    0.6748  Acrofacial dysostosis                                    3         3     0.2750
+        3    0.6683  Acroosteolysis-keloid-like lesions-prematu               1         1     0.4250 <-- RRF picks this
+        4    0.6583  Acrocraniofacial dysostosis                              4         4     0.2000
+        5    0.6423  Acrofrontofacionasal dysostosis                          5         5     0.1667
+
+  LLM raw output : "3, 1, 2, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'hajdu-cheney syndrome'
+GT     : 'Hajdu-Cheney syndrome'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Hajdu-Cheney syndrome                        <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.6470  Dubin-Johnson syndrome                                   2         2     0.3333
+        3    0.6171  Waardenburg-Shah syndrome                                3         3     0.2500
+        4    0.6127  Majeed syndrome                                          4         4     0.2000
+        5    0.6058  Birt-Hogg-Dubé syndrome                                  5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'acropectorovertebral dysplasia'
+GT     : 'Acropectorovertebral dysplasia'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Acropectorovertebral dysplasia               <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8506  Acromelic dysplasia                                      3         3     0.2750
+        3    0.8442  Acromicric dysplasia                                     4         4     0.2150
+        4    0.8214  Acromesomelic dysplasia                                  2         2     0.2933
+        5    0.8092  Acrocapitofemoral dysplasia                              5         5     0.1667
+
+  LLM raw output : "1, 4, 2, 3, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'acrorenal syndrome'
+GT     : 'Acrorenal syndrome'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Acrorenal syndrome                           <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7989  Acropectoral syndrome                                    2         2     0.3333
+        3    0.7549  Auriculocondylar syndrome                                3         3     0.2500
+        4    0.7524  Acrocallosal syndrome                                    4         4     0.2000
+        5    0.7162  Acrocardiofacial syndrome                                5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'spermatogenic failure 6'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7773  Male infertility with spermatogenesis diso               1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7370  Male infertility due to sperm disorder                   2         2     0.3333
+        3    0.7352  Male infertility due to sperm motility dis               4         4     0.2150
+        4    0.7277  Male infertility due to gonadal dysgenesis               3         3     0.2350
+        5    0.7091  Spermatocytic seminoma                                   5         5     0.1667
+
+  LLM raw output : "1, 2, 4, 3, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'Spermatogenic failure'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7880  Male infertility with spermatogenesis diso               1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7471  Male infertility due to sperm disorder                   2         2     0.3333
+        3    0.7409  Male infertility due to sperm motility dis               4         4     0.2150
+        4    0.7372  Male infertility due to gonadal dysgenesis               3         3     0.2350
+        5    0.7198  Spermatocytic seminoma                                   5         5     0.1667
+
+  LLM raw output : "1, 2, 4, 3, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'adactylia, unilateral'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7137  Unilateral polymicrogyria                                3         2     0.3250 <-- IR picks this
+        2    0.6901  Humero-ulnar synostosis, unilateral                      1         1     0.4500 <-- RRF picks this
+        3    0.6828  Macrodactyly of toes, unilateral                         2         3     0.3083
+        4    0.6785  Choanal atresia, unilateral                              4         4     0.2000
+        5    0.6701  Unilateral aplasia of the Müllerian ducts                5         5     0.1667
+
+  LLM raw output : "2, 3, 1, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'adamantinoma of long bones'
+GT     : 'Adamantinoma'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8062  Adamantinoma                                 <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.6096  Giant cell tumor of bone                                 3         3     0.2750
+        3    0.6053  Congenital bowing of long bones                          4         4     0.2150
+        4    0.5909  Skeletal muscle disease                                  5         5     0.1767
+        5    0.5893  Genetic bone tumor                                       2         2     0.2833
+
+  LLM raw output : "1, 5, 2, 3, 4"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'severe combined immunodeficiency, autosomal recessive, t cell-negative, B cell-negative, nk cell-negative, due to adenosine deaminase deficiency'
+GT     : 'Severe combined immunodeficiency due to adenosine deaminase deficiency'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7983  Severe combined immunodeficiency due to ad   <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7301  T-B+ severe combined immunodeficiency due                3         3     0.2750
+        3    0.7117  Autosomal recessive primary immunodeficien               4         4     0.2150
+        4    0.7102  T-B+ severe combined immunodeficiency due                2         2     0.2933
+        5    0.7030  Immunodeficiency with severe reduction in                5         5     0.1667
+
+  LLM raw output : "1, 4, 2, 3, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'adenosine deaminase, elevated, hemolytic anemia due to'
+GT     : 'Hemolytic anemia due to erythrocyte adenosine deaminase overproduction'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8508  Hemolytic anemia due to erythrocyte adenos   <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8217  Hemolytic anemia due to adenylate kinase d               5         4     0.2167
+        3    0.7741  Hemolytic anemia due to an erythrocyte nuc               2         2     0.3083
+        4    0.7490  Hemolytic anemia due to pyrimidine 5' nucl               4         5     0.2000
+        5    0.7392  Hemolytic anemia due to a disorder of glyc               3         3     0.2250
+
+  LLM raw output : "1, 3, 5, 4, 2"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'adenosine triphosphatase deficiency, anemia due to'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8367  Hemolytic anemia due to adenylate kinase d               1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8057  Hemolytic anemia due to diphosphoglycerate               2         2     0.3333
+        3    0.7698  Hemolytic anemia due to glutathione reduct               3         3     0.2500
+        4    0.7672  Hemolytic anemia due to glucophosphate iso               4         4     0.2000
+        5    0.7504  Hemolytic anemia due to erythrocyte adenos               5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'adenosine triphosphate, elevated, of erythrocytes'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.6904  Hemolytic anemia due to erythrocyte adenos               4         3     0.2900 <-- IR picks this
+        2    0.6624  Hemolytic anemia due to adenylate kinase d               2         2     0.3333
+        3    0.6543  Hemolytic anemia due to red cell pyruvate                3         4     0.2500
+        4    0.6444  Hemolytic anemia due to an erythrocyte nuc               1         1     0.4100 <-- RRF picks this
+        5    0.6327  Acute erythroid leukemia                                 5         5     0.1667
+
+  LLM raw output : "4, 2, 3, 1, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'adenylosuccinase deficiency'
+GT     : 'Adenylosuccinate lyase deficiency'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.8353  Adenylosuccinate lyase deficiency            <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.8108  Adenine phosphoribosyltransferase deficien               2         2     0.3333
+        3    0.7902  Adenosine monophosphate deaminase deficien               3         3     0.2500
+        4    0.7158  Adenohypophysitis                                        5         5     0.1767
+        5    0.7121  S-adenosylhomocysteine hydrolase deficienc               4         4     0.1900
+
+  LLM raw output : "1, 2, 3, 5, 4"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'adie pupil'
+GT     : 'Holmes-Adie syndrome'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.5599  Holmes-Adie syndrome                         <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.5547  Rare disorder of the pupil                               3         3     0.2750
+        3    0.5438  Coloboma of eye lens                                     4         4     0.2150
+        4    0.5405  Rare genetic disorder of the pupil                       2         2     0.2933
+        5    0.5387  Coloboma of inferior eyelid                              5         5     0.1667
+
+  LLM raw output : "1, 4, 2, 3, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'adiposis dolorosa'
+GT     : 'Adiposis dolorosa'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  Adiposis dolorosa                            <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.6154  AApoAI amyloidosis                                       2         2     0.3333
+        3    0.6096  AApoAII amyloidosis                                      3         3     0.2500
+        4    0.6052  AApoAIV amyloidosis                                      4         4     0.2000
+        5    0.5966  Adrenal hypoplasia congenita                             5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'adrenocortical hypofunction, chronic primary congenital'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.7566  Genetic chronic primary adrenal insufficie               1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7556  Acquired chronic primary adrenal insuffici               4         3     0.2400
+        3    0.7460  Chronic primary adrenal insufficiency                    2         2     0.3083
+        4    0.7456  Primary congenital hypothyroidism                        5         5     0.1767
+        5    0.7443  Congenital adrenal hyperplasia                           3         4     0.2250
+
+  LLM raw output : "1, 3, 5, 2, 4"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Source : 'adult syndrome'
+GT     : 'ADULT syndrome'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    1.0000  ADULT syndrome                               <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7715  KID syndrome                                             3         3     0.2750
+        3    0.7544  Young syndrome                                           4         4     0.2150
+        4    0.7512  CHILD syndrome                                           2         2     0.2933
+        5    0.7413  Adult acute respiratory distress syndrome                5         5     0.1667
+
+  LLM raw output : "1, 4, 2, 3, 5"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'hypoglossia-hypodactylia'
+GT     : 'Hypoglossia-hypodactyly syndrome'
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.9168  Hypoglossia-hypodactyly syndrome             <GT>         1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.7840  Hypoglossia/aglossia                                     2         2     0.3333
+        3    0.7253  Hypertelorism-hypospadias-polysyndactyly s               3         3     0.2500
+        4    0.7151  Hypophosphatasia                                         5         5     0.1767
+        5    0.6876  Hypomyelination-hypogonadotropic hypogonad               4         4     0.1900
+
+  LLM raw output : "1, 2, 3, 5, 4"
+  IR  result     : CORRECT
+  RRF result     : CORRECT
+===============================================================================================
+
+Source : 'ainhum'
+GT     : NOT IN TOP-K
+
+  IR Rank  IR Score  Candidate                                    GT?  LLM Rank  RRF Rank  RRF Score
+  -------  --------  ------------------------------------------  ----  --------  --------  ---------
+        1    0.5284  Acheiria                                                 1         1     0.5000 <-- IR picks this <-- RRF picks this
+        2    0.4995  Jordan                                                   2         2     0.3333
+        3    0.4889  Bahrain                                                  3         3     0.2500
+        4    0.4876  Egypt                                                    4         4     0.2000
+        5    0.4737  Qatar                                                    5         5     0.1667
+
+  LLM raw output : "1, 2, 3, 4, 5"
+  IR  result     : GT NOT IN TOP-K
+  RRF result     : GT NOT IN TOP-K
+===============================================================================================
+
+Rankings saved to experiments/outputs/bio-ml/omim-ordo.disease/listwise-rankings-Gemma4ListwiseBertRAG-label-2026.05.10-16:37:06.json
+
+============================================SUMMARY============================================
+
+  Total sources evaluated        : 50
+  GT in top-5 (reachable)    : 24 / 50  (48.0%)  —  ceiling for both IR and RRF
+  GT not in top-5 (unreachable): 26 / 50  (52.0%)  —  neither method can win here
+  RRF overrides IR               : 13 / 50  (26.0%)
+
+  Metric                                  IR-only         RRF     Delta
+  -----------------------------------  ----------  ----------  --------
+  Correct (all sources)                  24 / 50    23 / 50        -1
+  Correct (GT in top-k only)             24 / 24    23 / 24        -1
+  Accuracy (GT in top-k only)              100.0%       95.8%
+
+  -- LLM signal analysis (of 24 reachable sources) --
+  LLM rank-1 correct                                 : 23 / 24  (95.8%)  — if we used LLM alone
+  IR wrong but LLM rank-1 correct                    : 0 / 24  (0.0%)  — cases LLM could fix
+  IR wrong + LLM right + RRF still wrong             : 0 / 24  (0.0%)  — RRF suppressed LLM signal
+  IR right + LLM wrong + RRF still correct           : 0 / 24  (0.0%)  — IR weight saved result (robustness)
+  IR right + LLM wrong + RRF wrong (Set C)           : 1 / 24  (4.2%)  — LLM hurt IR result
+===============================================================================================
+End: Sun May 10 16:38:26 CEST 2026

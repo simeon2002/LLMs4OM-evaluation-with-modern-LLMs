@@ -1,0 +1,9 @@
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 17473.34it/s]
+[1mMPNetModel LOAD REPORT[0m from: sentence-transformers/multi-qa-mpnet-base-dot-v1
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[2026-05-17T17:26:28.422] error: *** JOB 66708041 ON s16g21 CANCELLED AT 2026-05-17T17:26:28 DUE to SIGNAL Terminated ***

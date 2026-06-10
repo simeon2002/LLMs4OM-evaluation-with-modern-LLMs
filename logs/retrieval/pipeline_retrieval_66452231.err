@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/pipeline_retrieval.py", line 16, in <module>
+    from ontomap.ontology_matchers import MatcherCatalog
+  File "/vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/ontomap/__init__.py", line 7, in <module>
+    from ontomap import base, encoder, evaluation, ontology, ontology_matchers, utils, postprocess
+  File "/vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/ontomap/ontology_matchers/__init__.py", line 27, in <module>
+    from ontomap.ontology_matchers.rag.models import (
+  File "/vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/ontomap/ontology_matchers/rag/models.py", line 515, in <module>
+    class LLaMA3InstructDecoderLM(RAGBasedInstructDecoderLLMArch):
+  File "/vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/ontomap/ontology_matchers/rag/models.py", line 546, in LLaMA3InstructDecoderLM
+    def tokenize(self, input_data: List) -> Any:
+                                   ^^^^
+NameError: name 'List' is not defined. Did you mean: 'list'?

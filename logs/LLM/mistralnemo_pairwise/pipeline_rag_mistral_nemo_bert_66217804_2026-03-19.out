@@ -1,0 +1,84 @@
+SLURM_JOB_ID: 66217804
+SLURM_JOB_USER: vsc38504
+SLURM_JOB_ACCOUNT: intro_vsc38504
+SLURM_JOB_NAME: pipeline_rag_mistral_nemo_bert
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: gpu_h100
+SLURM_NNODES: 1
+SLURM_NODELIST: s16g09
+SLURM_JOB_CPUS_PER_NODE: 4
+SLURM_JOB_GPUS: 0
+Date: Thu Mar 19 02:12:17 AM CET 2026
+Walltime: 00-03:00:00
+========================================================================
+HF_TOKEN preview: hf_W...lYfo
+Host: s16g09
+Start: Thu Mar 19 02:12:38 AM CET 2026
+JobID: 66217804
+MODEL: MistralNemoBertRAG
+CUDA_VISIBLE_DEVICES: 0
+=== GPU check ===
+Thu Mar 19 02:12:38 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 590.48.01              Driver Version: 590.48.01      CUDA Version: 13.1     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          On  |   00000000:26:00.0 Off |                    0 |
+| N/A   32C    P0             75W /  700W |       0MiB /  81559MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== Python/env check ===
+Python: /data/leuven/385/vsc38504/miniconda3/envs/llms4om/bin/python
+CONDA_DEFAULT_ENV: llms4om
+HF_TOKEN set: True
+HF_HOME: /scratch/leuven/385/vsc38504/.cache/huggingface
+working on MistralNemoBertRAG-RAG-MistralNemoBertRAG
+	Working on bio-ml track
+	Working on bio-ml/ncit-doid.disease task
+		Prompting ID is: label
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-MistralNemoBertRAG-label-2026.03.19-02:56:38.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-MistralNemoBertRAG-label-children-2026.03.19-03:40:27.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+		Encoded input pairs: 5
+		Working on generating response!
+		Create path to store data!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-MistralNemoBertRAG-label-parent-2026.03.19-04:24:04.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+Run evaluation on MistralNemoBertRAG
+	Working on bio-ml track
+	Working on bio-ml/ncit-doid.disease task
+		Prompting ID is: label
+Evaluating output for rag-MistralNemoBertRAG-label-2026.03.19-02:56:38.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-MistralNemoBertRAG-label-2026.03.19-02:56:38.json.
+		--------------------------------------------------
+		Prompting ID is: label-children
+Evaluating output for rag-MistralNemoBertRAG-label-children-2026.03.19-03:40:27.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-MistralNemoBertRAG-label-children-2026.03.19-03:40:27.json.
+		--------------------------------------------------
+		Prompting ID is: label-parent
+Evaluating output for rag-MistralNemoBertRAG-label-parent-2026.03.19-04:24:04.json run!
+		Storing results in /vsc-hard-mounts/leuven-data/385/vsc38504/thesis/llms4om/LLMs4OM/experiments/outputs/bio-ml/ncit-doid.disease/rag-MistralNemoBertRAG-label-parent-2026.03.19-04:24:04.json.
+		--------------------------------------------------
+	++++++++++++++++++++++++++++++++++++++++++++++++++
+End: Thu Mar 19 04:24:45 AM CET 2026
