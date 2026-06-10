@@ -4,13 +4,36 @@ This repository contains the code for the Master's thesis **"Ontology Matching w
 
 It is a fork and extension of the original [LLMs4OM](https://github.com/HamedBabaei/LLMs4OM) framework by Babaei Giglou et al. (2024). The thesis conducts a controlled re-evaluation of LLMs4OM on the **OAEI 2024 Bio-ML track** using contemporary retrieval and LLM models, and proposes a new **listwise ranking architecture** for instruction-tuned LLMs.
 
+---
+
+## Overview
+
+The original LLMs4OM framework implements a retrieve-and-rank RAG pipeline for ontology matching:
+
+<div align="center">
+ <img src="images/LLMs4OM.jpg" width="800" height="200"/>
+</div>
+
+1. **Concept representation**: Encode ontology concepts as C (label only), CP (label + parents), or CC (label + children)
+2. **Retrieval**: Use an embedding model to retrieve top-K candidate matches from the target ontology
+3. **LLM matching**: Use an LLM to classify equivalence for each (source, candidate) pair. pairwise matchign score prediction for pairwise approach vs. LLM ranking for listwise approach
+4. **Post-processing**: Filter by similarity and matching score threhsold and enforce one-to-one mappings for pairwise approach, filter by similarity threshold of highest ranking target candidate in LLM ranking and enforce one-to-one mappings.
+
+This thesis extends the framework in three ways:
+- Evaluates **7 retrieval models** and **8 LLMs** on the OAEI 2024 Bio-ML track
+- Adds a **listwise ranking pipeline** for instruction-tuned LLMs with Reciprocal Rank Fusion (RRF) post-processing
+- Analyzes the relative contribution of the retrieval model vs. the LLM to final matching performance
+- Analyzes the computational runtime and LLM call count for both pipelines.
+- Provides a comparison against OM baselines.
+
+---
+
 ## Key Findings
 
 - **Qwen-3-Embedding 4B** is the strongest retrieval model overall while **SBERT** remains a strong and competitive baseline
 - Most LLMs converge to **near-identical F1-scores** in the pairwise pipeline. The `Ssim ≥ 0.9` post-processing threshold is the dominant filter and not the LLM's matching score
 - The proposed **listwise pipeline** underperforms the pairwise pipeline by ~6 F1 points on NCIT-DOID, primarily due to LLM re-ranking quality degrading recall
 - General-purpose LLMs are not yet competitive with specialized OM systems (e.g., HybridOM, LogMapBio) on harder Bio-ML datasets such as SNOMED-FMA
-
 
 ## Thesis Contributions
 
@@ -50,7 +73,10 @@ Relevant files:
 ### 4. Hyperparameter Analysis Scripts
 - `sweep_rrf_weights.py` — sweeps RRF weights (`ir_weight`, `llm_weight`) over NCIT-DOID and OMIM-ORDO
 - `sweep_threshold_Qwen34_Qwen359B.py` — sweeps `Ssim` threshold from 0.0 to 0.95 for the best pipeline configuration, outputs CSV
-
+- other hyperparameter scripts are evaluated in `experiments/experiments.ipynb` jupyter notebook
+### 5. Experimental analysis and table production
+- All analysis for the experiments performed and additional analyses mentioned in the thesis are avaialbe in **`experiments/experiments.ipynb`**
+---
 ## Datasets
 
 All experiments use the **OAEI 2024 Bio-ML track** — five equivalence matching tasks on biomedical ontologies:
@@ -62,79 +88,26 @@ All experiments use the **OAEI 2024 Bio-ML track** — five equivalence matching
 | SNOMED-FMA | SNOMED CT | FMA | Anatomy | 34,418 | 88,955 | 7,256 |
 | SNOMED-NCIT (neoplas) | SNOMED CT | NCIT | Neoplasm | 22,971 | 20,247 | 3,804 |
 | SNOMED-NCIT (pharm) | SNOMED CT | NCIT | Pharmacology | 29,500 | 22,136 | 5,803 |
+---
 
-## Quick Tour
+## Installation
 
-A **RAG** specific quick tour with `Mistral-7B` and `BERTRetriever` using `C` representation.
-```python
-from ontomap.ontology import MouseHumanOMDataset
-from ontomap.base import BaseConfig
-from ontomap.evaluation.evaluator import evaluator
-from ontomap.encoder import IRILabelInRAGEncoder
-from ontomap.ontology_matchers import MistralLLMBertRAG
-from ontomap.postprocess import process
+```bash
+git clone https://github.com/simeon2002/LLMs4OM-evaluation-with-modern-LLMs.git
+cd LLMs4OM-evaluation-with-modern-LLMs
 
-# Setting configurations for experimenting 'rag' on GPU with batch size of 16
-config = BaseConfig(approach='rag').get_args(device='cuda', batch_size=16)
-# set dataset directory
-config.root_dir = "datasets"
-# parse task source, target, and reference ontology
-ontology = MouseHumanOMDataset().collect(root_dir=config.root_dir)
-
-# init encoder (concept-representation)
-encoded_inputs = IRILabelInRAGEncoder()(ontology)
-
-# init Mistral-7B + BERT
-model = MistralLLMBertRAG(config.MistralBertRAG)
-# generate results
-predicts = model.generate(input_data=encoded_inputs)
-
-# post-processing
-predicts, _ = process.postprocess_hybrid(predicts=predicts,
-                                         llm_confidence_th=0.7,
-                                         ir_score_threshold=0.9)
-# evaluation
-results = evaluator(track='anatomy',
-                    predicts=predicts,
-                    references=ontology["reference"])
-print(results)
+pip install -r requirements.txt
+mv .env-example .env
 ```
 
-A **Retrieval** specific quick tour with `BERTRetriever` using `C` representation.
-```python
-from ontomap.ontology import MouseHumanOMDataset
-from ontomap.base import BaseConfig
-from ontomap.evaluation.evaluator import evaluator
-from ontomap.encoder.lightweight import IRILabelInLightweightEncoder
-from ontomap.ontology_matchers.retrieval.models import BERTRetrieval
-from ontomap.postprocess import process
+Update tokens in `.env` for LLaMA-2 or GPT-based models, or leave dummy values if not using those.
 
-# Setting configurations for experimenting 'retrieval' on CPU
-config = BaseConfig(approach='retrieval').get_args(device='cpu')
-# set dataset directory
-config.root_dir = "datasets"
-# parse task source, target, and reference ontology
-ontology = MouseHumanOMDataset().collect(root_dir=config.root_dir)
+---
 
-# init encoder (concept-representation)
-encoded_inputs = IRILabelInLightweightEncoder()(ontology)
+### Pairwise RAG Pipeline (original architecture)
 
-# init BERTRetrieval
-model = BERTRetrieval(config.BERTRetrieval)
-# generate results
-predicts = model.generate(input_data=encoded_inputs)
+Quick example with `Qwen-3.5 9B` + `Qwen-3-Embedding 4B` on NCIT-DOID:
 
-# post-processing
-predicts = process.eval_preprocess_ir_outputs(predicts=predicts)
-
-# evaluation
-results = evaluator(track='anatomy',
-                    predicts=predicts,
-                    references=ontology["reference"])
-print(results)
-```
-
-### Pairwise RAG with best thesis configuration (Qwen-3.5 9B + Qwen-3-Embedding 4B)
 ```python
 from ontomap.ontology.bioml import NCITDOIDDiseaseOMDataset
 from ontomap.base import BaseConfig
@@ -163,6 +136,9 @@ print(results)
 ```
 
 ### Listwise Ranking Pipeline (thesis contribution)
+
+Quick example with `Qwen-3.5 9B Instruct` (listwise) + SBERT on NCIT-DOID:
+
 ```python
 from ontomap.ontology.bioml import NCITDOIDDiseaseOMDataset
 from ontomap.base import BaseConfig
@@ -192,7 +168,8 @@ results = evaluator(track='bio-ml', predicts=predicts, references=ontology["refe
 print(results)
 ```
 
-### Retrieval-Only with Qwen-3-Embedding 4B
+### Retrieval-Only Evaluation
+
 ```python
 from ontomap.ontology.bioml import NCITDOIDDiseaseOMDataset
 from ontomap.base import BaseConfig
@@ -215,11 +192,13 @@ results = evaluator(track='bio-ml', predicts=predicts, references=ontology["refe
 print(results)
 ```
 
+### Batch Scripts (ran on HPC with SLURM)
 
+SLURM batch scripts for each model are at the repo root (`.batch` files).
+---
 
-The following diagram represent the LLMs4OM framework.
-<div align="center">
- <img src="images/LLMs4OM.jpg" width="800" height="200"/>
-</div>
+## Computational Resources
 
-The LLMs4OM framework offers a retrieval augmented generation (RAG) approach within LLMs for OM. LLMs4OM uses $O_{source}$ as query $Q(O_{source})$ to retrieve possible matches for for any $C_s \in C_{source}$ from $C_{target} \in O_{target}$. Where, $C_{target}$ is stored in the knowledge base $KB(O_{target})$. Later, $C_{s}$ and obtained $C_t \in C_{target}$ are used to query the LLM to check whether the $(C_s, C_t)$ pair is a match. As shown in above diagram, the framework comprises four main steps: 1) Concept representation, 2) Retriever model, 3) LLM, and 4) Post-processing.
+All experiments were executed on the **Vlaams Supercomputer Centrum (VSC)** HPC infrastructure (KU Leuven Tier-2 clusters) using NVIDIA H100 and V100 GPUs via the Slurm workload manager.
+
+---
