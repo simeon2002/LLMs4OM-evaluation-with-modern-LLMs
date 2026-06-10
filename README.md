@@ -1,44 +1,67 @@
-<div align="center">
- <img src="images/logo.png"/>
-</div>
+# Ontology Matching with Large Language Models: An Experimental Comparison
 
-<div align="center">
+This repository contains the code for the Master's thesis **"Ontology Matching with Large Language Models: An Experimental Comparison"** (KU Leuven, 2025–2026), authored by **Simeon Serafimov**, supervised by Prof. dr ir Anastasia Dimou, with co-supervisors Ali Elhalawati and Duo Yang.
+
+It is a fork and extension of the original [LLMs4OM](https://github.com/HamedBabaei/LLMs4OM) framework by Babaei Giglou et al. (2024). The thesis conducts a controlled re-evaluation of LLMs4OM on the **OAEI 2024 Bio-ML track** using contemporary retrieval and LLM models, and proposes a new **listwise ranking architecture** for instruction-tuned LLMs.
+
+## Key Findings
+
+- **Qwen-3-Embedding 4B** is the strongest retrieval model overall while **SBERT** remains a strong and competitive baseline
+- Most LLMs converge to **near-identical F1-scores** in the pairwise pipeline. The `Ssim ≥ 0.9` post-processing threshold is the dominant filter and not the LLM's matching score
+- The proposed **listwise pipeline** underperforms the pairwise pipeline by ~6 F1 points on NCIT-DOID, primarily due to LLM re-ranking quality degrading recall
+- General-purpose LLMs are not yet competitive with specialized OM systems (e.g., HybridOM, LogMapBio) on harder Bio-ML datasets such as SNOMED-FMA
 
 
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Paper](https://img.shields.io/badge/Paper-EF3939?style=badge&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24)](https://arxiv.org/abs/2404.10317)
-[![The supplementary material](https://img.shields.io/badge/Supplementary%20Material-EF3939?style=badge&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24)](docs/LLMs4OM_Supplementary_Material.pdf)
+## Thesis Contributions
 
-</div>
+### 1. Listwise Ranking Architecture (new)
 
-[//]: # (The supplementary material for detailed results of retriever and LLM modules is available here for download: [![The supplementary material]&#40;https://img.shields.io/badge/Supplementary%20Material-EF3939?style=badge&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24&#41;]&#40;docs/LLMs4OM_Supplementary_Material.pdf&#41;)
+An alternative matching architecture for instruction-tuned LLMs. Instead of classifying each (source, candidate) pair separately, the LLM ranks all K candidates in a single prompt and outputs an ordered list (e.g., `"3, 1, 5, 2, 4"`). Post-processing uses **Reciprocal Rank Fusion (RRF)** to combine the retrieval ranking and LLM ranking:
+> RRF = ir_weight / (k + ir_rank + 1) + llm_weight / (k + llm_rank + 1)
 
-## What is the LLMs4OM?
+Relevant files:
+- `ontomap/ontology_matchers/rag/rag_listwise.py` — listwise LLM architectures and model classes
+- `ontomap/ontology_matchers/rag/dataset_listwise.py` — listwise prompt templates (C, CP, CC)
+- `ontomap/postprocess/process.py` — `apply_rrf()` and `postprocess_listwise()`
+- `ontomap/encoder/rag.py` — listwise concept encoders
+### 2. New Retrieval Models
+| Model | Class | Parameters |
+|---|---|---|
+| Qwen-3-Embedding 0.6B | `Qwen3EmbeddingRetrieval` | 0.6B |
+| Qwen-3-Embedding 4B | `Qwen3Embedding4BRetrieval` | 4B |
+| Embedding-Gemma | `EmbeddingGemma300MRetrieval` | 300M |
+| Llama-Embed-Nemotron | `LlamaNemotronEmbeddingRetrieval` | 8B |
+| NV-Embed-v2 | `NVEmbedV2Retrieval` | — |
+### 3. New LLM Models
+| Model | Class | Type |
+|---|---|---|
+| LLaMA-3 8B | `LLaMA3DecoderLM` | Base |
+| LLaMA-3 8B Instruct | `LLaMA3InstructDecoderLM` | Instruct |
+| Qwen-3.5 9B | `Qwen35_9BDecoderLM` | Base |
+| Qwen-3.5 9B Instruct | (listwise) | Instruct |
+| Gemma-2 9B | `Gemma2_9BDecoderLM` | Base |
+| Gemma-2 2B | `Gemma2_2BDecoderLM` | Base |
+| Gemma-4 26B-A4B | `Gemma4_26B_A4BDecoderLM` | Base (MoE) |
+| Gemma-4 26B-A4B Instruct | (listwise) | Instruct (MoE) |
+| Mamba 3B | `Mamba3BSSMLLM` | SSM |
+| Mistral-Nemo 12B | `MistralNemoDecoderLM` | Base |
+| Qwen-2.5 7B | `Qwen25_7BDecoderLM` | Base |
+| Qwen-2.5 3B | `Qwen25_3BDecoderLM` | Base |
+### 4. Hyperparameter Analysis Scripts
+- `sweep_rrf_weights.py` — sweeps RRF weights (`ir_weight`, `llm_weight`) over NCIT-DOID and OMIM-ORDO
+- `sweep_threshold_Qwen34_Qwen359B.py` — sweeps `Ssim` threshold from 0.0 to 0.95 for the best pipeline configuration, outputs CSV
 
-The LLMs4OM framework is a novel approach for effective Ontology Matching (OM) using LLMs. This framework utilizes two modules for retrieval and matching, respectively, enhanced by zero-shot prompting across three ontology representations: concept, concept-parent, and concept-children.  It is capable of comprehensive evaluations using 20 OM datasets (but not limited to) from various domains. The LLMs4OM framework, can match and even surpass the performance of traditional OM systems, particularly in complex matching scenarios.
+## Datasets
 
-The following diagram represent the LLMs4OM framework.
-<div align="center">
- <img src="images/LLMs4OM.jpg" width="800" height="200"/>
-</div>
+All experiments use the **OAEI 2024 Bio-ML track** — five equivalence matching tasks on biomedical ontologies:
 
-The LLMs4OM framework offers a retrieval augmented generation (RAG) approach within LLMs for OM. LLMs4OM uses $O_{source}$ as query $Q(O_{source})$ to retrieve possible matches for for any $C_s \in C_{source}$ from $C_{target} \in O_{target}$. Where, $C_{target}$ is stored in the knowledge base $KB(O_{target})$. Later, $C_{s}$ and obtained $C_t \in C_{target}$ are used to query the LLM to check whether the $(C_s, C_t)$ pair is a match. As shown in above diagram, the framework comprises four main steps: 1) Concept representation, 2) Retriever model, 3) LLM, and 4) Post-processing.
-
-## Installation
-
-You can also install and use the LLMs4OM using the following commands.
-```
-git clone https://github.com/HamedBabaei/LLMs4OM.git
-cd LLMs4OM
-
-pip install -r requirements.txt
-mv .env-example .env
-```
-Next, update your tokens in `.env` or if you don't want to use `LLaMA-2` or `GPT-3.5` LLMs just put dummy tokens there.
-Once you installed the requirements and prepared the `.env` file, you can move forward with experimentation.
+| Task | Source | Target | Domain | #Source | #Target | #Refs |
+|---|---|---|---|---|---|---|
+| NCIT-DOID | NCIT | DOID | Disease | 15,762 | 8,465 | 4,686 |
+| OMIM-ORDO | OMIM | ORDO | Rare Disease | 9,648 | 9,275 | 3,721 |
+| SNOMED-FMA | SNOMED CT | FMA | Anatomy | 34,418 | 88,955 | 7,256 |
+| SNOMED-NCIT (neoplas) | SNOMED CT | NCIT | Neoplasm | 22,971 | 20,247 | 3,804 |
+| SNOMED-NCIT (pharm) | SNOMED CT | NCIT | Pharmacology | 29,500 | 22,136 | 5,803 |
 
 ## Quick Tour
 
@@ -77,7 +100,6 @@ results = evaluator(track='anatomy',
 print(results)
 ```
 
-
 A **Retrieval** specific quick tour with `BERTRetriever` using `C` representation.
 ```python
 from ontomap.ontology import MouseHumanOMDataset
@@ -112,112 +134,92 @@ results = evaluator(track='anatomy',
 print(results)
 ```
 
-### Retrieval Models Imports
+### Pairwise RAG with best thesis configuration (Qwen-3.5 9B + Qwen-3-Embedding 4B)
 ```python
-from ontomap.ontology_matchers.rag.models import ChatGPTOpenAIAdaRAG
-from ontomap.ontology_matchers.rag.models import FalconLLMAdaRAG, FalconLLMBertRAG
-from ontomap.ontology_matchers.rag.models import LLaMA7BLLMAdaRAG, LLaMA7BLLMBertRAG
-from ontomap.ontology_matchers.rag.models import MistralLLMAdaRAG, MistralLLMBertRAG
-from ontomap.ontology_matchers.rag.models import MPTLLMAdaRAG, MPTLLMBertRAG
-from ontomap.ontology_matchers.rag.models import VicunaLLMAdaRAG, VicunaLLMBertRAG
-from ontomap.ontology_matchers.rag.models import MambaLLMAdaRAG, MambaLLMBertRAG
+from ontomap.ontology.bioml import NCITDOIDDiseaseOMDataset
+from ontomap.base import BaseConfig
+from ontomap.encoder.rag import IRILabelInRAGEncoder
+from ontomap.ontology_matchers.rag.models import Qwen35_9BQwen34BRAG
+from ontomap.postprocess import process
+from ontomap.evaluation.evaluator import evaluator
+
+config = BaseConfig(approach='rag').get_args(device='cuda', batch_size=16)
+config.root_dir = "datasets"
+
+ontology = NCITDOIDDiseaseOMDataset().load_from_json(root_dir=config.root_dir)
+encoded_inputs = IRILabelInRAGEncoder()(ontology)
+
+model = Qwen35_9BQwen34BRAG(config.Qwen35_9BQwen34BRAG)
+predicts = model.generate(input_data=encoded_inputs)
+
+predicts, _ = process.postprocess_hybrid(
+    predicts=predicts,
+    llm_confidence_th=0.7,
+    ir_score_threshold=0.9
+)
+
+results = evaluator(track='bio-ml', predicts=predicts, references=ontology["reference"])
+print(results)
 ```
-### LLMs Models Imports
+
+### Listwise Ranking Pipeline (thesis contribution)
 ```python
-from ontomap.ontology_matchers.retrieval.models import AdaRetrieval
-from ontomap.ontology_matchers.retrieval.models import BERTRetrieval
-from ontomap.ontology_matchers.retrieval.models import SpecterBERTRetrieval
-from ontomap.ontology_matchers.retrieval.models import TFIDFRetrieval
+from ontomap.ontology.bioml import NCITDOIDDiseaseOMDataset
+from ontomap.base import BaseConfig
+from ontomap.encoder.rag import IRILabelInListwiseEncoder
+from ontomap.ontology_matchers.rag.rag_listwise import Qwen35_9BListwiseBertRAG
+from ontomap.postprocess import process
+from ontomap.evaluation.evaluator import evaluator
+
+config = BaseConfig(approach='listwise').get_args(device='cuda', batch_size=16)
+config.root_dir = "datasets"
+
+ontology = NCITDOIDDiseaseOMDataset().load_from_json(root_dir=config.root_dir)
+encoded_inputs = IRILabelInListwiseEncoder()(ontology)
+
+model = Qwen35_9BListwiseBertRAG(config.Qwen35_9BListwiseBertRAG)
+predicts = model.generate(input_data=encoded_inputs)
+
+predicts, _ = process.postprocess_listwise(
+    predicts=predicts,
+    ir_score_threshold=0.9,
+    ir_weight=0.3,
+    llm_weight=0.7,
+    k=1
+)
+
+results = evaluator(track='bio-ml', predicts=predicts, references=ontology["reference"])
+print(results)
 ```
 
-### Track Tasks Imports - `Parser`
+### Retrieval-Only with Qwen-3-Embedding 4B
 ```python
-# CommonKG track
-from ontomap.ontology.commonkg import NellDbpediaOMDataset, YagoWikidataOMDataset
-# MSE track
-from ontomap.ontology.mse import MaterialInformationEMMOOMDataset, MaterialInformationMatOntoMDataset
-# Phenotype track
-from ontomap.ontology.phenotype import DoidOrdoOMDataset, HpMpOMDataset
-# Anatomy
-from ontomap.ontology.anatomy import MouseHumanOMDataset
-# Biodiv
-from ontomap.ontology.biodiv import EnvoSweetOMDataset, FishZooplanktonOMDataset,\
-                                    MacroalgaeMacrozoobenthosOMDataset, TaxrefldBacteriaNcbitaxonBacteriaOMDataset, \
-                                    TaxrefldChromistaNcbitaxonChromistaOMDataset, TaxrefldFungiNcbitaxonFungiOMDataset,\
-                                    TaxrefldPlantaeNcbitaxonPlantaeOMDataset, TaxrefldProtozoaNcbitaxonProtozoaOMDataset
-# Bio-ML
-from ontomap.ontology.bioml import NCITDOIDDiseaseOMDataset, OMIMORDODiseaseOMDataset, \
-                                   SNOMEDFMABodyOMDataset, SNOMEDNCITNeoplasOMDataset, SNOMEDNCITPharmOMDataset
+from ontomap.ontology.bioml import NCITDOIDDiseaseOMDataset
+from ontomap.base import BaseConfig
+from ontomap.encoder.lightweight import IRILabelInLightweightEncoder
+from ontomap.ontology_matchers.retrieval.models import Qwen3Embedding4BRetrieval
+from ontomap.postprocess import process
+from ontomap.evaluation.evaluator import evaluator
+
+config = BaseConfig(approach='retrieval').get_args(device='cuda')
+config.root_dir = "datasets"
+
+ontology = NCITDOIDDiseaseOMDataset().load_from_json(root_dir=config.root_dir)
+encoded_inputs = IRILabelInLightweightEncoder()(ontology)
+
+model = Qwen3Embedding4BRetrieval(config.Qwen3Embedding4BRetrieval)
+predicts = model.generate(input_data=encoded_inputs)
+
+predicts = process.eval_preprocess_ir_outputs(predicts=predicts)
+results = evaluator(track='bio-ml', predicts=predicts, references=ontology["reference"])
+print(results)
 ```
 
-### Concept-Representations - `C`, `CC`, and `CP`
-```python
-# Retriever models concept representations
-from ontomap.encoder.lightweight import IRILabelInLightweightEncoder              # C
-from ontomap.encoder.lightweight import IRILabelChildrensInLightweightEncoder     # CC
-from ontomap.encoder.lightweight import IRILabelParentsInLightweightEncoder       # CP
 
-# RAG models concept representations
-from ontomap.encoder.rag import IRILabelInRAGEncoder              # C
-from ontomap.encoder.rag import IRILabelChildrensInRAGEncoder     # CC
-from ontomap.encoder.rag import IRILabelParentsInRAGEncoder       # CP
-```
 
-### OMPipeline usage
-To use LLMs4OM pipleine follow the followings. It will run one model at a time over 20 OM tasks.
+The following diagram represent the LLMs4OM framework.
+<div align="center">
+ <img src="images/LLMs4OM.jpg" width="800" height="200"/>
+</div>
 
-```python
-from ontomap import OMPipelines
-
-# setting hyperparameters
-approach="rag"
-encoder="rag"
-use_all_encoders=False
-approach_encoders_to_consider=['label'] # C representation
-use_all_models=False
-load_from_json=False
-device="cuda"
-do_evaluation=False
-batch_size=16
-llm_confidence_th=0.7
-ir_score_threshold=0.9
-model="['MistralBertRAG']"
-outputs='output-rag-mistral'
-
-# arguments
-args = {
-    'approach': '$approach',
-    'encoder': '$encoder',
-    'use-all-encoders': use_all_encoders,
-    'approach-encoders-to-consider': approach_encoders_to_consider,
-    'use-all-models': use_all_models,
-    'models-to-consider': model,
-    'load-from-json': load_from_json,
-    'device': device,
-    'do-evaluation': do_evaluation,
-    'outputs-dir': outputs,
-    'batch-size': batch_size,
-    'llm_confidence_th': llm_confidence_th,
-    'ir_score_threshold': ir_score_threshold
-}
-
-# Running OMPipelines
-runner = OMPipelines(**args)
-
-runner()
-```
-
-## Citation
-If you found this project useful in your work or research please cite it by using this BibTeX entry:
-
-Pre-print:
-```bibtex
-@misc{giglou2024llms4om,
-      title={LLMs4OM: Matching Ontologies with Large Language Models},
-      author={Hamed Babaei Giglou and Jennifer D'Souza and Felix Engel and Sören Auer},
-      year={2024},
-      eprint={2404.10317},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI}
-}
-```
+The LLMs4OM framework offers a retrieval augmented generation (RAG) approach within LLMs for OM. LLMs4OM uses $O_{source}$ as query $Q(O_{source})$ to retrieve possible matches for for any $C_s \in C_{source}$ from $C_{target} \in O_{target}$. Where, $C_{target}$ is stored in the knowledge base $KB(O_{target})$. Later, $C_{s}$ and obtained $C_t \in C_{target}$ are used to query the LLM to check whether the $(C_s, C_t)$ pair is a match. As shown in above diagram, the framework comprises four main steps: 1) Concept representation, 2) Retriever model, 3) LLM, and 4) Post-processing.
