@@ -39,11 +39,11 @@ ontology_matching = {
     # "phenotype": [DoidOrdoOMDataset, HpMpOMDataset],
     # "commonkg": [NellDbpediaOMDataset, YagoWikidataOMDataset],
     "bio-ml": [
-        NCITDOIDDiseaseOMDataset,
-        OMIMORDODiseaseOMDataset,
-        # SNOMEDFMABodyOMDataset,
-        # SNOMEDNCITNeoplasOMDataset,
-        # SNOMEDNCITPharmOMDataset,
+        # NCITDOIDDiseaseOMDataset,
+        # OMIMORDODiseaseOMDataset,
+        SNOMEDFMABodyOMDataset,
+        SNOMEDNCITNeoplasOMDataset,
+        SNOMEDNCITPharmOMDataset,
     ],
     # "mse": [
     #     MaterialInformationEMMOOMDataset,

@@ -404,6 +404,14 @@ class Qwen35_9BBertRAG(RAG):
         return super().__str__() + "-Qwen35_9BBertRAG"
 
 
+class Qwen35_9BQwen34BRAG(RAG):
+    Retrieval = Qwen3Embedding4BRetrieval
+    LLM = Qwen35_9BDecoderLM
+
+    def __str__(self):
+        return super().__str__() + "-Qwen35_9BQwen34BRAG"
+
+
 class Gemma2_9BDecoderLM(RAGBasedDecoderLLMArch):
     tokenizer = AutoTokenizer
     model = AutoModelForCausalLM

@@ -26,7 +26,7 @@ config = {
     "use-all-models": False,
     "models-to-consider": [model_name],
     "use-all-encoders": False,
-    "approach-encoders-to-consider": ["label-parent"],
+    "approach-encoders-to-consider": ["label", "label-children", "label-parent"],
     "do-evaluation": False,
     "load-from-json": True,
     "root_dir": "datasets",
@@ -38,8 +38,8 @@ config = {
 }
 
 # generation first
-pipeline = OMPipelines(**config)
-pipeline()
+# pipeline = OMPipelines(**config)
+# pipeline()
 
 # evaluation only
 config["do-evaluation"] = True

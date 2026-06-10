@@ -115,7 +115,7 @@ class BaseConfig:
                           "MambaLLMAdaFewShot", "MambaLLMBertFewShot", "MambaLLMAdaRAG", "MambaLLMBertRAG",
                           "LLaMA3Qwen3RAG", "LLaMA3Qwen34BRAG", "LLaMA3EmbeddingGemmaRAG", "LLaMA3NemotronRAG",
                           "MistralNemoBertRAG", "Qwen25BertRAG", "Qwen25_3BBertRAG", "Gemma2_9BBertRAG",
-                          "Gemma2_2BBertRAG", "Qwen35_9BBertRAG", "LLaMA3BertRAG", "Gemma4_26B_A4BBertRAG",
+                          "Gemma2_2BBertRAG", "Qwen35_9BBertRAG", "Qwen35_9BQwen34BRAG", "LLaMA3BertRAG", "Gemma4_26B_A4BBertRAG",
                           "LLaMA3InstructBertRAG",
                           "LLaMA3ListwiseBertRAG", "Gemma4ListwiseBertRAG", "Qwen35_9BListwiseBertRAG"]
 
