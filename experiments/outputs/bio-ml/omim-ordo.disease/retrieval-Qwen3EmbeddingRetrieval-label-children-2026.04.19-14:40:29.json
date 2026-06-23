@@ -1,0 +1,18 @@
+{
+    "model": "Qwen3EmbeddingRetrieval",
+    "model-path": "Qwen/Qwen3-Embedding-0.6B",
+    "model-config": {
+        "top_k": 5,
+        "device": "cuda"
+    },
+    "dataset-info": {
+        "track": "bio-ml",
+        "ontology-name": "omim-ordo.disease"
+    },
+    "encoder-id": "label-children",
+    "encoder-info": "INPUT CONSIST OF COMBINED INFORMATION TO FUZZY STRING MATCHING",
+    "response-time": 8.869588136672974,
+    "generated-output": [
+        "CUDA out of memory. Tried to allocate 2.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 384.94 MiB is free. Including non-PyTorch memory, this process has 78.79 GiB memory in use. Of the allocated memory 74.16 GiB is allocated by PyTorch, and 3.97 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)"
+    ]
+}
